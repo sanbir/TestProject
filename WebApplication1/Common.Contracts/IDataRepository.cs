@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Common.Contracts
+namespace Data.Contracts
 {
     public interface IDataRepository
     {
-
+        // do nothing
     }
 
     public interface IDataRepository<T> : IDataRepository

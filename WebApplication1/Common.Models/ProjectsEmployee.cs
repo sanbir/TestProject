@@ -1,8 +1,8 @@
-namespace Common.Models
+namespace Data.Models
 {
     public class ProjectsEmployee : ObjectBase
     {
-        public int Id { get; set; }
+        public override int Id { get; set; }
 
         public int ProjectId { get; set; }
 

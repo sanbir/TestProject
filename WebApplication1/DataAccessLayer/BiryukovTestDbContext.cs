@@ -1,5 +1,5 @@
 using System.Data.Entity;
-using Common.Models;
+using Data.Models;
 
 namespace DataAccessLayer
 {

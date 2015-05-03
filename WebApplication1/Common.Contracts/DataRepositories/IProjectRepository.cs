@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Models;
+using Data.Models;
 
-namespace Common.Contracts.DataRepositories
+namespace Data.Contracts.DataRepositories
 {
-    interface IProjectRepository : IDataRepository<Project>
+    public interface IProjectRepository : IDataRepository<Project>
     {
     }
 }

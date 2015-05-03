@@ -1,4 +1,4 @@
-namespace Common.Models
+namespace Data.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +11,12 @@ namespace Common.Models
         public Project()
         {
             ProjectsEmployees = new HashSet<ProjectsEmployee>();
+        }
+
+        public override int Id
+        {
+            get { return ProjectId; }
+            set { ProjectId = value; }
         }
 
         public int ProjectId { get; set; }

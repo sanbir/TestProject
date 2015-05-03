@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Models
+namespace Data.Models
 {
-    public class ObjectBase
+    public abstract class ObjectBase
     {
+        public abstract int Id { get; set; }
         public static CompositionContainer Container { get; set; }
     }
 }

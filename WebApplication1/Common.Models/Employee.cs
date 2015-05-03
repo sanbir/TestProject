@@ -1,4 +1,4 @@
-namespace Common.Models
+namespace Data.Models
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,12 @@ namespace Common.Models
         {
             ProjectsEmployees = new HashSet<ProjectsEmployee>();
             Projects = new HashSet<Project>();
+        }
+
+        public override int Id
+        {
+            get { return EmployeeId; }
+            set { EmployeeId = value; }
         }
 
         public int EmployeeId { get; set; }
@@ -37,5 +43,6 @@ namespace Common.Models
         public virtual ICollection<ProjectsEmployee> ProjectsEmployees { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
+
     }
 }

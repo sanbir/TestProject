@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiryukovTestDbContext.cs" />
+    <Compile Include="DataRepositories\EmployeeRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,9 +53,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Contracts\Common.Contracts.csproj">
+    <ProjectReference Include="..\Common.Contracts\Data.Contracts.csproj">
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
-      <Name>Common.Contracts</Name>
+      <Name>Data.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
