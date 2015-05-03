@@ -6,7 +6,7 @@ namespace Common.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Employee
+    public class Employee
     {
         public Employee()
         {

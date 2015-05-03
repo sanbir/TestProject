@@ -1,17 +1,10 @@
-namespace Common.Models
+using System.Data.Entity;
+using Common.Models;
+
+namespace DataAccessLayer
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-
-    public partial class BiryukovTestDbContext : DbContext
+    public class BiryukovTestDbContext : DbContext
     {
-        public BiryukovTestDbContext()
-            : base("name=BiryukovTestDbConnectionString")
-        {
-        }
-
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectsEmployee> ProjectsEmployees { get; set; }
