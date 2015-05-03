@@ -1,15 +1,15 @@
-using System.Configuration;
-using System.Data.Entity;
-using Data.Models;
-
-namespace DataAccessLayer
+namespace ClassLibrary1
 {
-    public class BiryukovTestDbContext : DbContext
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
+    public partial class Model1 : DbContext
     {
-        public BiryukovTestDbContext()
+        public Model1()
             : base("name=Model1")
         {
-            Database.SetInitializer<BiryukovTestDbContext>(null);
         }
 
         public virtual DbSet<Employee> Employees { get; set; }
