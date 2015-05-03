@@ -16,19 +16,9 @@ namespace DataAccessLayer
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .HasMany(e => e.ProjectsEmployees)
-                .WithRequired(e => e.Employee)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Projects)
                 .WithRequired(e => e.Employee)
                 .HasForeignKey(e => e.ManagerId)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Project>()
-                .HasMany(e => e.ProjectsEmployees)
-                .WithRequired(e => e.Project)
                 .WillCascadeOnDelete(false);
         }
     }

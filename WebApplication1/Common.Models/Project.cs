@@ -6,7 +6,7 @@ namespace Common.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public class Project
+    public class Project : ObjectBase
     {
         public Project()
         {
