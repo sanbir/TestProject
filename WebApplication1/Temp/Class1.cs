@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Contracts
+namespace Temp
 {
-    interface IUnitOfWorkFactory
+    public class Class1
     {
-        T GetUnitOfWork<T>() where T : IUnitOfWork;
     }
 }

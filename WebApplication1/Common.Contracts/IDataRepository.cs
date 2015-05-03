@@ -14,13 +14,13 @@ namespace Common.Contracts
     public interface IDataRepository<T> : IDataRepository
         where T : class, new()
     {
-        void Add(T entity);
+        T Add(T entity);
 
         void Remove(T entity);
 
         void Remove(int id);
 
-        void Update(T entity);
+        T Update(T entity);
 
         IEnumerable<T> Get();
 

@@ -44,8 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiryukovTestDbContext.cs" />
-    <Compile Include="EntityFrameworkDataRepository.cs" />
-    <Compile Include="EntityFrameworkUnitOfWork.cs" />
+    <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
