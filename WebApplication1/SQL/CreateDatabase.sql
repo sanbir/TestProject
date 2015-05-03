@@ -5,8 +5,10 @@ IF NOT EXISTS
 	WHERE name = 'BiryukovTestDb'
 )
 CREATE DATABASE BiryukovTestDb;
+GO
 
 USE BiryukovTestDb;
+GO
 
 IF NOT EXISTS
 (
@@ -16,14 +18,15 @@ IF NOT EXISTS
 )
 CREATE TABLE Employees 
 (	
-	EmployeeId INT IDENTITY(1,1) NOT NULL,	
-	FirstName NVARCHAR(50) NOT NULL,	
-	LastName NVARCHAR(50) NOT NULL,	
-	MiddleName NVARCHAR(50) NULL,	
-	Email VARCHAR(100) NOT NULL,	
+	EmployeeId INT IDENTITY(1,1) NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	MiddleName NVARCHAR(50) NULL,
+	Email VARCHAR(100) NOT NULL,
 	ContractorCompanyName NVARCHAR(MAX) NOT NULL,
 	CONSTRAINT PK_Employees PRIMARY KEY CLUSTERED (EmployeeId)
 );
+GO
 
 IF NOT EXISTS
 (
@@ -40,10 +43,11 @@ CREATE TABLE Projects
 	StartDate DATETIME NOT NULL,	
 	EndDate DATETIME NOT NULL,	
 	[Priority] INT NOT NULL CHECK([Priority] >= 0),	
-	Comment NVARCHAR(MAX) NULL, 
+	Comment NVARCHAR(MAX) NULL,
 	CONSTRAINT PK_Projects PRIMARY KEY CLUSTERED (ProjectId),
 	CONSTRAINT FK_ProjectManager FOREIGN KEY(ManagerId) REFERENCES Employees (EmployeeId)
 );
+GO
 
 IF NOT EXISTS
 (
@@ -55,8 +59,9 @@ CREATE TABLE ProjectsEmployees
 (	
 	Id INT IDENTITY(1,1) NOT NULL,	
 	ProjectId INT NOT NULL,	
-	EmployeeId INT NOT NULL,	
+	EmployeeId INT NOT NULL,
 	CONSTRAINT PK_ProjectsEmployees PRIMARY KEY CLUSTERED (Id),
-	CONSTRAINT FK_Projects FOREIGN KEY(ProjectId) REFERENCES Projects (ProjectId),
-	CONSTRAINT FK_Employees FOREIGN KEY(EmployeeId) REFERENCES Employees (EmployeeId)
+	CONSTRAINT FK_Projects FOREIGN KEY(ProjectId) REFERENCES Projects (ProjectId) ON DELETE CASCADE,
+	CONSTRAINT FK_Employees FOREIGN KEY(EmployeeId) REFERENCES Employees (EmployeeId) ON DELETE CASCADE
 );
+GO
