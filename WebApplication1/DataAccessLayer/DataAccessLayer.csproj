@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="BiryukovTestDbContext.cs" />
     <Compile Include="DataRepositories\EmployeeRepository.cs" />
+    <Compile Include="DataRepositories\ProjectRepository.cs" />
+    <Compile Include="DataRepositories\ProjectsEmployeeRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

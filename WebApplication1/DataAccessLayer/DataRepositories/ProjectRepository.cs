@@ -9,9 +9,9 @@ using Data.Models;
 
 namespace DataAccessLayer.DataRepositories
 {
-    [Export(typeof(IEmployeeRepository))]
+    [Export(typeof(IProjectRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class EmployeeRepository : DataRepositoryBase<Employee>, IEmployeeRepository
+    public class ProjectRepository : DataRepositoryBase<Project>, IProjectRepository
     {
     }
 }
