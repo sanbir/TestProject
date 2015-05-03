@@ -11,19 +11,11 @@ namespace DataAccessLayer
     public abstract class DataRepositoryBase<T> : IDataRepository<T>
         where T : ObjectBase, new()
     {
-        protected abstract T AddEntity(BiryukovTestDbContext entityContext, T entity);
-
-        protected abstract T UpdateEntity(BiryukovTestDbContext entityContext, T entity);
-
-        protected abstract IEnumerable<T> GetEntities(BiryukovTestDbContext entityContext);
-
-        protected abstract T GetEntity(BiryukovTestDbContext entityContext, int id);
-
         public T Add(T entity)
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                T addedEntity = AddEntity(entityContext, entity);
+                T addedEntity = entityContext.Set<T>().Add(entity);
                 entityContext.SaveChanges();
                 return addedEntity;
             }
@@ -52,7 +44,7 @@ namespace DataAccessLayer
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                T existingEntity = UpdateEntity(entityContext, entity);
+                T existingEntity = GetEntity(entityContext, entity.Id);
 
                 PropertyMap(entity, existingEntity);
 
@@ -64,13 +56,23 @@ namespace DataAccessLayer
         public IEnumerable<T> Get()
         {
             using (var entityContext = new BiryukovTestDbContext())
-                return (GetEntities(entityContext)).ToArray().ToList();
+                return (from e in entityContext.Set<T>()
+                    select e).ToArray().ToList();
         }
 
         public T Get(int id)
         {
             using (var entityContext = new BiryukovTestDbContext())
                 return GetEntity(entityContext, id);
+        }
+
+        private T GetEntity(BiryukovTestDbContext entityContext, int id)
+        {
+            var entity = (from e in entityContext.Set<T>()
+                          where e.Id == id
+                          select e).FirstOrDefault();
+
+            return entity;
         }
 
         private static void PropertyMap<TSource, TDest>(TSource source, TDest destination)
