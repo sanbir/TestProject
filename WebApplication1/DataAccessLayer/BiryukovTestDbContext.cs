@@ -7,9 +7,8 @@ namespace DataAccessLayer
     public class BiryukovTestDbContext : DbContext
     {
         public BiryukovTestDbContext()
-            : base("name=Model1")
+            : base("name=MainConnectionString")
         {
-            Database.SetInitializer<BiryukovTestDbContext>(null);
         }
 
         public virtual DbSet<Employee> Employees { get; set; }

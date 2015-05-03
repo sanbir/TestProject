@@ -61,14 +61,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="DataAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\ClassLibrary1.csproj">
-      <Project>{795d90ba-ada4-4b14-8546-330339776709}</Project>
-      <Name>ClassLibrary1</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Contracts\Data.Contracts.csproj">
       <Project>{065d42f7-c500-4cdd-9498-eeaa8549e4c5}</Project>
       <Name>Data.Contracts</Name>

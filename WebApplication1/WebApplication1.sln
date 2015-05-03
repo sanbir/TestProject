@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Contracts", "Common.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Models", "Common.Models\Common.Models.csproj", "{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{795D90BA-ADA4-4B14-8546-330339776709}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{795D90BA-ADA4-4B14-8546-330339776709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{795D90BA-ADA4-4B14-8546-330339776709}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{795D90BA-ADA4-4B14-8546-330339776709}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{795D90BA-ADA4-4B14-8546-330339776709}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
