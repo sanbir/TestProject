@@ -6,7 +6,7 @@ namespace Data.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public class Employee : EntityBase
+    public class Employee : ObjectBase
     {
         public Employee()
         {

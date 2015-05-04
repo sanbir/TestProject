@@ -1,6 +1,6 @@
 namespace Data.Models
 {
-    public class ProjectsEmployee : EntityBase
+    public class ProjectsEmployee : ObjectBase
     {
         public override int Id { get; set; }
 

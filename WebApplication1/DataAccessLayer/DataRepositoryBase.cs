@@ -9,7 +9,7 @@ using Data.Models;
 namespace DataAccessLayer
 {
     public class DataRepositoryBase<T> : IDataRepository<T>
-        where T : EntityBase, new()
+        where T : ObjectBase, new()
     {
         public T Add(T entity)
         {
