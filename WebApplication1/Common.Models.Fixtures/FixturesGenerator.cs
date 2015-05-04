@@ -30,23 +30,6 @@ namespace Common.Models.Fixtures
             return employees;
         }
 
-        public static ICollection<Employee> GenerateEmployees()
-        {
-            return GenerateEmployees(_fixture.Create<int>());
-        }
-
-        public static ICollection<Employee> GenerateEmployees(int numberOfEmployees)
-        {
-            ICollection<Employee> employees = new List<Employee>();
-
-            for (int i = 0; i < numberOfEmployees; i++)
-            {
-                employees.Add(GenerateEmployee());
-            }
-
-            return employees;
-        }
-
         public static Employee GenerateEmployee()
         {
             Employee employee = new Employee();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using Common.Models.Fixtures;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
@@ -25,9 +26,12 @@ namespace DataAccessLayer.Tests
         [TestMethod]
         public void obtain_proxy_from_container_using_service_contract()
         {
-            //var aa = GenerateEmployee();
-            //var bb = GenerateProject(new List<Employee> {aa});
-            //var cc = GenerateProjectsEmployee(new List<Project> {bb}, new List<Employee> {aa});
+
+            Employee employee = FixturesGenerator.GenerateEmployee();
+
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
+
+            employeeRepository.Add(employee);
         }
 
 

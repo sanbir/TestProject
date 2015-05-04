@@ -52,10 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeGenerator.cs" />
-    <Compile Include="FixtureGenerator.cs" />
     <Compile Include="FixturesGenerator.cs" />
-    <Compile Include="ProjectGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
