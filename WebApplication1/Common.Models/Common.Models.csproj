@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee.cs" />
-    <Compile Include="ObjectBase.cs" />
+    <Compile Include="EntityBase.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="ProjectsEmployee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

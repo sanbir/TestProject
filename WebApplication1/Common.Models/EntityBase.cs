@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public abstract class ObjectBase
+    public abstract class EntityBase
     {
         public abstract int Id { get; set; }
         public static CompositionContainer Container { get; set; }
