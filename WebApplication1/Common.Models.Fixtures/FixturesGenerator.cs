@@ -34,7 +34,6 @@ namespace Common.Models.Fixtures
         {
             Employee employee = new Employee();
 
-            employee.EmployeeId = _fixture.Create<int>();
             employee.FirstName = _fixture.Create<string>();
             employee.LastName = _fixture.Create<string>();
             employee.MiddleName = _fixture.Create<string>();
@@ -48,7 +47,6 @@ namespace Common.Models.Fixtures
         {
             Project project = new Project();
 
-            project.ProjectId = _fixture.Create<int>();
             project.ProjectName = _fixture.Create<string>();
             project.CustomerCompanyName = _fixture.Create<string>();
             project.ManagerId = employees.ElementAt(new Random().Next(employees.Count)).EmployeeId;
@@ -64,7 +62,6 @@ namespace Common.Models.Fixtures
         {
             ProjectsEmployee projectsEmployee = new ProjectsEmployee();
 
-            projectsEmployee.Id = _fixture.Create<int>();
             projectsEmployee.ProjectId = projects.ElementAt(new Random().Next(projects.Count)).ProjectId;
             projectsEmployee.EmployeeId = employees.ElementAt(new Random().Next(employees.Count)).EmployeeId;
 

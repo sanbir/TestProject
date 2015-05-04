@@ -24,17 +24,41 @@ namespace DataAccessLayer.Tests
         }
 
         [TestMethod]
-        public void obtain_proxy_from_container_using_service_contract()
+        public void TestCreateEmployeeInDatabase()
         {
-
             Employee employee = FixturesGenerator.GenerateEmployee();
-
             IEmployeeRepository employeeRepository = new EmployeeRepository();
 
-            employeeRepository.Add(employee);
+            Employee savedEmployee = employeeRepository.Add(employee);
+
+            Assert.AreEqual(employee, savedEmployee);
+
+            Employee readEmployee = employeeRepository.Get(savedEmployee.EmployeeId);
+
+            Assert.AreEqual(employee, readEmployee);
         }
 
+        [TestMethod]
+        public void TestReadEmployeeFromDatabase()
+        {
+            Employee employee = FixturesGenerator.GenerateEmployee();
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
 
+            
+
+           // Assert.AreEqual(employee, savedEmployee);
+        }
+
+        [TestMethod]
+        public void TestCreateProjectInDatabase()
+        {
+            //Project project = FixturesGenerator.GenerateProject();
+            //IEmployeeRepository employeeRepository = new EmployeeRepository();
+
+            //Employee savedEmployee = employeeRepository.Add(employee);
+
+            //Assert.AreEqual(employee, savedEmployee);
+        }
         
 
     }
