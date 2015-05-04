@@ -29,11 +29,21 @@ namespace DataAccessLayer.Tests
             Employee employee = FixturesGenerator.GenerateEmployee();
             IEmployeeRepository employeeRepository = new EmployeeRepository();
 
+            #region Create
+
             Employee savedEmployee = employeeRepository.Add(employee);
             Assert.AreEqual(employee, savedEmployee);
 
+            #endregion
+
+            #region Read
+
             Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
             Assert.AreEqual(employee.Email, readEmployee.Email);
+
+            #endregion
+
+            #region Update
 
             employee = FixturesGenerator.GenerateEmployee();
             readEmployee.FirstName = employee.FirstName;
@@ -42,7 +52,18 @@ namespace DataAccessLayer.Tests
             readEmployee.Email = employee.Email;
             readEmployee.ContractorCompanyName = employee.ContractorCompanyName;
             Employee updatedEmployee = employeeRepository.Update(readEmployee);
-            Assert.AreEqual(employee.Email, readEmployee.Email);
+            Assert.AreEqual(employee.Email, updatedEmployee.Email); 
+
+            #endregion
+
+            #region Delete
+
+            employeeRepository.Remove(updatedEmployee);
+            readEmployee = employeeRepository.Get(updatedEmployee.Id);
+            Assert.IsNull(readEmployee);
+
+            #endregion
+
         }
 
         [TestMethod]

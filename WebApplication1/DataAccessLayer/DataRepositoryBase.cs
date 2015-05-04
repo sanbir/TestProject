@@ -46,10 +46,22 @@ namespace DataAccessLayer
             {
                 T existingEntity = GetEntity(entityContext, entity.Id);
 
-                PropertyMap(entity, existingEntity);
+                MapProperties(entity, existingEntity);
 
                 entityContext.SaveChanges();
                 return existingEntity;
+            }
+        }
+
+        private static void MapProperties(T entity, T existingEntity)
+        {
+            List<PropertyInfo> properties = typeof (T).GetProperties().ToList();
+            foreach (PropertyInfo property in properties)
+            {
+                if (!property.PropertyType.IsAbstract)
+                {
+                    property.SetValue(existingEntity, property.GetValue(entity));
+                }
             }
         }
 
@@ -75,26 +87,5 @@ namespace DataAccessLayer
             return entity;
         }
 
-        private static void PropertyMap<TSource, TDest>(TSource source, TDest destination)
-        {
-            List<PropertyInfo> sourceProperties = source.GetType().GetProperties().ToList();
-            List<PropertyInfo> destinationProperties = destination.GetType().GetProperties().ToList();
-
-            foreach (PropertyInfo sourceProperty in sourceProperties)
-            {
-                PropertyInfo destinationProperty = destinationProperties.Find(item => item.Name == sourceProperty.Name);
-
-                if (destinationProperty != null)
-                {
-                    try
-                    {
-                        destinationProperty.SetValue(destination, sourceProperty.GetValue(source, null), null);
-                    }
-                    catch (ArgumentException)
-                    {
-                    }
-                }
-            }
-        }
     }
 }
