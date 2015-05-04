@@ -58,7 +58,7 @@ namespace DataAccessLayer
             List<PropertyInfo> properties = typeof (T).GetProperties().ToList();
             foreach (PropertyInfo property in properties)
             {
-                if (!property.PropertyType.IsAbstract)
+                if (!property.GetGetMethod().IsVirtual)
                 {
                     property.SetValue(existingEntity, property.GetValue(entity));
                 }
