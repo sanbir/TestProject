@@ -24,17 +24,24 @@ namespace DataAccessLayer.Tests
         }
 
         [TestMethod]
-        public void TestCreateEmployeeInDatabase()
+        public void TestEmployeeRepository()
         {
             Employee employee = FixturesGenerator.GenerateEmployee();
             IEmployeeRepository employeeRepository = new EmployeeRepository();
 
             Employee savedEmployee = employeeRepository.Add(employee);
-
             Assert.AreEqual(employee, savedEmployee);
 
             Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
+            Assert.AreEqual(employee.Email, readEmployee.Email);
 
+            employee = FixturesGenerator.GenerateEmployee();
+            readEmployee.FirstName = employee.FirstName;
+            readEmployee.LastName = employee.LastName;
+            readEmployee.MiddleName = employee.MiddleName;
+            readEmployee.Email = employee.Email;
+            readEmployee.ContractorCompanyName = employee.ContractorCompanyName;
+            Employee updatedEmployee = employeeRepository.Update(readEmployee);
             Assert.AreEqual(employee.Email, readEmployee.Email);
         }
 
