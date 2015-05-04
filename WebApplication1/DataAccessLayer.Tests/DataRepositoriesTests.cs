@@ -20,10 +20,6 @@ namespace DataAccessLayer.Tests
         [TestInitialize]
         public void Initialize()
         {
-            //AggregateCatalog catalog = new AggregateCatalog();
-            //catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
-            //CompositionContainer container = new CompositionContainer(catalog);
-            //ObjectBase.Container = container;
         }
 
         [TestMethod]
@@ -31,39 +27,11 @@ namespace DataAccessLayer.Tests
         {
             var aa = GenerateEmployee();
             var bb = GenerateProject(new List<Employee> {aa});
+            var cc = GenerateProjectsEmployee(new List<Project> {bb}, new List<Employee> {aa});
         }
 
-        private Employee GenerateEmployee()
-        {
-            Employee employee = new Employee();
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
 
-            employee.EmployeeId = fixture.Create<int>();
-            employee.FirstName = fixture.Create<string>();
-            employee.LastName = fixture.Create<string>();
-            employee.MiddleName = fixture.Create<string>();
-            employee.Email = fixture.Create<string>();
-            employee.ContractorCompanyName = fixture.Create<string>();
-
-            return employee;
-        }
-
-        private Project GenerateProject(ICollection<Employee> employees)
-        {
-            Project project = new Project();
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-
-            project.ProjectId = fixture.Create<int>();
-            project.ProjectName = fixture.Create<string>();
-            project.CustomerCompanyName = fixture.Create<string>();
-            project.ManagerId = employees.ElementAt(new Random().Next(employees.Count)).EmployeeId;
-            project.StartDate = fixture.Create<DateTime>();
-            project.EndDate = project.StartDate + new TimeSpan(fixture.Create<int>(), 0, 0, 0);
-            project.Priority = Math.Abs(fixture.Create<int>());
-            project.Comment = fixture.Create<string>();
-
-            return project;
-        }
+        
 
     }
 }

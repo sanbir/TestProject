@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Contracts", "Common.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Models", "Common.Models\Common.Models.csproj", "{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Models.Fixtures", "Common.Models.Fixtures\Common.Models.Fixtures.csproj", "{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
