@@ -55,7 +55,7 @@ namespace DataAccessLayer.Tests
             readEmployee.Email = employee.Email;
             readEmployee.ContractorCompanyName = employee.ContractorCompanyName;
             Employee updatedEmployee = employeeRepository.Update(readEmployee);
-            Assert.AreEqual(employee.Email, updatedEmployee.Email); 
+            Assert.AreEqual(employee.Email, updatedEmployee.Email);
 
             #endregion
 
@@ -135,7 +135,65 @@ namespace DataAccessLayer.Tests
             #endregion
 
         }
-        
 
+        [TestMethod]
+        public void TestProjectsEmployeeRepository()
+        {
+            var employees = new EmployeeRepository().Get().ToList();
+            var projects = new ProjectRepository().Get().ToList();
+
+            ProjectsEmployee projectsEmployee = FixturesGenerator.GenerateProjectsEmployee(projects, employees);
+            IProjectsEmployeeRepository projectsEmployeeRepository = new ProjectsEmployeeRepository();
+
+            #region Create
+
+            ProjectsEmployee savedEmployee = projectsEmployeeRepository.Add(projectsEmployee);
+            Assert.AreEqual(projectsEmployee, savedEmployee);
+
+            #endregion
+
+            #region Read
+
+            projectsEmployeeRepository.Add(projectsEmployee);
+            ProjectsEmployee readProjectsEmployee = projectsEmployeeRepository.Get(savedEmployee.Id);
+            Assert.AreEqual(projectsEmployee.EmployeeId, readProjectsEmployee.EmployeeId);
+
+            #endregion
+
+            #region Read Many
+
+            var readProjectsEmployees = projectsEmployeeRepository.Get();
+            Assert.IsTrue(readProjectsEmployees.Count() > 1);
+
+            #endregion
+
+            #region Update
+
+            projectsEmployee = FixturesGenerator.GenerateProjectsEmployee(projects, employees);
+            readProjectsEmployee.EmployeeId = projectsEmployee.EmployeeId;
+            readProjectsEmployee.ProjectId = projectsEmployee.ProjectId;
+            ProjectsEmployee updatedProjectsEmployee = projectsEmployeeRepository.Update(readProjectsEmployee);
+            Assert.AreEqual(projectsEmployee.EmployeeId, updatedProjectsEmployee.EmployeeId);
+
+            #endregion
+
+            #region Delete
+
+            projectsEmployeeRepository.Remove(updatedProjectsEmployee);
+            readProjectsEmployee = projectsEmployeeRepository.Get(updatedProjectsEmployee.Id);
+            Assert.IsNull(readProjectsEmployee);
+
+            #endregion
+
+            #region Delete By Id
+
+            savedEmployee = projectsEmployeeRepository.Add(projectsEmployee);
+            projectsEmployeeRepository.Remove(savedEmployee.Id);
+            readProjectsEmployee = projectsEmployeeRepository.Get(savedEmployee.Id);
+            Assert.IsNull(readProjectsEmployee);
+
+            #endregion
+
+        }
     }
 }
