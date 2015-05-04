@@ -22,10 +22,14 @@ namespace DataAccessLayer
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
+                .Ignore(e => e.Id)
                 .HasMany(e => e.Projects)
                 .WithRequired(e => e.Employee)
                 .HasForeignKey(e => e.ManagerId)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Project>()
+                .Ignore(e => e.Id);
         }
     }
 }
