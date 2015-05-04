@@ -49,7 +49,7 @@ namespace Common.Models.Fixtures
 
             project.ProjectName = _fixture.Create<string>();
             project.CustomerCompanyName = _fixture.Create<string>();
-            project.ManagerId = employees.ElementAt(new Random().Next(employees.Count)).EmployeeId;
+            project.ManagerId = employees.ElementAt(new Random().Next(employees.Count)).Id;
             project.StartDate = _fixture.Create<DateTime>();
             project.EndDate = project.StartDate + new TimeSpan(_fixture.Create<int>(), 0, 0, 0);
             project.Priority = Math.Abs(_fixture.Create<int>());
@@ -62,8 +62,8 @@ namespace Common.Models.Fixtures
         {
             ProjectsEmployee projectsEmployee = new ProjectsEmployee();
 
-            projectsEmployee.ProjectId = projects.ElementAt(new Random().Next(projects.Count)).ProjectId;
-            projectsEmployee.EmployeeId = employees.ElementAt(new Random().Next(employees.Count)).EmployeeId;
+            projectsEmployee.ProjectId = projects.ElementAt(new Random().Next(projects.Count)).Id;
+            projectsEmployee.EmployeeId = employees.ElementAt(new Random().Next(employees.Count)).Id;
 
             return projectsEmployee;
         }

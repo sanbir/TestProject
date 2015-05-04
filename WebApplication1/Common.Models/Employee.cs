@@ -14,13 +14,7 @@ namespace Data.Models
             Projects = new HashSet<Project>();
         }
 
-        public override int Id
-        {
-            get { return EmployeeId; }
-            set { EmployeeId = value; }
-        }
-
-        public int EmployeeId { get; set; }
+        public override int Id { get; set; }
 
         [Required]
         [StringLength(50)]

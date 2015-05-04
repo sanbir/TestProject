@@ -33,9 +33,9 @@ namespace DataAccessLayer.Tests
 
             Assert.AreEqual(employee, savedEmployee);
 
-            Employee readEmployee = employeeRepository.Get(savedEmployee.EmployeeId);
+            Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
 
-            Assert.AreEqual(employee, readEmployee);
+            Assert.AreEqual(employee.Email, readEmployee.Email);
         }
 
         [TestMethod]
