@@ -78,57 +78,62 @@ namespace DataAccessLayer.Tests
 
         }
 
-        //[TestMethod]
-        //public void TestProjectRepository()
-        //{
-        //    Project project = FixturesGenerator.GenerateProject();
-        //    IEmployeeRepository employeeRepository = new EmployeeRepository();
-
-        //    #region Create
-
-        //    Employee savedEmployee = employeeRepository.Add(project);
-        //    Assert.AreEqual(project, savedEmployee);
-
-        //    #endregion
-
-        //    #region Read
-
-        //    Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
-        //    Assert.AreEqual(project.Email, readEmployee.Email);
-
-        //    #endregion
-
-        //    #region Update
-
-        //    project = FixturesGenerator.GenerateEmployee();
-        //    readEmployee.FirstName = project.FirstName;
-        //    readEmployee.LastName = project.LastName;
-        //    readEmployee.MiddleName = project.MiddleName;
-        //    readEmployee.Email = project.Email;
-        //    readEmployee.ContractorCompanyName = project.ContractorCompanyName;
-        //    Employee updatedEmployee = employeeRepository.Update(readEmployee);
-        //    Assert.AreEqual(project.Email, updatedEmployee.Email);
-
-        //    #endregion
-
-        //    #region Delete
-
-        //    employeeRepository.Remove(updatedEmployee);
-        //    readEmployee = employeeRepository.Get(updatedEmployee.Id);
-        //    Assert.IsNull(readEmployee);
-
-        //    #endregion
-        //}
-
         [TestMethod]
-        public void TestCreateProjectInDatabase()
+        public void TestProjectRepository()
         {
-            //Project project = FixturesGenerator.GenerateProject();
-            //IEmployeeRepository employeeRepository = new EmployeeRepository();
+            var employees = new EmployeeRepository().Get().ToList();
 
-            //Employee savedEmployee = employeeRepository.Add(employee);
+            Project project = FixturesGenerator.GenerateProject(employees);
+            IProjectRepository projectRepository = new ProjectRepository();
 
-            //Assert.AreEqual(employee, savedEmployee);
+            #region Create
+
+            Project savedProject = projectRepository.Add(project);
+            Assert.AreEqual(project, savedProject);
+
+            #endregion
+
+            #region Read
+
+            projectRepository.Add(project);
+            Project readProject = projectRepository.Get(savedProject.Id);
+            Assert.AreEqual(project.ProjectName, readProject.ProjectName);
+
+            #endregion
+
+            #region Read Many
+
+            var readProjects = projectRepository.Get();
+            Assert.IsTrue(readProjects.Count() > 1);
+
+            #endregion
+
+            #region Update
+
+            project = FixturesGenerator.GenerateProject(employees);
+            readProject.ProjectName = project.ProjectName;
+            Project updatedProject = projectRepository.Update(readProject);
+            Assert.AreEqual(project.ProjectName, updatedProject.ProjectName);
+
+            #endregion
+
+            #region Delete
+
+            projectRepository.Remove(updatedProject);
+            readProject = projectRepository.Get(updatedProject.Id);
+            Assert.IsNull(readProject);
+
+            #endregion
+
+            #region Delete By Id
+
+            savedProject = projectRepository.Add(project);
+            projectRepository.Remove(savedProject.Id);
+            readProject = projectRepository.Get(savedProject.Id);
+            Assert.IsNull(readProject);
+
+            #endregion
+
         }
         
 
