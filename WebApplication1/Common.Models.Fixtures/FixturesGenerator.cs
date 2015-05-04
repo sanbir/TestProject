@@ -9,16 +9,16 @@ using Ploeh.AutoFixture.AutoMoq;
 
 namespace Common.Models.Fixtures
 {
-    public class FixturesGenerator
+    public static class FixturesGenerator
     {
-        readonly IFixture _fixture = new Fixture().Customize(new AutoMoqCustomization());
+        static readonly IFixture _fixture = new Fixture().Customize(new AutoMoqCustomization());
 
-        private ICollection<Employee> GenerateEmployees()
+        public static ICollection<Employee> GenerateEmployees()
         {
             return GenerateEmployees(_fixture.Create<int>());
         }
 
-        private ICollection<Employee> GenerateEmployees(int numberOfEmployees)
+        public static ICollection<Employee> GenerateEmployees(int numberOfEmployees)
         {
             ICollection<Employee> employees = new List<Employee>();
 
@@ -30,7 +30,24 @@ namespace Common.Models.Fixtures
             return employees;
         }
 
-        private Employee GenerateEmployee()
+        public static ICollection<Employee> GenerateEmployees()
+        {
+            return GenerateEmployees(_fixture.Create<int>());
+        }
+
+        public static ICollection<Employee> GenerateEmployees(int numberOfEmployees)
+        {
+            ICollection<Employee> employees = new List<Employee>();
+
+            for (int i = 0; i < numberOfEmployees; i++)
+            {
+                employees.Add(GenerateEmployee());
+            }
+
+            return employees;
+        }
+
+        public static Employee GenerateEmployee()
         {
             Employee employee = new Employee();
 
@@ -44,7 +61,7 @@ namespace Common.Models.Fixtures
             return employee;
         }
 
-        private Project GenerateProject(ICollection<Employee> employees)
+        public static Project GenerateProject(ICollection<Employee> employees)
         {
             Project project = new Project();
 
@@ -60,7 +77,7 @@ namespace Common.Models.Fixtures
             return project;
         }
 
-        private ProjectsEmployee GenerateProjectsEmployee(ICollection<Project> projects, ICollection<Employee> employees)
+        public static ProjectsEmployee GenerateProjectsEmployee(ICollection<Project> projects, ICollection<Employee> employees)
         {
             ProjectsEmployee projectsEmployee = new ProjectsEmployee();
 

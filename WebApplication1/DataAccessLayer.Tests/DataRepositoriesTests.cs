@@ -25,9 +25,9 @@ namespace DataAccessLayer.Tests
         [TestMethod]
         public void obtain_proxy_from_container_using_service_contract()
         {
-            var aa = GenerateEmployee();
-            var bb = GenerateProject(new List<Employee> {aa});
-            var cc = GenerateProjectsEmployee(new List<Project> {bb}, new List<Employee> {aa});
+            //var aa = GenerateEmployee();
+            //var bb = GenerateProject(new List<Employee> {aa});
+            //var cc = GenerateProjectsEmployee(new List<Project> {bb}, new List<Employee> {aa});
         }
 
 
