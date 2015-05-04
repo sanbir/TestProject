@@ -18,11 +18,6 @@ namespace DataAccessLayer.Tests
     [TestClass]
     public class DataRepositoriesTests
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-        }
-
         [TestMethod]
         public void TestEmployeeRepository()
         {
@@ -38,8 +33,16 @@ namespace DataAccessLayer.Tests
 
             #region Read
 
+            employeeRepository.Add(employee);
             Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
             Assert.AreEqual(employee.Email, readEmployee.Email);
+
+            #endregion
+
+            #region Read Many
+
+            var readEmployees = employeeRepository.Get();
+            Assert.IsTrue(readEmployees.Count() > 1);
 
             #endregion
 
@@ -64,18 +67,58 @@ namespace DataAccessLayer.Tests
 
             #endregion
 
+            #region Delete By Id
+
+            savedEmployee = employeeRepository.Add(employee);
+            employeeRepository.Remove(savedEmployee.Id);
+            readEmployee = employeeRepository.Get(savedEmployee.Id);
+            Assert.IsNull(readEmployee);
+
+            #endregion
+
         }
 
-        [TestMethod]
-        public void TestReadEmployeeFromDatabase()
-        {
-            Employee employee = FixturesGenerator.GenerateEmployee();
-            IEmployeeRepository employeeRepository = new EmployeeRepository();
+        //[TestMethod]
+        //public void TestProjectRepository()
+        //{
+        //    Project project = FixturesGenerator.GenerateProject();
+        //    IEmployeeRepository employeeRepository = new EmployeeRepository();
 
-            
+        //    #region Create
 
-           // Assert.AreEqual(employee, savedEmployee);
-        }
+        //    Employee savedEmployee = employeeRepository.Add(project);
+        //    Assert.AreEqual(project, savedEmployee);
+
+        //    #endregion
+
+        //    #region Read
+
+        //    Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
+        //    Assert.AreEqual(project.Email, readEmployee.Email);
+
+        //    #endregion
+
+        //    #region Update
+
+        //    project = FixturesGenerator.GenerateEmployee();
+        //    readEmployee.FirstName = project.FirstName;
+        //    readEmployee.LastName = project.LastName;
+        //    readEmployee.MiddleName = project.MiddleName;
+        //    readEmployee.Email = project.Email;
+        //    readEmployee.ContractorCompanyName = project.ContractorCompanyName;
+        //    Employee updatedEmployee = employeeRepository.Update(readEmployee);
+        //    Assert.AreEqual(project.Email, updatedEmployee.Email);
+
+        //    #endregion
+
+        //    #region Delete
+
+        //    employeeRepository.Remove(updatedEmployee);
+        //    readEmployee = employeeRepository.Get(updatedEmployee.Id);
+        //    Assert.IsNull(readEmployee);
+
+        //    #endregion
+        //}
 
         [TestMethod]
         public void TestCreateProjectInDatabase()
