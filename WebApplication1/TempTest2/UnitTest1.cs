@@ -15,8 +15,6 @@ namespace TempTest2
         [TestMethod]
         public void TestMethod1()
         {
-            MEFLoader.Init();
-
             Employee employee = FixturesGenerator.GenerateEmployee();
             IEmployeeRepository employeeRepository = new EmployeeRepository();
 
@@ -27,8 +25,10 @@ namespace TempTest2
 
             #endregion
 
+            ObjectBase.Container = MEFLoader.Init();
             EmployeeManager manager = new EmployeeManager();
 
+            
             Employee updateEmployeeResults = manager.UpdateEmployee(employee);
 
             Assert.IsTrue(updateEmployeeResults == employee);
