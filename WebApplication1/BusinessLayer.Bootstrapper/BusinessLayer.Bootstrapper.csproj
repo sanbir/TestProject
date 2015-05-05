@@ -48,13 +48,13 @@
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
       <Name>Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
+    <ProjectReference Include="..\Common.Models\Data.Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Common.Models</Name>
+      <Name>Data.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+    <ProjectReference Include="..\DataAccessLayer\Data.EntityFrameworkRepository.csproj">
       <Project>{2CAE9EBA-3C0F-48B8-BA52-E44FCA3F36ED}</Project>
-      <Name>DataAccessLayer</Name>
+      <Name>Data.EntityFrameworkRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

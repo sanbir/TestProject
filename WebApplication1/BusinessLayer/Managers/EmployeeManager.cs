@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
-using Data.Contracts.DataRepositories;
 
 namespace BusinessLayer.Managers
 {
@@ -27,7 +26,6 @@ namespace BusinessLayer.Managers
 
         public Employee UpdateEmployee(Employee employee)
         {
-
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
             Employee updatedEntity = null;
@@ -42,7 +40,6 @@ namespace BusinessLayer.Managers
 
         public void DeleteEmployee(int employeeId)
         {
-
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
             employeeRepository.Remove(employeeId);
