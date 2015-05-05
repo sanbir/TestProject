@@ -27,11 +27,10 @@ namespace TempTest2
 
             ObjectBase.Container = MEFLoader.Init();
             EmployeeManager manager = new EmployeeManager();
-
             
             Employee updateEmployeeResults = manager.UpdateEmployee(employee);
 
-            Assert.IsTrue(updateEmployeeResults == employee);
+            Assert.AreEqual(employee.Email, updateEmployeeResults.Email);
         }
     }
 }
