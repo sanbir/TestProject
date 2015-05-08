@@ -84,9 +84,9 @@
       <Project>{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}</Project>
       <Name>Fixtures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Data.Models.csproj">
+    <ProjectReference Include="..\Common.Models\Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Data.Models</Name>
+      <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer\Data.EntityFrameworkRepository.csproj">
       <Project>{2cae9eba-3c0f-48b8-ba52-e44fca3f36ed}</Project>

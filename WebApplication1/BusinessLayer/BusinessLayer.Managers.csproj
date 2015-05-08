@@ -51,9 +51,9 @@
       <Project>{065d42f7-c500-4cdd-9498-eeaa8549e4c5}</Project>
       <Name>Data.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Data.Models.csproj">
+    <ProjectReference Include="..\Common.Models\Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Data.Models</Name>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

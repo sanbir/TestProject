@@ -17,6 +17,7 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        // 
         // GET: Student
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {

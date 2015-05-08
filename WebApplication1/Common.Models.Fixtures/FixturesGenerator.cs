@@ -37,7 +37,7 @@ namespace Common.Models.Fixtures
             employee.FirstName = _fixture.Create<string>();
             employee.LastName = _fixture.Create<string>();
             employee.MiddleName = _fixture.Create<string>();
-            employee.Email = _fixture.Create<string>();
+            employee.Email = _fixture.Create<string>() + "@" + _fixture.Create<string>() + ".com";
             employee.ContractorCompanyName = _fixture.Create<string>();
 
             return employee;
