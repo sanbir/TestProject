@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition.Hosting;
 using DataAccessLayer.DataRepositories;
 
-namespace BusinessLayer
+namespace BusinessLayer.Bootstrapper
 {
-    public static class MEFLoader
+    public static class MefLoader
     {
         public static CompositionContainer Init()
         {

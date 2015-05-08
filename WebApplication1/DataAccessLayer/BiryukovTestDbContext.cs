@@ -1,13 +1,14 @@
 using System.Configuration;
 using System.Data.Entity;
 using Data.Models;
+using Utils;
 
 namespace DataAccessLayer
 {
     public class BiryukovTestDbContext : DbContext
     {
         public BiryukovTestDbContext()
-            : base("name=MainConnectionString")
+            : base(Constants.ConnectionString)
         {
         }
 
@@ -22,7 +23,7 @@ namespace DataAccessLayer
                 .IsUnicode(false);
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Id)
-                .HasColumnName("EmployeeId");
+                .HasColumnName(Constants.EmployeeId);
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Projects)
                 .WithRequired(e => e.Employee)
@@ -31,7 +32,7 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Project>()
                 .Property(e => e.Id)
-                .HasColumnName("ProjectId");
+                .HasColumnName(Constants.ProjectId);
         }
     }
 }

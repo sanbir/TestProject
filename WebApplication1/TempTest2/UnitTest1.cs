@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLayer;
+using BusinessLayer.Bootstrapper;
 using BusinessLayer.Managers;
 using Common.Models.Fixtures;
 using Data.Contracts.DataRepositories;
@@ -15,7 +16,7 @@ namespace TempTest2
         [TestMethod]
         public void TestMethod1()
         {
-            ObjectBase.Container = MEFLoader.Init();
+            ObjectBase.Container = MefLoader.Init();
 
             Employee employee = FixturesGenerator.GenerateEmployee();
             IEmployeeRepository employeeRepository = new EmployeeRepository();

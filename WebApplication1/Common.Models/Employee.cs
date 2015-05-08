@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using Utils;
 
 namespace Data.Models
 {
@@ -15,7 +16,7 @@ namespace Data.Models
             Projects = new HashSet<Project>();
         }
 
-        [Required(ErrorMessage = "Введите имя")]
+        [Required(ErrorMessage = Constants.EmployeeFirstNameRequiredErrorMessage)]
         [StringLength(50)]
         [Display(Name = "Имя", Prompt = "Имя")]
         public string FirstName { get; set; }
