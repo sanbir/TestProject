@@ -9,7 +9,9 @@ using System.Web.Routing;
 using ContosoUniversity.DAL;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Reflection;
+using BusinessLayer.Managers;
 using Data.Models;
+using DataAccessLayer.DataRepositories;
 using PresentationLayer.Bootstrapper;
 
 namespace ContosoUniversity
@@ -25,7 +27,16 @@ namespace ContosoUniversity
             DbInterception.Add(new SchoolInterceptorTransientErrors());
             DbInterception.Add(new SchoolInterceptorLogging());
 
-            MEFLoader.Init();
+            AggregateCatalog catalog = new AggregateCatalog();
+
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeManager).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
+
+            CompositionContainer container = new CompositionContainer(catalog);
+            IControllerFactory mefControllerFactory = new MefControllerFactory(container);
+            ControllerBuilder.Current.SetControllerFactory(mefControllerFactory);
+            ObjectBase.Container = container;
         } 
     }
 }
