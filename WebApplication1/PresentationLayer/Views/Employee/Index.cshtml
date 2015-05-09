@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Data.Models.Employee>
+﻿@model ContosoUniversity.ViewModels.EmployeeViewModel
 @using Data.Models
 @using PagedList.Mvc;
 @using Utils
@@ -13,35 +13,35 @@
 <p>
     @Html.ActionLink("Создать", "Create")
 </p>
-@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("Поиск", ViewBag.CurrentFilter as string)
+        Find by name: @Html.TextBox("Поиск", Model.Filter)
         <input type="submit" value="Search" />
     </p>
 }
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.LastName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.LastName), "Index", new { Model.Sorting, Model.Filter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.FirstName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.FirstName), "Index", new { Model.Sorting, Model.Filter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.MiddleName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.MiddleName), "Index", new { Model.Sorting, Model.Filter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.Email), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.Email), "Index", new { Model.Sorting, Model.Filter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.ContractorCompanyName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.ContractorCompanyName), "Index", new { Model.Sorting, Model.Filter })
         </th>
         <th></th>
     </tr>
 
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Employees)
     {
         <tr>
             <td>
@@ -69,7 +69,6 @@
 
 </table>
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+Page @(Model.Employees.PageCount < Model.Employees.PageNumber ? 0 : Model.Employees.PageNumber) of @Model.Employees.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+@Html.PagedListPager(Model.Employees, page => Url.Action("Index", new { page, Model.Sorting.SortOrder, Model.Filter }))

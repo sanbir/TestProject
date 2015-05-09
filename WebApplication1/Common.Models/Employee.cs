@@ -45,5 +45,13 @@ namespace Data.Models
         [Browsable(false)]
         public virtual ICollection<Project> Projects { get; set; }
 
+        public enum PropertyNames
+        {
+            FirstName,
+            LastName,
+            MiddleName,
+            Email,
+            ContractorCompanyName
+        }
     }
 }
