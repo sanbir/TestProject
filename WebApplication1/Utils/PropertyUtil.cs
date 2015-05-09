@@ -7,18 +7,29 @@ namespace Utils
 {
     public static class PropertyUtil
     {
-        public static string GetPropertyDisplayOrNameFor<TObject>(this TObject type,
+        public static string GetPropertyDisplayNameFor<TObject>(this TObject type,
                                                        Expression<Func<TObject, object>> propertyRefExpr)
         {
-            return GetPropertyNameCore(propertyRefExpr.Body);
+            return GetPropertyNameOrDisplayCore(propertyRefExpr.Body, true);
         }
 
-        public static string GetDisplayOrNameFor<TObject>(Expression<Func<TObject, object>> propertyRefExpr)
+        public static string GetDisplayNameFor<TObject>(Expression<Func<TObject, object>> propertyRefExpr)
         {
-            return GetPropertyNameCore(propertyRefExpr.Body);
+            return GetPropertyNameOrDisplayCore(propertyRefExpr.Body, true);
         }
 
-        private static string GetPropertyNameCore(Expression propertyRefExpr)
+        public static string GetPropertyNameFor<TObject>(this TObject type,
+                                               Expression<Func<TObject, object>> propertyRefExpr)
+        {
+            return GetPropertyNameOrDisplayCore(propertyRefExpr.Body);
+        }
+
+        public static string GetNameFor<TObject>(Expression<Func<TObject, object>> propertyRefExpr)
+        {
+            return GetPropertyNameOrDisplayCore(propertyRefExpr.Body);
+        }
+
+        private static string GetPropertyNameOrDisplayCore(Expression propertyRefExpr, bool isDisplay = false)
         {
             if (propertyRefExpr == null)
                 throw new ArgumentNullException("propertyRefExpr", "propertyRefExpr is null.");
@@ -31,19 +42,20 @@ namespace Utils
                     memberExpr = unaryExpr.Operand as MemberExpression;
             }
 
-            if (memberExpr != null && memberExpr.Member.MemberType == MemberTypes.Property)
-            {
-                MemberInfo propertyMember = memberExpr.Member;
+            if (memberExpr == null || memberExpr.Member.MemberType != MemberTypes.Property)
+                throw new ArgumentException("No property reference expression was found.", "propertyRefExpr");
 
+            MemberInfo propertyMember = memberExpr.Member;
+
+            if (isDisplay)
+            {
                 Object[] displayAttributes = propertyMember.GetCustomAttributes(typeof(DisplayAttribute), true);
                 if (displayAttributes.Length == 1)
                     return ((DisplayAttribute)displayAttributes[0]).Name;
-
-                return propertyMember.Name;
             }
 
-            throw new ArgumentException("No property reference expression was found.",
-                             "propertyRefExpr");
+            return propertyMember.Name;
         }
+
     }
 }

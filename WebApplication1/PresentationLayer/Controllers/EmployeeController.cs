@@ -1,20 +1,35 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Web.Mvc;
+using BusinessLayer.Contracts.Managers;
+using Data.Models;
+using PagedList;
 
 namespace ContosoUniversity.Controllers
 {
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmployeeController : Controller
     {
+        [ImportingConstructor]
+        public EmployeeController(IEmployeeManager employeeManager)
+        {
+            _employeeManager = employeeManager;
+        }
+
+        [Import]
+        IEmployeeManager _employeeManager;
+
         public ActionResult Create()
         {
             throw new System.NotImplementedException();
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.CurrentSortDirection = sortDirection;
+            ViewBag.CurrentPropertyName = sortPropertyName;
 
             if (searchString != null)
             {
@@ -27,34 +42,11 @@ namespace ContosoUniversity.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            //var employees = from s in db.Students
-            //               select s;
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    employees = employees.Where(s => s.LastName.Contains(searchString)
-            //                           || s.FirstMidName.Contains(searchString));
-            //}
-            //switch (sortOrder)
-            //{
-            //    case "name_desc":
-            //        employees = employees.OrderByDescending(s => s.LastName);
-            //        break;
-            //    case "Date":
-            //        employees = employees.OrderBy(s => s.EnrollmentDate);
-            //        break;
-            //    case "date_desc":
-            //        employees = employees.OrderByDescending(s => s.EnrollmentDate);
-            //        break;
-            //    default:  // Name ascending 
-            //        employees = employees.OrderBy(s => s.LastName);
-            //        break;
-            //}
+            var employees = _employeeManager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyName, searchString);
 
-            //int pageSize = 3;
-            //int pageNumber = (page ?? 1);
-            //return System.Web.UI.WebControls.View(employees.ToPagedList(pageNumber, pageSize));
-
-            throw new NotImplementedException();
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Edit(object id)

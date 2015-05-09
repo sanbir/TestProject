@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using BusinessLayer.Contracts.Managers;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
+using Utils;
 
 namespace BusinessLayer.Managers
 {
@@ -59,14 +61,48 @@ namespace BusinessLayer.Managers
             return employeeEntity;
         }
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+            var employees = GetAllEmployees();
 
-            IEnumerable<Employee> employees = employeeRepository.Get();
+            if (!String.IsNullOrEmpty(filter))
+            {
+                employees = employees.Where(employee => employee.LastName.Contains(filter)
+                                                        || employee.FirstName.Contains(filter)
+                                                        || employee.MiddleName.Contains(filter)
+                                                        || employee.Email.Contains(filter)
+                                                        || employee.ContractorCompanyName.Contains(filter));
+            }
+
+            switch (sortDirection)
+            {
+                case ListSortDirection.Ascending:
+                    employees = employees.OrderBy(sortPropertyDescriptor.GetValue);
+                    break;
+                case ListSortDirection.Descending:
+                    employees = employees.OrderByDescending(sortPropertyDescriptor.GetValue);
+                    break;
+            }
 
             return employees;
         }
 
+        private IEnumerable<Employee> GetAllEmployees()
+        {
+            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+            IEnumerable<Employee> employees = employeeRepository.Get();
+            return employees;
+        }
+
+
+        public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection, string sortPropertyName, string filter)
+        {
+            ListSortDirection direction;
+            Enum.TryParse(sortDirection, out direction);
+
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
+
+            return GetAllEmployeesSortedAndFiltered(direction, descriptor, filter);
+        }
     }
 }

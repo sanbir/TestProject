@@ -23,19 +23,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.LastName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.LastName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.FirstName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.FirstName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.MiddleName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.MiddleName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.Email), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.Email), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayOrNameFor(e => e.ContractorCompanyName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.ContractorCompanyName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
