@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLayer;
+using BusinessLayer.Bootstrapper;
 using BusinessLayer.Managers;
 using Common.Models.Fixtures;
 using Data.Contracts.DataRepositories;

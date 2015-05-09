@@ -11,7 +11,7 @@ using Data.Models;
 
 namespace BusinessLayer.Managers
 {
-    public class EmployeeManager : ManagerBase, IEmployeeManager //, IInventoryService
+    public class EmployeeManager : ManagerBase, IEmployeeManager
     {
         public EmployeeManager()
         {

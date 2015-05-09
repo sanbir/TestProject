@@ -55,6 +55,7 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
@@ -276,6 +277,10 @@
     <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
       <Name>Common.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PresentationLayer.Bootstrapper\PresentationLayer.Bootstrapper.csproj">
+      <Project>{2EE14BA1-DDC5-4C04-A1F0-22C0FD13049A}</Project>
+      <Name>PresentationLayer.Bootstrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Common.Utils.csproj">
       <Project>{d21d7750-52f2-44a0-a6d5-15347fbb01cb}</Project>
