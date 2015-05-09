@@ -76,21 +76,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Contracts\Data.Contracts.csproj">
+    <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
       <Project>{065d42f7-c500-4cdd-9498-eeaa8549e4c5}</Project>
-      <Name>Data.Contracts</Name>
+      <Name>DataAccessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models.Fixtures\Fixtures.csproj">
+    <ProjectReference Include="..\Common.Models.Fixtures\Tests.Fixtures.csproj">
       <Project>{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}</Project>
-      <Name>Fixtures</Name>
+      <Name>Tests.Fixtures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Models.csproj">
+    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Models</Name>
+      <Name>Common.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\Data.EntityFrameworkRepository.csproj">
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.EntityFrameworkRepository.csproj">
       <Project>{2cae9eba-3c0f-48b8-ba52-e44fca3f36ed}</Project>
-      <Name>Data.EntityFrameworkRepository</Name>
+      <Name>DataAccessLayer.EntityFrameworkRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

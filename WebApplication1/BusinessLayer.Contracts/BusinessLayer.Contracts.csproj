@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD7DCB86-B90C-4B26-8E4A-D56CF8565EE9}</ProjectGuid>
+    <ProjectGuid>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLayer.Bootstrapper</RootNamespace>
-    <AssemblyName>BusinessLayer.Bootstrapper</AssemblyName>
+    <RootNamespace>BusinessLayer.Contracts</RootNamespace>
+    <AssemblyName>BusinessLayer.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,21 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MEFLoader.cs" />
+    <Compile Include="IManager.cs" />
+    <Compile Include="IManagerFactory.cs" />
+    <Compile Include="Managers\IEmployeeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
-      <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
-      <Name>DataAccessLayer.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Models\Common.Models.csproj">
-      <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
+      <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
       <Name>Common.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.EntityFrameworkRepository.csproj">
-      <Project>{2CAE9EBA-3C0F-48B8-BA52-E44FCA3F36ED}</Project>
-      <Name>DataAccessLayer.EntityFrameworkRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

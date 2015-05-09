@@ -67,25 +67,29 @@
       <Project>{FD7DCB86-B90C-4B26-8E4A-D56CF8565EE9}</Project>
       <Name>BusinessLayer.Bootstrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BusinessLayer.Contracts\BusinessLayer.Contracts.csproj">
+      <Project>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</Project>
+      <Name>BusinessLayer.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.Managers.csproj">
       <Project>{8AFF7348-82B5-48CF-8F2B-8B9C645D33EB}</Project>
       <Name>BusinessLayer.Managers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Contracts\Data.Contracts.csproj">
+    <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
-      <Name>Data.Contracts</Name>
+      <Name>DataAccessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models.Fixtures\Fixtures.csproj">
+    <ProjectReference Include="..\Common.Models.Fixtures\Tests.Fixtures.csproj">
       <Project>{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}</Project>
-      <Name>Fixtures</Name>
+      <Name>Tests.Fixtures</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Models.csproj">
+    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
-      <Name>Models</Name>
+      <Name>Common.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\Data.EntityFrameworkRepository.csproj">
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.EntityFrameworkRepository.csproj">
       <Project>{2CAE9EBA-3C0F-48B8-BA52-E44FCA3F36ED}</Project>
-      <Name>Data.EntityFrameworkRepository</Name>
+      <Name>DataAccessLayer.EntityFrameworkRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

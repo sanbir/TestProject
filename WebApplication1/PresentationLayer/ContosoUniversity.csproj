@@ -273,13 +273,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Models\Models.csproj">
+    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Models</Name>
+      <Name>Common.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Common.Utils.csproj">
       <Project>{d21d7750-52f2-44a0-a6d5-15347fbb01cb}</Project>
-      <Name>Utils</Name>
+      <Name>Common.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

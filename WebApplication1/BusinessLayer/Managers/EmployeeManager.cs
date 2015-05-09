@@ -4,13 +4,14 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Contracts.Managers;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
 
 namespace BusinessLayer.Managers
 {
-    public class EmployeeManager : ManagerBase //, IInventoryService
+    public class EmployeeManager : ManagerBase, IEmployeeManager //, IInventoryService
     {
         public EmployeeManager()
         {
@@ -58,19 +59,13 @@ namespace BusinessLayer.Managers
             return employeeEntity;
         }
 
-        public Employee[] GetAllEmployees()
+        public IEnumerable<Employee> GetAllEmployees()
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
             IEnumerable<Employee> employees = employeeRepository.Get();
 
-            foreach (Employee employee in employees)
-            {
-                //Rental rentedCar = rentedCars.Where(item => item.CarId == employee.CarId).FirstOrDefault();
-                //employee.CurrentlyRented = (rentedCar != null);
-            }
-
-            return employees.ToArray();
+            return employees;
         }
 
     }
