@@ -33,32 +33,38 @@ namespace ContosoUniversity.Controllers
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
-            sortDirection = sortDirection == ListSortDirection.Ascending.ToString()
-                ? ListSortDirection.Descending.ToString()
-                : ListSortDirection.Ascending.ToString();
+            sortDirection = SwapSortDirection(sortDirection);
             ViewBag.CurrentSortDirection = sortDirection;
 
             if (string.IsNullOrEmpty(sortPropertyName))
             {
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.LastName);
+                sortPropertyName = DefaultSortPropertyName;
             }
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
+            if (searchString == null)
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
 
             var employees = _employeeManager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyName, searchString);
 
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
+            const int pageSize = 3;
+            int pageNumber = page ?? 1;
             return View(employees.ToPagedList(pageNumber, pageSize));
+        }
+
+        private static string DefaultSortPropertyName
+        {
+            get { return new Employee().GetPropertyNameFor(e => e.LastName); }
+        }
+
+        private static string SwapSortDirection(string sortDirection)
+        {
+            sortDirection = sortDirection == ListSortDirection.Ascending.ToString()
+                ? ListSortDirection.Descending.ToString()
+                : ListSortDirection.Ascending.ToString();
+            return sortDirection;
         }
 
         public ActionResult Edit(object id)
