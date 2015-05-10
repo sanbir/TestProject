@@ -15,5 +15,7 @@ namespace BusinessLayer.Contracts.Managers
 
         IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection,
             string sortPropertyName, string filter);
+
+        Employee Get(int id);
     }
 }

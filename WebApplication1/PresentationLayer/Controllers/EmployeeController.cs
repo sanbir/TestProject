@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Net;
 using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
 using Data.Models;
@@ -72,9 +73,18 @@ namespace ContosoUniversity.Controllers
             throw new System.NotImplementedException();
         }
 
-        public ActionResult Details(object id)
+        public ActionResult Details(int? id)
         {
-            throw new System.NotImplementedException();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = _employeeManager.Get((int) id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
         }
 
         public ActionResult Delete(object id)

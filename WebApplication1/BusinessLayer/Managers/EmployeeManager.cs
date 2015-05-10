@@ -50,19 +50,6 @@ namespace BusinessLayer.Managers
             employeeRepository.Remove(employeeId);
         }
 
-        public Employee GetEmployee(int employeeId)
-        {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-
-            Employee employeeEntity = employeeRepository.Get(employeeId);
-            if (employeeEntity == null)
-            {
-                //NotFoundException ex = new NotFoundException(string.Format("Car with ID of {0} is not in database", employeeId));
-            }
-
-            return employeeEntity;
-        }
-
         public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
             var employees = GetAllEmployees();
@@ -110,7 +97,6 @@ namespace BusinessLayer.Managers
             return employees;
         }
 
-
         public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection, string sortPropertyName, string filter)
         {
             ListSortDirection direction = ListSortDirection.Ascending;
@@ -128,6 +114,15 @@ namespace BusinessLayer.Managers
             }
 
             return GetAllEmployeesSortedAndFiltered(direction, descriptor, filter);
+        }
+
+        public Employee Get(int id)
+        {
+            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+
+            Employee employeeEntity = employeeRepository.Get(id);
+
+            return employeeEntity;
         }
     }
 }

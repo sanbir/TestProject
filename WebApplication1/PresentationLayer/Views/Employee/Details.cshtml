@@ -1,13 +1,13 @@
-﻿@model ContosoUniversity.Models.Student
+﻿@model Data.Models.Employee
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Информация о работнике";
 }
 
-<h2>Details</h2>
+<h2>Информация о работнике</h2>
 
 <div>
-    <h4>Student</h4>
+    <h4>Работник</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,45 +19,39 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstMidName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstMidName)
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model.MiddleName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
+            @Html.DisplayFor(model => model.MiddleName)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.Enrollments)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
+
         <dd>
-            <table class="table">
-                <tr>
-                    <th>Course Title</th>
-                    <th>Grade</th>
-                </tr>
-                @foreach (var item in Model.Enrollments)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Course.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Grade)
-                        </td>
-                    </tr>
-                }
-            </table>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractorCompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractorCompanyName)
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
 </p>
