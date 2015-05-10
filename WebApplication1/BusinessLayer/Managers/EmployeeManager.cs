@@ -45,7 +45,7 @@ namespace BusinessLayer.Managers
             return updatedEntity;
         }
 
-        public void DeleteEmployee(int employeeId)
+        public void Delete(int employeeId)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
@@ -118,10 +118,10 @@ namespace BusinessLayer.Managers
             return GetAll(direction, descriptor, filter);
         }
 
-        public Employee Get(int id)
+        public Employee Get(int employeeId)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-            Employee employeeEntity = employeeRepository.Get(id);
+            Employee employeeEntity = employeeRepository.Get(employeeId);
             return employeeEntity;
         }
 

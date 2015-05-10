@@ -133,9 +133,37 @@ namespace ContosoUniversity.Controllers
             return View(employee);
         }
 
-        public ActionResult Delete(object id)
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
-            throw new System.NotImplementedException();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Не удалось удалить. Пожалуйста, попробуйте позже";
+            }
+            Employee employee = _employeeManager.Get((int)id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _employeeManager.Delete(id);
+            }
+            catch (Exception)// TODO:
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
+            return RedirectToAction("Index");
         }
 
         private static string DefaultSortPropertyName

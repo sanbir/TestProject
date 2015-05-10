@@ -19,5 +19,7 @@ namespace BusinessLayer.Contracts.Managers
         Employee Get(int id);
 
         void CreateOrUpdate(Employee employee);
+
+        void Delete(int id);
     }
 }
