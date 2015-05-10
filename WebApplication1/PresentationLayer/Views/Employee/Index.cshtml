@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
 {
     <p>
-        Find by name: @Html.TextBox("Поиск", ViewBag.CurrentFilter as string)
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
