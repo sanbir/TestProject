@@ -15,7 +15,7 @@ namespace DataAccessLayer
     {
         T IDataRepositoryFactory.GetDataRepository<T>()
         {
-            return ObjectBase.Container.GetExportedValue<T>();
+            return EntityBase.Container.GetExportedValue<T>();
         }
     }
 }

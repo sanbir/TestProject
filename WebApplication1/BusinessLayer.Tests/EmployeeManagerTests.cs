@@ -164,7 +164,7 @@ namespace BusinessLayer.Tests
             AggregateCatalog catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
             CompositionContainer container = new CompositionContainer(catalog);
-            ObjectBase.Container = container;
+            EntityBase.Container = container;
 
             Employee employee = FixturesGenerator.GenerateEmployee();
             IEmployeeRepository employeeRepository = new EmployeeRepository();

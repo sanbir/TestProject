@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class ObjectBase
+    public class EntityBase : IEntity
     {
         [Browsable(false)]
         public int Id { get; set; }

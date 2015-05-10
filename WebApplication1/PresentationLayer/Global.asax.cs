@@ -36,7 +36,7 @@ namespace ContosoUniversity
             CompositionContainer container = new CompositionContainer(catalog);
             IControllerFactory mefControllerFactory = new MefControllerFactory(container);
             ControllerBuilder.Current.SetControllerFactory(mefControllerFactory);
-            ObjectBase.Container = container;
+            EntityBase.Container = container;
         } 
     }
 }

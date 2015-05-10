@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Data.Models
 {
-    public class ProjectsEmployee : ObjectBase
+    public class ProjectsEmployee : EntityBase
     {
         [Browsable(false)]
         public int ProjectId { get; set; }

@@ -15,7 +15,7 @@ namespace BusinessLayer
     {
         T IManagerFactory.GetManager<T>()
         {
-            return ObjectBase.Container.GetExportedValue<T>();
+            return EntityBase.Container.GetExportedValue<T>();
         }
     }
 }

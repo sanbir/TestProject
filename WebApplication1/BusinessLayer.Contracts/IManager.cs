@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data.Models;
 
 namespace BusinessLayer.Contracts
 {
@@ -12,7 +13,7 @@ namespace BusinessLayer.Contracts
     }
 
     public interface IManager<TEntity> : IManager
-        where TEntity : class, new()
+        where TEntity : class, IEntity, new()
     {
         IEnumerable<TEntity> GetAll(ListSortDirection sortDirection,
             PropertyDescriptor sortPropertyDescriptor, string filter);

@@ -12,8 +12,8 @@ namespace BusinessLayer
     {
         public ManagerBase()
         {
-            if (ObjectBase.Container != null)
-                ObjectBase.Container.SatisfyImportsOnce(this);
+            if (EntityBase.Container != null)
+                EntityBase.Container.SatisfyImportsOnce(this);
         }
     }
 }

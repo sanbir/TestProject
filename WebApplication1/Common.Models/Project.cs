@@ -7,7 +7,7 @@ using System.Data.Entity.Spatial;
 
 namespace Data.Models
 {
-    public class Project : ObjectBase
+    public class Project : EntityBase
     {
         public Project()
         {
