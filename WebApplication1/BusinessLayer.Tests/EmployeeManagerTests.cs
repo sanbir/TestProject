@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLayer.Managers;
+using Common.Models.Fixtures;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
@@ -41,6 +44,19 @@ namespace BusinessLayer.Tests
             Employee updateEmployeeResults = manager.UpdateEmployee(existingEmployee);
 
             Assert.IsTrue(updateEmployeeResults == updatedEmployee);
+        }
+
+        [TestMethod]
+        public void GetAllEmployees()
+        {
+            IEnumerable<Employee> employees = FixturesGenerator.GenerateEmployees(10);
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IEmployeeRepository>().Get()).Returns(employees);
+
+            EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
+
+            Assert.IsTrue(manager.GetAllEmployees().ToList()[5].Email == employees.ToList()[5].Email);
         }
 
     }

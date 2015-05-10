@@ -38,6 +38,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.30.4.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoFixture.3.30.4\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
   </ItemGroup>
@@ -76,12 +80,17 @@
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
       <Name>DataAccessLayer.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Models.Fixtures\Tests.Fixtures.csproj">
+      <Project>{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}</Project>
+      <Name>Tests.Fixtures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
       <Name>Common.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>

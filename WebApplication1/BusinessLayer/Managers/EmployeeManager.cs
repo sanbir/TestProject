@@ -93,7 +93,7 @@ namespace BusinessLayer.Managers
             return employees;
         }
 
-        private IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAllEmployees()
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
             IEnumerable<Employee> employees = employeeRepository.Get();
