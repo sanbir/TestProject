@@ -10,6 +10,7 @@ using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
 using Utils;
+using BusinessLayer.Contracts;
 
 namespace BusinessLayer.Managers
 {
@@ -29,7 +30,7 @@ namespace BusinessLayer.Managers
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
 
-        void IEmployeeManager.CreateOrUpdate(Employee employee)
+        void IManager<Employee>.CreateOrUpdate(Employee employee)
         {
             CreateOrUpdate(employee);
         }

@@ -10,16 +10,5 @@ namespace BusinessLayer.Contracts.Managers
 {
     public interface IEmployeeManager : IManager<Employee>
     {
-        IEnumerable<Employee> GetAll(ListSortDirection sortDirection,
-            PropertyDescriptor sortPropertyDescriptor, string filter);
-
-        IEnumerable<Employee> GetAll(string sortDirection,
-            string sortPropertyName, string filter);
-
-        Employee Get(int id);
-
-        void CreateOrUpdate(Employee employee);
-
-        void Delete(int id);
     }
 }
