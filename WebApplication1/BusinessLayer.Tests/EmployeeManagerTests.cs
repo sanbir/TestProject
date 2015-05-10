@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
-using System.Linq.Expressions;
 using BusinessLayer.Managers;
 using Common.Models.Fixtures;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
+using DataAccessLayer.DataRepositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -155,6 +156,23 @@ namespace BusinessLayer.Tests
             // assert
             Assert.IsTrue(receivedEmployees.Count == 2);
             Assert.IsTrue(receivedEmployees[0].LastName == "Alexander");
+        }
+
+        [TestMethod]
+        public void TestDependencyInjection()
+        {
+            AggregateCatalog catalog = new AggregateCatalog();
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
+            CompositionContainer container = new CompositionContainer(catalog);
+            ObjectBase.Container = container;
+
+            Employee employee = FixturesGenerator.GenerateEmployee();
+            IEmployeeRepository employeeRepository = new EmployeeRepository();
+            Employee savedEmployee = employeeRepository.Add(employee);
+
+            EmployeeManager manager = new EmployeeManager();
+            Employee updateEmployeeResults = manager.UpdateEmployee(employee);
+            Assert.AreEqual(employee.Email, updateEmployeeResults.Email);
         }
 
     }
