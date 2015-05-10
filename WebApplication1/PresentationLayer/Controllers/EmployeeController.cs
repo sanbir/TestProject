@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
 using Data.Models;
 using PagedList;
+using Utils;
 
 namespace ContosoUniversity.Controllers
 {
@@ -32,7 +33,15 @@ namespace ContosoUniversity.Controllers
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
+            sortDirection = sortDirection == ListSortDirection.Ascending.ToString()
+                ? ListSortDirection.Descending.ToString()
+                : ListSortDirection.Ascending.ToString();
             ViewBag.CurrentSortDirection = sortDirection;
+
+            if (string.IsNullOrEmpty(sortPropertyName))
+            {
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.LastName);
+            }
             ViewBag.CurrentPropertyName = sortPropertyName;
 
             if (searchString != null)

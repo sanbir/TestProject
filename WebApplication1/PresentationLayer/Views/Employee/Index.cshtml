@@ -17,6 +17,7 @@
         <input type="submit" value="Search" />
     </p>
 }
+
 <table class="table">
     <tr>
         <th>
@@ -25,7 +26,7 @@
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ViewBag.CurrentPropertyName,
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.LastName),
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
@@ -35,7 +36,7 @@
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ViewBag.CurrentPropertyName,
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.FirstName),
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
@@ -45,7 +46,7 @@
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ViewBag.CurrentPropertyName,
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.MiddleName),
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
@@ -55,19 +56,19 @@
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ViewBag.CurrentPropertyName,
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.Email),
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
         <th>
             @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.ContractorCompanyName),
             "Index",
-                                 new
-                     {
-                         sortDirection = ViewBag.CurrentSortDirection,
-                         sortPropertyName = ViewBag.CurrentPropertyName,
-                         currentFilter = ViewBag.CurrentFilter
-                     })
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = new Employee().GetPropertyNameFor(e => e.ContractorCompanyName),
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th></th>
     </tr>
