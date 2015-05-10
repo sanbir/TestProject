@@ -124,14 +124,7 @@ namespace BusinessLayer.Managers
 
             if (!string.IsNullOrEmpty(sortPropertyName))
             {
-                try
-                {
-                    descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
+                descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
             }
 
             return GetAllEmployeesSortedAndFiltered(direction, descriptor, filter);

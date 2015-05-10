@@ -93,5 +93,69 @@ namespace BusinessLayer.Tests
             Assert.IsTrue(receivedEmployees[0].FirstName == "Alexey");
         }
 
+        [TestMethod]
+        public void GetAllEmployeesSortedAndFiltered_WithStrings()
+        {
+            // arrange
+            string sortDirection = "Descending";
+            string sortPropertyDescriptor = "FirstName";
+            string filter = "alex";
+
+            List<Employee> employees = FixturesGenerator.GenerateEmployees(10).ToList();
+            employees[0].FirstName = "Anton";
+            employees[1].FirstName = "Anna";
+            employees[2].FirstName = "Olga";
+            employees[3].FirstName = "Alexander";
+            employees[4].FirstName = "Igor";
+            employees[5].FirstName = "Julia";
+            employees[6].FirstName = "Galina";
+            employees[7].FirstName = "Alexey";
+            employees[8].FirstName = "Daria";
+            employees[9].FirstName = "Denis";
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IEmployeeRepository>().Get()).Returns(employees);
+            EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
+
+            // act
+            List<Employee> receivedEmployees = manager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyDescriptor, filter).ToList();
+
+            // assert
+            Assert.IsTrue(receivedEmployees.Count == 2);
+            Assert.IsTrue(receivedEmployees[0].FirstName == "Alexey");
+        }
+
+        [TestMethod]
+        public void GetAllEmployeesSortedAndFiltered_WithIncorrectStrings()
+        {
+            // arrange
+            string sortDirection = "ThisIsAnIncorrectValue";
+            string sortPropertyDescriptor = "ThisIsAnotherIncorrectValue";
+            string filter = "alex";
+
+            List<Employee> employees = FixturesGenerator.GenerateEmployees(10).ToList();
+            employees[0].LastName = "Anton";
+            employees[1].LastName = "Anna";
+            employees[2].LastName = "Olga";
+            employees[3].LastName = "Alexander";
+            employees[4].LastName = "Igor";
+            employees[5].LastName = "Julia";
+            employees[6].LastName = "Galina";
+            employees[7].LastName = "Alexey";
+            employees[8].LastName = "Daria";
+            employees[9].LastName = "Denis";
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IEmployeeRepository>().Get()).Returns(employees);
+            EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
+
+            // act
+            List<Employee> receivedEmployees = manager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyDescriptor, filter).ToList();
+
+            // assert
+            Assert.IsTrue(receivedEmployees.Count == 2);
+            Assert.IsTrue(receivedEmployees[0].LastName == "Alexander");
+        }
+
     }
 }
