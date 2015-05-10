@@ -10,7 +10,8 @@ namespace BusinessLayer.Contracts
     {
     }
 
-    public interface IManager<T> where T : class, new()
+    public interface IManager<T> : IManager
+        where T : class, new()
     {
     }
 }
