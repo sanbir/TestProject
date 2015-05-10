@@ -69,11 +69,21 @@ namespace BusinessLayer.Managers
 
             if (!String.IsNullOrEmpty(filter))
             {
-                employees = employees.Where(employee => employee.LastName.Contains(filter)
-                                                        || employee.FirstName.Contains(filter)
-                                                        || employee.MiddleName.Contains(filter)
-                                                        || employee.Email.Contains(filter)
-                                                        || employee.ContractorCompanyName.Contains(filter));
+                employees =
+                    employees.Where(employee =>
+                        employee.LastName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        ||
+                        employee.FirstName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        ||
+                        employee.MiddleName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        || employee.Email.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        ||
+                        employee.ContractorCompanyName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant()));
             }
 
             switch (sortDirection)
