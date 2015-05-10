@@ -74,10 +74,46 @@ namespace ContosoUniversity.Controllers
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
-
-        public ActionResult Edit(object id)
+        public ActionResult Edit(int? id)
         {
-            throw new System.NotImplementedException();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Employee employee = _employeeManager.Get((int)id);
+
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(employee);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = _employeeManager.Get((int)id);
+            if (TryUpdateModel(employee, "",
+                new[] { "LastName", "FirstName", "MiddleName", "Email", "ContractorCompanyName" }))
+            {
+                try
+                {
+                    _employeeManager.CreateOrUpdate(employee);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception) // TODO: add custom
+                {
+                    ModelState.AddModelError("", "Не удалось сохранить. Пожалуйста, попробуйте позже");
+                }
+            }
+            return View(employee);
         }
 
         public ActionResult Details(int? id)
@@ -87,7 +123,7 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Employee employee = _employeeManager.Get((int) id);
+            Employee employee = _employeeManager.Get((int)id);
 
             if (employee == null)
             {
