@@ -29,7 +29,26 @@ namespace ContosoUniversity.Controllers
 
         public ActionResult Create()
         {
-            throw new System.NotImplementedException();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "LastName, FirstName, MiddleName, Email, ContractorCompanyName")]Employee employee)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _employeeManager.CreateOrUpdate(employee);
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception) // TODO: add custom
+            {
+                ModelState.AddModelError("", "Не удалось сохранить. Пожалуйста, попробуйте позже");
+            }
+            return View(employee);
         }
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
@@ -55,18 +74,6 @@ namespace ContosoUniversity.Controllers
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
 
-        private static string DefaultSortPropertyName
-        {
-            get { return new Employee().GetPropertyNameFor(e => e.LastName); }
-        }
-
-        private static string SwapSortDirection(string sortDirection)
-        {
-            sortDirection = sortDirection == ListSortDirection.Ascending.ToString()
-                ? ListSortDirection.Descending.ToString()
-                : ListSortDirection.Ascending.ToString();
-            return sortDirection;
-        }
 
         public ActionResult Edit(object id)
         {
@@ -79,17 +86,33 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Employee employee = _employeeManager.Get((int) id);
+
             if (employee == null)
             {
                 return HttpNotFound();
             }
+
             return View(employee);
         }
 
         public ActionResult Delete(object id)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static string DefaultSortPropertyName
+        {
+            get { return new Employee().GetPropertyNameFor(e => e.LastName); }
+        }
+
+        private static string SwapSortDirection(string sortDirection)
+        {
+            sortDirection = sortDirection == ListSortDirection.Ascending.ToString()
+                ? ListSortDirection.Descending.ToString()
+                : ListSortDirection.Ascending.ToString();
+            return sortDirection;
         }
     }
 }

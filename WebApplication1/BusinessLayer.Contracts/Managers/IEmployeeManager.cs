@@ -17,5 +17,7 @@ namespace BusinessLayer.Contracts.Managers
             string sortPropertyName, string filter);
 
         Employee Get(int id);
+
+        void CreateOrUpdate(Employee employee);
     }
 }

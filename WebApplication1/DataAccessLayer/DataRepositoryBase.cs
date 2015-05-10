@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
 using Data.Contracts;
@@ -15,9 +16,17 @@ namespace DataAccessLayer
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                T addedEntity = entityContext.Set<T>().Add(entity);
-                entityContext.SaveChanges();
-                return addedEntity;
+                try
+                {
+                    T addedEntity = entityContext.Set<T>().Add(entity);
+                    entityContext.SaveChanges();
+                    return addedEntity;
+                }
+                catch (RetryLimitExceededException)
+                {
+                    // TODO: custom exception needed
+                    throw new Exception();
+                }
             }
         }
 

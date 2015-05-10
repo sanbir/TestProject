@@ -29,7 +29,7 @@ namespace BusinessLayer.Managers
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
 
-        public Employee UpdateEmployee(Employee employee)
+        public Employee CreateOrUpdate(Employee employee)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
@@ -64,8 +64,8 @@ namespace BusinessLayer.Managers
                         employee.FirstName.ToLowerInvariant()
                             .Contains(filter.ToLowerInvariant())
                         ||
-                        employee.MiddleName.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant())
+                        (employee.MiddleName != null && employee.MiddleName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant()))
                         || employee.Email.ToLowerInvariant()
                             .Contains(filter.ToLowerInvariant())
                         ||
@@ -119,10 +119,13 @@ namespace BusinessLayer.Managers
         public Employee Get(int id)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-
             Employee employeeEntity = employeeRepository.Get(id);
-
             return employeeEntity;
+        }
+
+        void IEmployeeManager.CreateOrUpdate(Employee employee)
+        {
+            CreateOrUpdate(employee);
         }
     }
 }

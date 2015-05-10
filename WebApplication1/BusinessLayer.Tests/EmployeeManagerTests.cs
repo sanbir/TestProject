@@ -28,7 +28,7 @@ namespace BusinessLayer.Tests
 
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
-            Employee updateEmployeeResults = manager.UpdateEmployee(newEmployee);
+            Employee updateEmployeeResults = manager.CreateOrUpdate(newEmployee);
 
             Assert.IsTrue(updateEmployeeResults == addedEmployee);
         }
@@ -44,7 +44,7 @@ namespace BusinessLayer.Tests
 
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
-            Employee updateEmployeeResults = manager.UpdateEmployee(existingEmployee);
+            Employee updateEmployeeResults = manager.CreateOrUpdate(existingEmployee);
 
             Assert.IsTrue(updateEmployeeResults == updatedEmployee);
         }
@@ -171,7 +171,7 @@ namespace BusinessLayer.Tests
             Employee savedEmployee = employeeRepository.Add(employee);
 
             EmployeeManager manager = new EmployeeManager();
-            Employee updateEmployeeResults = manager.UpdateEmployee(employee);
+            Employee updateEmployeeResults = manager.CreateOrUpdate(employee);
             Assert.AreEqual(employee.Email, updateEmployeeResults.Email);
         }
 
