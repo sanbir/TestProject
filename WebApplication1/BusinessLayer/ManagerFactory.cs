@@ -13,9 +13,9 @@ namespace BusinessLayer
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ManagerFactory : IManagerFactory
     {
-        T IManagerFactory.GetManager<T>()
+        TManager IManagerFactory.GetManager<TManager>()
         {
-            return EntityBase.Container.GetExportedValue<T>();
+            return EntityBase.Container.GetExportedValue<TManager>();
         }
     }
 }

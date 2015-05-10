@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data.Models;
 
 namespace Data.Contracts
 {
@@ -6,19 +7,19 @@ namespace Data.Contracts
     {
     }
 
-    public interface IDataRepository<T> : IDataRepository
-        where T : class, new()
+    public interface IDataRepository<TEntity> : IDataRepository
+        where TEntity : class, IEntity, new()
     {
-        T Add(T entity);
+        TEntity Add(TEntity entity);
 
-        void Remove(T entity);
+        void Remove(TEntity entity);
 
         void Remove(int id);
 
-        T Update(T entity);
+        TEntity Update(TEntity entity);
 
-        IEnumerable<T> Get();
+        IEnumerable<TEntity> Get();
 
-        T Get(int id);
+        TEntity Get(int id);
     }
 }

@@ -8,6 +8,6 @@ namespace BusinessLayer.Contracts
 {
     public interface IManagerFactory
     {
-        T GetManager<T>() where T : IManager;
+        TManager GetManager<TManager>() where TManager : IManager;
     }
 }

@@ -9,16 +9,16 @@ using Data.Models;
 
 namespace DataAccessLayer
 {
-    public class DataRepositoryBase<T> : IDataRepository<T>
-        where T : EntityBase, new()
+    public class DataRepositoryBase<TEntity> : IDataRepository<TEntity>
+        where TEntity : EntityBase, new()
     {
-        public T Add(T entity)
+        public TEntity Add(TEntity entity)
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
                 try
                 {
-                    T addedEntity = entityContext.Set<T>().Add(entity);
+                    TEntity addedEntity = entityContext.Set<TEntity>().Add(entity);
                     entityContext.SaveChanges();
                     return addedEntity;
                 }
@@ -30,11 +30,11 @@ namespace DataAccessLayer
             }
         }
 
-        public void Remove(T entity)
+        public void Remove(TEntity entity)
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                entityContext.Entry<TEntity>(entity).State = EntityState.Deleted;
                 entityContext.SaveChanges();
             }
         }
@@ -43,17 +43,17 @@ namespace DataAccessLayer
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                T entity = GetEntity(entityContext, id);
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                TEntity entity = GetEntity(entityContext, id);
+                entityContext.Entry<TEntity>(entity).State = EntityState.Deleted;
                 entityContext.SaveChanges();
             }
         }
 
-        public T Update(T entity)
+        public TEntity Update(TEntity entity)
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                T existingEntity = GetEntity(entityContext, entity.Id);
+                TEntity existingEntity = GetEntity(entityContext, entity.Id);
 
                 MapProperties(entity, existingEntity);
 
@@ -62,9 +62,9 @@ namespace DataAccessLayer
             }
         }
 
-        private static void MapProperties(T entity, T existingEntity)
+        private static void MapProperties(TEntity entity, TEntity existingEntity)
         {
-            List<PropertyInfo> properties = typeof (T).GetProperties().ToList();
+            List<PropertyInfo> properties = typeof (TEntity).GetProperties().ToList();
             foreach (PropertyInfo property in properties)
             {
                 if (!property.GetGetMethod().IsVirtual)
@@ -74,22 +74,22 @@ namespace DataAccessLayer
             }
         }
 
-        public IEnumerable<T> Get()
+        public IEnumerable<TEntity> Get()
         {
             using (var entityContext = new BiryukovTestDbContext())
-                return (from e in entityContext.Set<T>()
+                return (from e in entityContext.Set<TEntity>()
                     select e).ToArray().ToList();
         }
 
-        public T Get(int id)
+        public TEntity Get(int id)
         {
             using (var entityContext = new BiryukovTestDbContext())
                 return GetEntity(entityContext, id);
         }
 
-        private T GetEntity(BiryukovTestDbContext entityContext, int id)
+        private TEntity GetEntity(BiryukovTestDbContext entityContext, int id)
         {
-            var entity = (from e in entityContext.Set<T>()
+            var entity = (from e in entityContext.Set<TEntity>()
                           where e.Id == id
                           select e).FirstOrDefault();
 

@@ -13,9 +13,9 @@ namespace DataAccessLayer
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DataRepositoryFactory : IDataRepositoryFactory
     {
-        T IDataRepositoryFactory.GetDataRepository<T>()
+        TDataRepository IDataRepositoryFactory.GetDataRepository<TDataRepository>()
         {
-            return EntityBase.Container.GetExportedValue<T>();
+            return EntityBase.Container.GetExportedValue<TDataRepository>();
         }
     }
 }
