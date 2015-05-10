@@ -12,6 +12,10 @@ namespace ContosoUniversity.Controllers
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmployeeController : Controller
     {
+        public EmployeeController()
+        {
+        }
+
         [ImportingConstructor]
         public EmployeeController(IEmployeeManager employeeManager)
         {

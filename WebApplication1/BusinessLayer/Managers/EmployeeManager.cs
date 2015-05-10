@@ -13,6 +13,8 @@ using Utils;
 
 namespace BusinessLayer.Managers
 {
+    [Export(typeof(IEmployeeManager))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmployeeManager : ManagerBase, IEmployeeManager
     {
         public EmployeeManager()
@@ -77,10 +79,14 @@ namespace BusinessLayer.Managers
             switch (sortDirection)
             {
                 case ListSortDirection.Ascending:
-                    employees = employees.OrderBy(sortPropertyDescriptor.GetValue);
+                    employees = sortPropertyDescriptor == null
+                        ? employees.OrderBy(employee => employee.LastName)
+                        : employees.OrderBy(sortPropertyDescriptor.GetValue);
                     break;
                 case ListSortDirection.Descending:
-                    employees = employees.OrderByDescending(sortPropertyDescriptor.GetValue);
+                    employees = sortPropertyDescriptor == null
+                        ? employees.OrderByDescending(employee => employee.LastName)
+                        : employees.OrderByDescending(sortPropertyDescriptor.GetValue);
                     break;
             }
 
@@ -97,10 +103,26 @@ namespace BusinessLayer.Managers
 
         public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection, string sortPropertyName, string filter)
         {
-            ListSortDirection direction;
-            Enum.TryParse(sortDirection, out direction);
+            ListSortDirection direction = ListSortDirection.Ascending;
 
-            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
+            if (!string.IsNullOrEmpty(sortDirection))
+            {
+                Enum.TryParse(sortDirection, out direction);
+            }
+
+            PropertyDescriptor descriptor = null;
+
+            if (!string.IsNullOrEmpty(sortPropertyName))
+            {
+                try
+                {
+                    descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
 
             return GetAllEmployeesSortedAndFiltered(direction, descriptor, filter);
         }

@@ -3,13 +3,10 @@
 @using PagedList.Mvc;
 @using Utils
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 @{
     ViewBag.Title = "Работники";
 }
-
 <h2>Работники</h2>
-
 <p>
     @Html.ActionLink("Создать", "Create")
 </p>
@@ -23,23 +20,57 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.LastName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.LastName),
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ViewBag.CurrentPropertyName,
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.FirstName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.FirstName),
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ViewBag.CurrentPropertyName,
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.MiddleName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.MiddleName),
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ViewBag.CurrentPropertyName,
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.Email), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.Email),
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ViewBag.CurrentPropertyName,
+                currentFilter = ViewBag.CurrentFilter
+            })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.ContractorCompanyName), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.ContractorCompanyName),
+            "Index",
+                                 new
+                     {
+                         sortDirection = ViewBag.CurrentSortDirection,
+                         sortPropertyName = ViewBag.CurrentPropertyName,
+                         currentFilter = ViewBag.CurrentFilter
+                     })
         </th>
         <th></th>
     </tr>
-
 
     @foreach (var item in Model)
     {
@@ -66,10 +97,15 @@
             </td>
         </tr>
     }
-
 </table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+new
+{
+    page, 
+    sortOrder = ViewBag.CurrentSort, 
+    currentFilter = ViewBag.CurrentFilter
+}))
