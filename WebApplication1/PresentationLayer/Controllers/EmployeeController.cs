@@ -42,7 +42,6 @@ namespace ContosoUniversity.Controllers
             {
                 sortPropertyName = new Employee().GetPropertyNameFor(e => e.LastName);
             }
-            ViewBag.CurrentPropertyName = sortPropertyName;
 
             if (searchString != null)
             {

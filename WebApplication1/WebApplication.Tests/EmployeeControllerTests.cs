@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
 using Common.Models.Fixtures;
+using ContosoUniversity;
 using ContosoUniversity.Controllers;
 using Data.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,10 +19,11 @@ namespace WebApplication.Tests
     public class EmployeeControllerTests
     {
         [TestMethod]
-        public void GetAllEmployees()
+        public void Index()
         {
             // arrange
             string sortDirection = "Descending";
+            string receivedSortDirection = "Ascending";
             string sortPropertyName = "FirstName";
             string filter = "alex";
 
@@ -30,14 +33,21 @@ namespace WebApplication.Tests
 
             Mock<IManagerFactory> mockManagerFactory = new Mock<IManagerFactory>();
             mockManagerFactory.Setup(mock => mock.GetManager<IEmployeeManager>()
-                .GetAllEmployeesSortedAndFiltered("Ascending", sortPropertyName, filter))
+                .GetAllEmployeesSortedAndFiltered(receivedSortDirection, sortPropertyName, filter))
                 .Returns(employees);
 
             EmployeeController controller = new EmployeeController(mockManagerFactory.Object.GetManager<IEmployeeManager>());
 
-            var dsffsd = controller.Index(sortDirection, sortPropertyName, null, filter, null);
+            // act
+            ActionResult result = controller.Index(sortDirection, sortPropertyName, null, filter, null);
 
-            Assert.IsNotNull(dsffsd);
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(controller.ViewBag.CurrentSortDirection);
+            Assert.AreEqual(receivedSortDirection, controller.ViewBag.CurrentSortDirection);
+            Assert.IsNotNull(controller.ViewBag.CurrentFilter);
+            Assert.AreEqual(filter, controller.ViewBag.CurrentFilter);
         }
+
     }
 }
