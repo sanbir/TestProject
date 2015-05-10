@@ -59,7 +59,7 @@ namespace BusinessLayer.Tests
 
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
-            Assert.IsTrue(manager.GetAllEmployees().ToList()[5].Email == employees.ToList()[5].Email);
+            Assert.IsTrue(manager.GetAll().ToList()[5].Email == employees.ToList()[5].Email);
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace BusinessLayer.Tests
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
             // act
-            List<Employee> receivedEmployees = manager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyDescriptor, filter).ToList();
+            List<Employee> receivedEmployees = manager.GetAll(sortDirection, sortPropertyDescriptor, filter).ToList();
 
             // assert
             Assert.IsTrue(receivedEmployees.Count == 2);
@@ -119,7 +119,7 @@ namespace BusinessLayer.Tests
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
             // act
-            List<Employee> receivedEmployees = manager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyDescriptor, filter).ToList();
+            List<Employee> receivedEmployees = manager.GetAll(sortDirection, sortPropertyDescriptor, filter).ToList();
 
             // assert
             Assert.IsTrue(receivedEmployees.Count == 2);
@@ -151,7 +151,7 @@ namespace BusinessLayer.Tests
             EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
 
             // act
-            List<Employee> receivedEmployees = manager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyDescriptor, filter).ToList();
+            List<Employee> receivedEmployees = manager.GetAll(sortDirection, sortPropertyDescriptor, filter).ToList();
 
             // assert
             Assert.IsTrue(receivedEmployees.Count == 2);

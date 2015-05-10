@@ -29,16 +29,18 @@ namespace BusinessLayer.Managers
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
 
+        void IEmployeeManager.CreateOrUpdate(Employee employee)
+        {
+            CreateOrUpdate(employee);
+        }
+
         public Employee CreateOrUpdate(Employee employee)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
-            Employee updatedEntity = null;
-
-            if (employee.Id == 0)
-                updatedEntity = employeeRepository.Add(employee);
-            else
-                updatedEntity = employeeRepository.Update(employee);
+            Employee updatedEntity = employee.Id == 0
+                ? employeeRepository.Add(employee)
+                : employeeRepository.Update(employee);
 
             return updatedEntity;
         }
@@ -50,9 +52,9 @@ namespace BusinessLayer.Managers
             employeeRepository.Remove(employeeId);
         }
 
-        public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
+        public IEnumerable<Employee> GetAll(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
-            var employees = GetAllEmployees();
+            var employees = GetAll();
 
             if (!String.IsNullOrEmpty(filter))
             {
@@ -90,14 +92,14 @@ namespace BusinessLayer.Managers
             return employees;
         }
 
-        public IEnumerable<Employee> GetAllEmployees()
+        public IEnumerable<Employee> GetAll()
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
             IEnumerable<Employee> employees = employeeRepository.Get();
             return employees;
         }
 
-        public IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection, string sortPropertyName, string filter)
+        public IEnumerable<Employee> GetAll(string sortDirection, string sortPropertyName, string filter)
         {
             ListSortDirection direction = ListSortDirection.Ascending;
 
@@ -113,7 +115,7 @@ namespace BusinessLayer.Managers
                 descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
             }
 
-            return GetAllEmployeesSortedAndFiltered(direction, descriptor, filter);
+            return GetAll(direction, descriptor, filter);
         }
 
         public Employee Get(int id)
@@ -123,9 +125,5 @@ namespace BusinessLayer.Managers
             return employeeEntity;
         }
 
-        void IEmployeeManager.CreateOrUpdate(Employee employee)
-        {
-            CreateOrUpdate(employee);
-        }
     }
 }

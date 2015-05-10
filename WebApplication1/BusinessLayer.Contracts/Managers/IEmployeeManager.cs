@@ -10,10 +10,10 @@ namespace BusinessLayer.Contracts.Managers
 {
     public interface IEmployeeManager : IManager<Employee>
     {
-        IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(ListSortDirection sortDirection,
+        IEnumerable<Employee> GetAll(ListSortDirection sortDirection,
             PropertyDescriptor sortPropertyDescriptor, string filter);
 
-        IEnumerable<Employee> GetAllEmployeesSortedAndFiltered(string sortDirection,
+        IEnumerable<Employee> GetAll(string sortDirection,
             string sortPropertyName, string filter);
 
         Employee Get(int id);

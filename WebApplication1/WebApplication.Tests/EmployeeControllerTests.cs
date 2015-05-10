@@ -33,7 +33,7 @@ namespace WebApplication.Tests
 
             Mock<IManagerFactory> mockManagerFactory = new Mock<IManagerFactory>();
             mockManagerFactory.Setup(mock => mock.GetManager<IEmployeeManager>()
-                .GetAllEmployeesSortedAndFiltered(receivedSortDirection, sortPropertyName, filter))
+                .GetAll(receivedSortDirection, sortPropertyName, filter))
                 .Returns(employees);
 
             EmployeeController controller = new EmployeeController(mockManagerFactory.Object.GetManager<IEmployeeManager>());

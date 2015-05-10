@@ -67,7 +67,7 @@ namespace ContosoUniversity.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var employees = _employeeManager.GetAllEmployeesSortedAndFiltered(sortDirection, sortPropertyName, searchString);
+            var employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
 
             const int pageSize = 3;
             int pageNumber = page ?? 1;
