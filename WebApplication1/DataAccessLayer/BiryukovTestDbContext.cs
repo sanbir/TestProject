@@ -25,13 +25,16 @@ namespace DataAccessLayer
                 .HasColumnName(DbAccess.EmployeeId);
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Projects)
-                .WithRequired(e => e.Employee)
+                .WithRequired(e => e.Manager)
                 .HasForeignKey(e => e.ManagerId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Project>()
                 .Property(p => p.Id)
                 .HasColumnName(DbAccess.ProjectId);
+            modelBuilder.Entity<Project>()
+                .Property(e => e.Manager)
+                .HasColumnName(DbAccess.ManagerId);
             modelBuilder.Entity<Project>()
                 .Ignore(p => p.Manager);
         }

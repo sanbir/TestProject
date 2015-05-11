@@ -23,9 +23,6 @@ namespace Data.Models
 
         public int ManagerId { get; set; }
 
-        [Display(Name = ProjectProperties.ManagerDisplay, Prompt = ProjectProperties.ManagerDisplay)]
-        public Employee Manager { get; set; }
-
         [DataType(DataType.Date)]
         [Required(ErrorMessage = ProjectValidationMessages.EnterStartDate)]
         [DisplayFormat(DataFormatString = ProjectValidationMessages.DateFormatString, ApplyFormatInEditMode = true)]
@@ -46,8 +43,8 @@ namespace Data.Models
         [Display(Name = ProjectProperties.Comment, Prompt = ProjectProperties.Comment)]
         public string Comment { get; set; }
 
-        [Browsable(false)]
-        public virtual Employee Employee { get; set; }
+        [Display(Name = ProjectProperties.ManagerDisplay, Prompt = ProjectProperties.ManagerDisplay)]
+        public Employee Manager { get; set; }
 
         [Browsable(false)]
         public virtual ICollection<ProjectsEmployee> ProjectsEmployees { get; set; }

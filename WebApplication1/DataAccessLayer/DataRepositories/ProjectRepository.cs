@@ -15,43 +15,22 @@ namespace DataAccessLayer.DataRepositories
         {
             using (var entityContext = new BiryukovTestDbContext())
             {
-                //var projects = (from project in entityContext.Projects
-                //                select project).ToList();
-
-                //var employee = (from p in projects
-                //                join e in entityContext.Employees
-                //                    on p.ManagerId equals e.Id
-                //                select e).FirstOrDefault();
-
-                //return projects.Select(p => new Project
-                //{
-                //    Id = p.Id,
-                //    ProjectName = p.ProjectName,
-                //    CustomerCompanyName = p.CustomerCompanyName,
-                //    ManagerId = p.ManagerId,
-                //    Manager = employee,
-                //    StartDate = p.StartDate,
-                //    EndDate = p.EndDate,
-                //    Priority = p.Priority,
-                //    Comment = p.Comment
-                //}).ToList();
-
-                var re = (from p in entityContext.Projects
-                        join e in entityContext.Employees
-                            on p.ManagerId equals e.Id
-                        select new
-                        {
-                            Id = p.Id,
-                            ProjectName = p.ProjectName,
-                            CustomerCompanyName = p.CustomerCompanyName,
-                            ManagerId = p.ManagerId,
-                            Manager = e,
-                            StartDate = p.StartDate,
-                            EndDate = p.EndDate,
-                            Priority = p.Priority,
-                            Comment = p.Comment
-                        }).ToList();
-                return (from p in re
+                var dto = (from p in entityContext.Projects
+                          join e in entityContext.Employees
+                              on p.ManagerId equals e.Id
+                          select new
+                          {
+                              Id = p.Id,
+                              ProjectName = p.ProjectName,
+                              CustomerCompanyName = p.CustomerCompanyName,
+                              ManagerId = p.ManagerId,
+                              Manager = e,
+                              StartDate = p.StartDate,
+                              EndDate = p.EndDate,
+                              Priority = p.Priority,
+                              Comment = p.Comment
+                          }).ToList();
+                return (from p in dto
                         select new Project
                         {
                             Id = p.Id,

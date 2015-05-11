@@ -5,5 +5,6 @@
         public const string MainConnectionString = "name=MainConnectionString";
         public const string EmployeeId = "EmployeeId";
         public const string ProjectId = "ProjectId";
+        public const string ManagerId = "ManagerId";
     }
 }
