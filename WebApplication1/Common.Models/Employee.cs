@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using Common.Constants;
+using Common.Constants.Employee;
 
 namespace Data.Models
 {
@@ -15,28 +17,28 @@ namespace Data.Models
             Projects = new HashSet<Project>();
         }
 
-        [Required(ErrorMessage = "Введите имя")]
+        [Required(ErrorMessage = EmployeeValidationMessages.EnterFirstName)]
         [StringLength(50)]
-        [Display(Name = "Имя", Prompt = "Имя")]
+        [Display(Name = EmployeeProperties.FirstNameDisplay, Prompt = EmployeeProperties.FirstNameDisplay)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Введите фамилию")]
+        [Required(ErrorMessage = EmployeeValidationMessages.EnterLastName)]
         [StringLength(50)]
-        [Display(Name = "Фамилия", Prompt = "Фамилия")]
+        [Display(Name = EmployeeProperties.LastNameDisplay, Prompt = EmployeeProperties.LastNameDisplay)]
         public string LastName { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Отчество", Prompt = "Отчество")]
+        [Display(Name = EmployeeProperties.MiddleNameDisplay, Prompt = EmployeeProperties.MiddleNameDisplay)]
         public string MiddleName { get; set; }
 
-        [StringLength(100, ErrorMessage = "Длина e-mail не может превышать 100 символов")]
-        [Display(Name = "E-mail", Prompt = "name@example.com")]
-        [Required(ErrorMessage = "Введите адрес электронной почты")]
-        [EmailAddress(ErrorMessage = "Неверный адрес электронной почты")]
+        [StringLength(100, ErrorMessage = EmployeeValidationMessages.ExceedEmailLength)]
+        [Display(Name = EmployeeProperties.EmailDisplay, Prompt = EmployeeValidationMessages.EmailPrompt)]
+        [Required(ErrorMessage = EmployeeValidationMessages.EnterEmail)]
+        [EmailAddress(ErrorMessage = EmployeeValidationMessages.EmailIncorrect)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Введите название компании-исполнителя")]
-        [Display(Name = "Название компании-исполнителя", Prompt = "Название компании-исполнителя")]
+        [Required(ErrorMessage = EmployeeValidationMessages.EnterContractorCompanyName)]
+        [Display(Name = EmployeeProperties.ContractorCompanyNameDisplay, Prompt = EmployeeProperties.ContractorCompanyNameDisplay)]
         public string ContractorCompanyName { get; set; }
 
         [Browsable(false)]

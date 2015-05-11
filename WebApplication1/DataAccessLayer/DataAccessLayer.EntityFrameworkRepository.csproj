@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Constants\Common.Constants.csproj">
+      <Project>{0B09E27E-B8B5-41DA-AE08-68907F877418}</Project>
+      <Name>Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
       <Name>DataAccessLayer.Contracts</Name>

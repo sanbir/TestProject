@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using Common.Constants;
+using Common.Constants.Project;
 
 namespace Data.Models
 {
@@ -14,34 +16,35 @@ namespace Data.Models
             ProjectsEmployees = new HashSet<ProjectsEmployee>();
         }
 
-        [Required(ErrorMessage = "Введите название проекта")]
-        [Display(Name = "Название проекта", Prompt = "Название проекта")]
+        [Required(ErrorMessage = ProjectValidationMessages.EnterProjectName)]
+        [Display(Name = ProjectProperties.ProjectName, Prompt = ProjectProperties.ProjectName)]
         public string ProjectName { get; set; }
 
-        [Required(ErrorMessage = "Введите название компании-заказчика")]
-        [Display(Name = "Название компании-заказчика", Prompt = "Название компании-заказчика")]
+        [Required(ErrorMessage = ProjectValidationMessages.EnterCustomerCompanyName)]
+        [Display(Name = ProjectProperties.CustomerCompanyName, Prompt = ProjectProperties.CustomerCompanyName)]
         public string CustomerCompanyName { get; set; }
 
         [Browsable(false)]
         public int ManagerId { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Введите дату начала проекта")]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Дата начала проекта", Prompt = "Дата начала проекта")]
+        [Required(ErrorMessage = ProjectValidationMessages.EnterStartDate)]
+        [DisplayFormat(DataFormatString = ProjectValidationMessages.DateFormatString, ApplyFormatInEditMode = true)]
+        [Display(Name = ProjectProperties.StartDate, Prompt = ProjectProperties.StartDate)]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Введите дату окончания проекта")]
-        [Display(Name = "Дата окончания проекта", Prompt = "Дата окончания проекта")]
+        [Required(ErrorMessage = ProjectValidationMessages.EnterEndDate)]
+        [DisplayFormat(DataFormatString = ProjectValidationMessages.DateFormatString, ApplyFormatInEditMode = true)]
+        [Display(Name = ProjectProperties.EndDate, Prompt = ProjectProperties.EndDate)]
         public DateTime EndDate { get; set; }
 
-        [Required(ErrorMessage = "Введите приоритет проекта")]
-        [Range(0, int.MaxValue, ErrorMessage = "Приоритетом проекта должно быть целочисленное значение >= 0")]
-        [Display(Name = "Приоритет проекта", Prompt = "Приоритет проекта")]
+        [Required(ErrorMessage = ProjectValidationMessages.EnterPriority)]
+        [Range(0, int.MaxValue, ErrorMessage = ProjectValidationMessages.PriorityRange)]
+        [Display(Name = ProjectProperties.Priority, Prompt = ProjectProperties.Priority)]
         public int Priority { get; set; }
 
-        [Display(Name = "Текстовый комментарий", Prompt = "Текстовый комментарий")]
+        [Display(Name = ProjectProperties.Comment, Prompt = ProjectProperties.Comment)]
         public string Comment { get; set; }
 
         [Browsable(false)]
