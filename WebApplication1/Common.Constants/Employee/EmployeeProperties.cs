@@ -2,6 +2,11 @@
 {
     public static class EmployeeProperties
     {
+        public const string LastName = "LastName";
+        public const string FirstName = "FirstName";
+        public const string MiddleName = "MiddleName";
+        public const string Email = "Email";
+        public const string ContractorCompanyName = "ContractorCompanyName";
         public const string FirstNameDisplay = "Имя";
         public const string LastNameDisplay = "Фамилия";
         public const string MiddleNameDisplay = "Отчество";

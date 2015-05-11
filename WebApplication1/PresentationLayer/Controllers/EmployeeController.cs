@@ -4,6 +4,8 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
+using Common.Constants.Common;
+using Common.Constants.Employee;
 using Data.Models;
 using PagedList;
 using Utils;
@@ -34,7 +36,7 @@ namespace ContosoUniversity.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LastName, FirstName, MiddleName, Email, ContractorCompanyName")]Employee employee)
+        public ActionResult Create([Bind(Include = EmployeeProperties.BindEmployeeProperties)]Employee employee)
         {
             try
             {
@@ -46,7 +48,7 @@ namespace ContosoUniversity.Controllers
             }
             catch (Exception) // TODO: add custom
             {
-                ModelState.AddModelError("", "Не удалось сохранить. Пожалуйста, попробуйте позже");
+                ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
             }
             return View(employee);
         }
@@ -100,8 +102,8 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Employee employee = _employeeManager.Get((int)id);
-            if (TryUpdateModel(employee, "",
-                new[] { "LastName", "FirstName", "MiddleName", "Email", "ContractorCompanyName" }))
+            if (TryUpdateModel(employee, string.Empty,
+                new[] { EmployeeProperties.LastName, EmployeeProperties.FirstName, EmployeeProperties.MiddleName, EmployeeProperties.Email, EmployeeProperties.ContractorCompanyName }))
             {
                 try
                 {
@@ -110,7 +112,7 @@ namespace ContosoUniversity.Controllers
                 }
                 catch (Exception) // TODO: add custom
                 {
-                    ModelState.AddModelError("", "Не удалось сохранить. Пожалуйста, попробуйте позже");
+                    ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
                 }
             }
             return View(employee);
@@ -141,7 +143,7 @@ namespace ContosoUniversity.Controllers
             }
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewBag.ErrorMessage = "Не удалось удалить. Пожалуйста, попробуйте позже";
+                ViewBag.ErrorMessage = ErrorMessages.CouldNotDelete;
             }
             Employee employee = _employeeManager.Get((int)id);
             if (employee == null)

@@ -285,6 +285,10 @@
       <Project>{8AFF7348-82B5-48CF-8F2B-8B9C645D33EB}</Project>
       <Name>BusinessLayer.Managers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Constants\Common.Constants.csproj">
+      <Project>{0B09E27E-B8B5-41DA-AE08-68907F877418}</Project>
+      <Name>Common.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
       <Project>{065D42F7-C500-4CDD-9498-EEAA8549E4C5}</Project>
       <Name>DataAccessLayer.Contracts</Name>
