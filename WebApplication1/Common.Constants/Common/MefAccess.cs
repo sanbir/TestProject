@@ -10,5 +10,7 @@ namespace Common.Constants.Common
     {
         public const string DataRepositoriesFolder = "DataRepositoriesFolder";
         public const string BusinessLayerManagersFolder = "BusinessLayerManagersFolder";
+        public const string DataAccessLayerDll = "DataAccessLayer.dll";
+        public const string BusinessLayerDll = "BusinessLayer.dll";
     }
 }

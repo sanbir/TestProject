@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.ComponentModel.Composition.Hosting;
 using System.Configuration;
 using System.Reflection;
@@ -22,11 +23,11 @@ namespace WebApplication
 
             AggregateCatalog catalog = new AggregateCatalog();
 
-            var dataRepositoriesFolder = ConfigurationManager.AppSettings[MefAccess.DataRepositoriesFolder];
-            var businessLayerManagersFolder = ConfigurationManager.AppSettings[MefAccess.BusinessLayerManagersFolder];
+            string dataRepositoriesFolder = ConfigurationManager.AppSettings[MefAccess.DataRepositoriesFolder];
+            string businessLayerManagersFolder = ConfigurationManager.AppSettings[MefAccess.BusinessLayerManagersFolder];
 
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(dataRepositoriesFolder + "DataAccessLayer.dll")));
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(businessLayerManagersFolder + "BusinessLayer.dll")));
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(dataRepositoriesFolder + MefAccess.DataAccessLayerDll)));
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(businessLayerManagersFolder + MefAccess.BusinessLayerDll)));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
             CompositionContainer container = new CompositionContainer(catalog);
