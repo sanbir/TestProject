@@ -91,6 +91,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WebApplication\WebApplication\WebApplication.csproj">
+      <Project>{7ce9d8f9-1a65-46b2-89c1-975ba157cdc5}</Project>
+      <Name>WebApplication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BusinessLayer.Contracts\BusinessLayer.Contracts.csproj">
       <Project>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</Project>
       <Name>BusinessLayer.Contracts</Name>
@@ -102,10 +106,6 @@
     <ProjectReference Include="..\Common.Models\Common.Models.csproj">
       <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
       <Name>Common.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\ContosoUniversity.csproj">
-      <Project>{264E21D6-4024-4A53-B1BE-1CD42F3348FE}</Project>
-      <Name>ContosoUniversity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

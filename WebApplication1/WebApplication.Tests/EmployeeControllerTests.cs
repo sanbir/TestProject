@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
 using Common.Models.Fixtures;
-using ContosoUniversity.Controllers;
+using WebApplication.Controllers;
 using Data.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
