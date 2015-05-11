@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DbAccess.cs" />
+    <Compile Include="Common\MefAccess.cs" />
     <Compile Include="Common\ViewStringConstants.cs" />
     <Compile Include="Employee\EmployeeProperties.cs" />
     <Compile Include="Common\ErrorMessages.cs" />

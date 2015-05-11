@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace PresentationLayer.Bootstrapper
+namespace WebApplication
 {
     public class MefControllerFactory : DefaultControllerFactory
     {
@@ -15,7 +15,7 @@ namespace PresentationLayer.Bootstrapper
         }
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            Lazy<object, object> export = _container.GetExports(controllerType, null, string.Empty).FirstOrDefault();
+            Lazy<object, object> export = _container.GetExports(controllerType, null, null).FirstOrDefault();
 
             return null == export
                                 ? base.GetControllerInstance(requestContext, controllerType)

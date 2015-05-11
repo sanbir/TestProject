@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using System;
+using System.ComponentModel.Composition.Hosting;
+using System.Configuration;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Common.Constants.Common;
 using Data.Models;
-using PresentationLayer.Bootstrapper;
 
 namespace WebApplication
 {
@@ -20,8 +22,11 @@ namespace WebApplication
 
             AggregateCatalog catalog = new AggregateCatalog();
 
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(@"C:\myDll.dll")));
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(@"C:\myDll.dll")));
+            var dataRepositoriesFolder = ConfigurationManager.AppSettings[MefAccess.DataRepositoriesFolder];
+            var businessLayerManagersFolder = ConfigurationManager.AppSettings[MefAccess.BusinessLayerManagersFolder];
+
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(dataRepositoriesFolder + "DataAccessLayer.dll")));
+            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(businessLayerManagersFolder + "BusinessLayer.dll")));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
             CompositionContainer container = new CompositionContainer(catalog);
