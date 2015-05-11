@@ -33,9 +33,6 @@ namespace DataAccessLayer
                 .Property(p => p.Id)
                 .HasColumnName(DbAccess.ProjectId);
             modelBuilder.Entity<Project>()
-                .Property(e => e.Manager)
-                .HasColumnName(DbAccess.ManagerId);
-            modelBuilder.Entity<Project>()
                 .Ignore(p => p.Manager);
         }
     }
