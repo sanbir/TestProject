@@ -1,72 +1,74 @@
 ﻿@model PagedList.IPagedList<Data.Models.Employee>
+@using Common.Constants.Common
+@using Common.Constants.Employee
 @using Data.Models
 @using PagedList.Mvc;
 @using Utils
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Работники";
+    ViewBag.Title = ViewStringConstants.EmployeesTitle;
 }
-<h2>Работники</h2>
+<h2>@ViewStringConstants.EmployeesTitle</h2>
 <p>
-    @Html.ActionLink("Создать", "Create")
+    @Html.ActionLink(ViewStringConstants.Create, "Create")
 </p>
 @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
 {
     <p>
         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Поиск" />
+        <input type="submit" value=@ViewStringConstants.Search />
     </p>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.LastName),
+            @Html.ActionLink(EmployeeProperties.LastNameDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.LastName),
+                sortPropertyName = EmployeeProperties.LastName,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.FirstName),
+            @Html.ActionLink(EmployeeProperties.FirstNameDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.FirstName),
+                sortPropertyName = EmployeeProperties.FirstName,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.MiddleName),
+            @Html.ActionLink(EmployeeProperties.MiddleNameDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.MiddleName),
+                sortPropertyName = EmployeeProperties.MiddleName,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.Email),
+            @Html.ActionLink(EmployeeProperties.EmailDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.Email),
+                sortPropertyName = EmployeeProperties.Email,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
         <th>
-            @Html.ActionLink(new Employee().GetPropertyDisplayNameFor(e => e.ContractorCompanyName),
+            @Html.ActionLink(EmployeeProperties.ContractorCompanyNameDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = new Employee().GetPropertyNameFor(e => e.ContractorCompanyName),
+                sortPropertyName = EmployeeProperties.ContractorCompanyName,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
@@ -92,9 +94,9 @@
                 @Html.DisplayFor(modelItem => item.ContractorCompanyName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(ViewStringConstants.Details, "Details", new { id = item.Id }) |
+                @Html.ActionLink(ViewStringConstants.Delete, "Delete", new { id = item.Id })
             </td>
         </tr>
     }
@@ -106,7 +108,7 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @Html.PagedListPager(Model, page => Url.Action("Index",
 new
 {
-    page, 
-    sortOrder = ViewBag.CurrentSort, 
+    page,
+    sortOrder = ViewBag.CurrentSort,
     currentFilter = ViewBag.CurrentFilter
 }))

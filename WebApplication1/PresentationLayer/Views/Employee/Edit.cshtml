@@ -1,10 +1,11 @@
-﻿@model Data.Models.Employee
+﻿@using Common.Constants.Common
+@model Data.Models.Employee
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = ViewStringConstants.Edit;
 }
 
-<h2>Редактировать</h2>
+<h2>@ViewStringConstants.Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Работник</h4>
+        <h4>@ViewStringConstants.EmployeeTitle</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -59,14 +60,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Сохранить" class="btn btn-default" />
+                <input type="submit" value=@ViewStringConstants.Save class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Назад", "Index")
+    @Html.ActionLink(ViewStringConstants.Back, "Index")
 </div>
 
 @section Scripts {

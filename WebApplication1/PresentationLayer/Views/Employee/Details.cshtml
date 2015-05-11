@@ -1,13 +1,14 @@
-﻿@model Data.Models.Employee
+﻿@using Common.Constants.Common
+@model Data.Models.Employee
 
 @{
-    ViewBag.Title = "Информация о работнике";
+    ViewBag.Title = ViewStringConstants.Details;
 }
 
-<h2>Информация о работнике</h2>
+<h2>@ViewStringConstants.Details</h2>
 
 <div>
-    <h4>Работник</h4>
+    <h4>@ViewStringConstants.EmployeeTitle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -52,6 +53,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Назад", "Index")
+    @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(ViewStringConstants.Back, "Index")
 </p>

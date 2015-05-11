@@ -1,64 +1,66 @@
-﻿@model Data.Models.Employee
+﻿@using Common.Constants.Common
+@model Data.Models.Employee
 
 @{
-    ViewBag.Title = "Удалить";
+    ViewBag.Title = ViewStringConstants.Delete;
 }
 
-<h2>Удалить</h2>
-<p class="error">@ViewBag.ErrorMessage</p>
-<h3>Вы действительно хотите удалить?</h3>
-<div>
-    <h4>Работник</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+<h2>@ViewStringConstants.Delete</h2>
+    <p class="error">@ViewBag.ErrorMessage</p>
+    <h3>@ViewStringConstants.AreYouSure</h3>
+    <div>
+        <h4>Работник</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MiddleName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.MiddleName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ContractorCompanyName)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ContractorCompanyName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ContractorCompanyName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ContractorCompanyName)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Назад", "Index")
-        </div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="submit" value=@ViewStringConstants.Delete class="btn btn-default" /> |
+                @Html.ActionLink(ViewStringConstants.Back, "Index")
+            </div>
+        }
+    </div>
