@@ -17,5 +17,8 @@
         public const string Search = "Поиск";
         public const string Page = "Страница";
         public const string Of = "из";
+
+        public const int StartPage = 1;
+        public const int PageSize = 3;
     }
 }

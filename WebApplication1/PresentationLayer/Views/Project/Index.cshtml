@@ -33,11 +33,21 @@
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.CustomerCompanyNameDisplay,
+                "Index",
+                new
+                {
+                    sortDirection = ViewBag.CurrentSortDirection,
+                    sortPropertyName = ProjectProperties.CustomerCompanyName,
+                    currentFilter = ViewBag.CurrentFilter
+                })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.ManagerDisplay,
             "Index",
             new
             {
                 sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.CustomerCompanyName,
+                sortPropertyName = ProjectProperties.Manager,
                 currentFilter = ViewBag.CurrentFilter
             })
         </th>
@@ -72,14 +82,7 @@
                 })
         </th>
         <th>
-            @Html.ActionLink(ProjectProperties.CommentDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.Comment,
-                currentFilter = ViewBag.CurrentFilter
-            })
+            @Html.Label(ProjectProperties.CommentDisplay)
         </th>
         <th></th>
     </tr>
@@ -92,6 +95,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerCompanyName)
+            </td>
+            <td>
+                @Html.Display(string.Join(item.Manager.LastName, item.Manager.FirstName, item.Manager.MiddleName ?? string.Empty), " ")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)

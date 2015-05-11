@@ -70,8 +70,8 @@ namespace ContosoUniversity.Controllers
 
             var projects = _projectManager.GetAll(sortDirection, sortPropertyName, searchString);
 
-            const int pageSize = 3;
-            int pageNumber = page ?? 1;
+            const int pageSize = ViewStringConstants.PageSize;
+            int pageNumber = page ?? ViewStringConstants.StartPage;
             return View(projects.ToPagedList(pageNumber, pageSize));
         }
 

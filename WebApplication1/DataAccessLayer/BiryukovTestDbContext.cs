@@ -30,8 +30,10 @@ namespace DataAccessLayer
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Project>()
-                .Property(e => e.Id)
+                .Property(p => p.Id)
                 .HasColumnName(DbAccess.ProjectId);
+            modelBuilder.Entity<Project>()
+                .Ignore(p => p.Manager);
         }
     }
 }

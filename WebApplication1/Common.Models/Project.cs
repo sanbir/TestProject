@@ -21,8 +21,10 @@ namespace Data.Models
         [Display(Name = ProjectProperties.CustomerCompanyNameDisplay, Prompt = ProjectProperties.CustomerCompanyNameDisplay)]
         public string CustomerCompanyName { get; set; }
 
-        [Browsable(false)]
         public int ManagerId { get; set; }
+
+        [Display(Name = ProjectProperties.ManagerDisplay, Prompt = ProjectProperties.ManagerDisplay)]
+        public Employee Manager { get; set; }
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = ProjectValidationMessages.EnterStartDate)]
