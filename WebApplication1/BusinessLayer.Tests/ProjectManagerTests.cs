@@ -166,7 +166,9 @@ namespace BusinessLayer.Tests
             CompositionContainer container = new CompositionContainer(catalog);
             EntityBase.Container = container;
 
-            Project project = FixturesGenerator.GenerateProject(FixturesGenerator.GenerateEmployees());
+            List<Employee> employees = new EmployeeManager().GetAll().Take(5).ToList();
+
+            Project project = FixturesGenerator.GenerateProject(employees);
             IProjectRepository projectRepository = new ProjectRepository();
             Project savedProject = projectRepository.Add(project);
 
