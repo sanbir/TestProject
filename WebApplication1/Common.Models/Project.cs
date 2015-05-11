@@ -14,11 +14,11 @@ namespace Data.Models
         }
 
         [Required(ErrorMessage = ProjectValidationMessages.EnterProjectName)]
-        [Display(Name = ProjectProperties.ProjectName, Prompt = ProjectProperties.ProjectName)]
+        [Display(Name = ProjectProperties.ProjectNameDisplay, Prompt = ProjectProperties.ProjectNameDisplay)]
         public string ProjectName { get; set; }
 
         [Required(ErrorMessage = ProjectValidationMessages.EnterCustomerCompanyName)]
-        [Display(Name = ProjectProperties.CustomerCompanyName, Prompt = ProjectProperties.CustomerCompanyName)]
+        [Display(Name = ProjectProperties.CustomerCompanyNameDisplay, Prompt = ProjectProperties.CustomerCompanyNameDisplay)]
         public string CustomerCompanyName { get; set; }
 
         [Browsable(false)]
@@ -27,18 +27,18 @@ namespace Data.Models
         [DataType(DataType.Date)]
         [Required(ErrorMessage = ProjectValidationMessages.EnterStartDate)]
         [DisplayFormat(DataFormatString = ProjectValidationMessages.DateFormatString, ApplyFormatInEditMode = true)]
-        [Display(Name = ProjectProperties.StartDate, Prompt = ProjectProperties.StartDate)]
+        [Display(Name = ProjectProperties.StartDateDisplay, Prompt = ProjectProperties.StartDateDisplay)]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = ProjectValidationMessages.EnterEndDate)]
         [DisplayFormat(DataFormatString = ProjectValidationMessages.DateFormatString, ApplyFormatInEditMode = true)]
-        [Display(Name = ProjectProperties.EndDate, Prompt = ProjectProperties.EndDate)]
+        [Display(Name = ProjectProperties.EndDateDisplay, Prompt = ProjectProperties.EndDateDisplay)]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = ProjectValidationMessages.EnterPriority)]
         [Range(0, int.MaxValue, ErrorMessage = ProjectValidationMessages.PriorityRange)]
-        [Display(Name = ProjectProperties.Priority, Prompt = ProjectProperties.Priority)]
+        [Display(Name = ProjectProperties.PriorityDisplay, Prompt = ProjectProperties.PriorityDisplay)]
         public int Priority { get; set; }
 
         [Display(Name = ProjectProperties.Comment, Prompt = ProjectProperties.Comment)]

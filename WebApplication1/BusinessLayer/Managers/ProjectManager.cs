@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using BusinessLayer.Contracts;
+using BusinessLayer.Contracts.Managers;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
 
 namespace BusinessLayer.Managers
 {
-    public class ProjectManager : ManagerBase //, IInventoryService
+    [Export(typeof(IProjectManager))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class ProjectManager : ManagerBase, IProjectManager
     {
         public ProjectManager()
         {
@@ -21,55 +27,100 @@ namespace BusinessLayer.Managers
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
 
-        public Project UpdateProject(Project project)
+        void IManager<Project>.CreateOrUpdate(Project project)
         {
+            CreateOrUpdate(project);
+        }
 
+        public Project CreateOrUpdate(Project project)
+        {
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-            Project updatedEntity = null;
-
-            if (project.Id == 0)
-                updatedEntity = projectRepository.Add(project);
-            else
-                updatedEntity = projectRepository.Update(project);
+            Project updatedEntity = project.Id == 0
+                ? projectRepository.Add(project)
+                : projectRepository.Update(project);
 
             return updatedEntity;
         }
 
-        public void DeleteProject(int projectId)
+        public void Delete(int projectId)
         {
-
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
             projectRepository.Remove(projectId);
         }
 
-        public Project GetProject(int projectId)
+        public IEnumerable<Project> GetAll(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
-            IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
+            var projects = GetAll();
 
-            Project projectEntity = projectRepository.Get(projectId);
-            if (projectEntity == null)
+            if (!String.IsNullOrEmpty(filter))
             {
-                //NotFoundException ex = new NotFoundException(string.Format("Car with ID of {0} is not in database", ProjectId));
+                //projects =
+                //    projects.Where(project =>
+                //        project.ProjectName.ToLowerInvariant()
+                //            .Contains(filter.ToLowerInvariant())
+                //        ||
+                //        project.CustomerCompanyName.ToLowerInvariant()
+                //            .Contains(filter.ToLowerInvariant())
+                //        ||
+                //        (project.MiddleName != null && project.MiddleName.ToLowerInvariant()
+                //            .Contains(filter.ToLowerInvariant()))
+                //        || project.Email.ToLowerInvariant()
+                //            .Contains(filter.ToLowerInvariant())
+                //        ||
+                //        project.ContractorCompanyName.ToLowerInvariant()
+                //            .Contains(filter.ToLowerInvariant()));
             }
 
-            return projectEntity;
+            switch (sortDirection)
+            {
+                case ListSortDirection.Ascending:
+                    projects = sortPropertyDescriptor == null
+                        ? projects.OrderBy(project => project.ProjectName)
+                        : projects.OrderBy(sortPropertyDescriptor.GetValue);
+                    break;
+                case ListSortDirection.Descending:
+                    projects = sortPropertyDescriptor == null
+                        ? projects.OrderByDescending(project => project.ProjectName)
+                        : projects.OrderByDescending(sortPropertyDescriptor.GetValue);
+                    break;
+            }
+
+            return projects;
         }
 
-        public Project[] GetAllProjects()
+        public IEnumerable<Project> GetAll()
         {
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
-
             IEnumerable<Project> projects = projectRepository.Get();
+            return projects;
+        }
 
-            foreach (Project project in projects)
+        public IEnumerable<Project> GetAll(string sortDirection, string sortPropertyName, string filter)
+        {
+            ListSortDirection direction = ListSortDirection.Ascending;
+
+            if (!string.IsNullOrEmpty(sortDirection))
             {
-                //Rental rentedCar = rentedCars.Where(item => item.CarId == Project.CarId).FirstOrDefault();
-                //Project.CurrentlyRented = (rentedCar != null);
+                Enum.TryParse(sortDirection, out direction);
             }
 
-            return projects.ToArray();
+            PropertyDescriptor descriptor = null;
+
+            if (!string.IsNullOrEmpty(sortPropertyName))
+            {
+                descriptor = TypeDescriptor.GetProperties(new Project()).Find(sortPropertyName, false);
+            }
+
+            return GetAll(direction, descriptor, filter);
+        }
+
+        public Project Get(int projectId)
+        {
+            IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
+            Project projectEntity = projectRepository.Get(projectId);
+            return projectEntity;
         }
 
     }

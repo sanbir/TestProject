@@ -41,6 +41,23 @@ namespace Common.Models.Fixtures
             return employee;
         }
 
+        public static ICollection<Project> GenerateProjects()
+        {
+            return GenerateProjects(_fixture.Create<int>());
+        }
+
+        public static ICollection<Project> GenerateProjects(int numberOfProjects)
+        {
+            ICollection<Project> projects = new List<Project>();
+
+            for (int i = 0; i < numberOfProjects; i++)
+            {
+                projects.Add(GenerateProject(GenerateEmployees()));
+            }
+
+            return projects;
+        }
+
         public static Project GenerateProject(ICollection<Employee> employees)
         {
             Project project = new Project();

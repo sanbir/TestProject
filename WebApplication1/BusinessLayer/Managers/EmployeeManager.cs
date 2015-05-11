@@ -43,11 +43,11 @@ namespace BusinessLayer.Managers
             return updatedEntity;
         }
 
-        public void Delete(int employeeId)
+        public void Delete(int projectId)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
-            employeeRepository.Remove(employeeId);
+            employeeRepository.Remove(projectId);
         }
 
         public IEnumerable<Employee> GetAll(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
@@ -116,10 +116,10 @@ namespace BusinessLayer.Managers
             return GetAll(direction, descriptor, filter);
         }
 
-        public Employee Get(int employeeId)
+        public Employee Get(int projectId)
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-            Employee employeeEntity = employeeRepository.Get(employeeId);
+            Employee employeeEntity = employeeRepository.Get(projectId);
             return employeeEntity;
         }
 

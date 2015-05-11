@@ -11,6 +11,8 @@
         public const string MainTitle = "Тестовое задание";
         public const string EmployeeTitle = "Работник";
         public const string EmployeesTitle = "Работники";
+        public const string ProjectTitle = "Проект";
+        public const string ProjectsTitle = "Проекты";
         public const string Back = "Назад";
         public const string Search = "Поиск";
         public const string Page = "Страница";

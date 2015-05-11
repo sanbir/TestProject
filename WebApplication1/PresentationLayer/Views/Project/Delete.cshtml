@@ -1,5 +1,5 @@
 ﻿@using Common.Constants.Common
-@model Data.Models.Employee
+@model Data.Models.Project
 
 @{
     ViewBag.Title = ViewStringConstants.Delete;
@@ -9,47 +9,55 @@
     <p class="error">@ViewBag.ErrorMessage</p>
     <h3>@ViewStringConstants.AreYouSure</h3>
     <div>
-        <h4>@ViewStringConstants.EmployeeTitle</h4>
+        <h4>@ViewStringConstants.ProjectTitle</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.ProjectName)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.LastName)
+                @Html.DisplayFor(model => model.ProjectName)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.CustomerCompanyName)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.FirstName)
+                @Html.DisplayFor(model => model.CustomerCompanyName)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.MiddleName)
+                @Html.DisplayNameFor(model => model.StartDate)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.MiddleName)
+                @Html.DisplayFor(model => model.StartDate)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.EndDate)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Email)
+                @Html.DisplayFor(model => model.EndDate)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContractorCompanyName)
+                @Html.DisplayNameFor(model => model.Priority)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ContractorCompanyName)
+                @Html.DisplayFor(model => model.Priority)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comment)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comment)
             </dd>
 
         </dl>

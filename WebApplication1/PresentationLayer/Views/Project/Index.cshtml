@@ -1,0 +1,129 @@
+﻿@using Common.Constants.Common
+@using Common.Constants.Project
+@using PagedList.Mvc
+@model PagedList.IPagedList<Data.Models.Project>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = ViewStringConstants.ProjectsTitle;
+}
+<h2>@ViewStringConstants.ProjectsTitle</h2>
+<hr />
+@using (Html.BeginForm("Index", "Project", FormMethod.Get))
+{
+    <p class="col-md-9 form-horizontal form-inline form-group">
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+        <input type="submit" value=@ViewStringConstants.Search class="btn btn-default" />
+    </p>
+}
+<p class="col-md-1 col-md-offset-2">
+    @Html.ActionLink(ViewStringConstants.Create, "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink(ProjectProperties.ProjectNameDisplay,
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ProjectProperties.ProjectName,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.CustomerCompanyNameDisplay,
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ProjectProperties.CustomerCompanyName,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.StartDateDisplay,
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ProjectProperties.StartDate,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.EndDateDisplay,
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ProjectProperties.EndDate,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.PriorityDisplay,
+                "Index",
+                new
+                {
+                    sortDirection = ViewBag.CurrentSortDirection,
+                    sortPropertyName = ProjectProperties.Priority,
+                    currentFilter = ViewBag.CurrentFilter
+                })
+        </th>
+        <th>
+            @Html.ActionLink(ProjectProperties.CommentDisplay,
+            "Index",
+            new
+            {
+                sortDirection = ViewBag.CurrentSortDirection,
+                sortPropertyName = ProjectProperties.Comment,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerCompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(ViewStringConstants.Details, "Details", new { id = item.Id }) |
+                @Html.ActionLink(ViewStringConstants.Delete, "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+
+@ViewStringConstants.Page
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@ViewStringConstants.Of
+@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))

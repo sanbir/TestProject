@@ -42,8 +42,8 @@
   <ItemGroup>
     <Compile Include="ManagerBase.cs" />
     <Compile Include="ManagerFactory.cs" />
-    <Compile Include="Managers\EmployeeManager.cs" />
     <Compile Include="Managers\ProjectManager.cs" />
+    <Compile Include="Managers\EmployeeManager.cs" />
     <Compile Include="Managers\ProjectsEmployeeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
