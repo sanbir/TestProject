@@ -14,6 +14,7 @@ namespace Common.Constants.Common
         public const string Details = "Просмотр";
         public const string Edit = "Редактировать";
         public const string Save = "Сохранить";
+        public const string MainTitle = "Тестовое задание";
         public const string EmployeeTitle = "Работник";
         public const string EmployeesTitle = "Работники";
         public const string Back = "Назад";
