@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
 using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
-using Utils;
-using BusinessLayer.Contracts;
 
 namespace BusinessLayer.Managers
 {

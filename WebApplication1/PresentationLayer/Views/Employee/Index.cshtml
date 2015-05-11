@@ -1,9 +1,7 @@
-﻿@model PagedList.IPagedList<Data.Models.Employee>
-@using Common.Constants.Common
+﻿@using Common.Constants.Common
 @using Common.Constants.Employee
-@using Data.Models
-@using PagedList.Mvc;
-@using Utils
+@using PagedList.Mvc
+@model PagedList.IPagedList<Data.Models.Employee>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = ViewStringConstants.EmployeesTitle;
@@ -105,10 +103,10 @@
 <br />
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index",
-new
-{
-    page,
-    sortOrder = ViewBag.CurrentSort,
-    currentFilter = ViewBag.CurrentFilter
-}))
+@((object) Html.PagedListPager(Model, page => Url.Action("Index",
+      new
+      {
+          page,
+          sortOrder = ViewBag.CurrentSort,
+          currentFilter = ViewBag.CurrentFilter
+      })))

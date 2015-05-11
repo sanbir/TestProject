@@ -301,10 +301,6 @@
       <Project>{2CAE9EBA-3C0F-48B8-BA52-E44FCA3F36ED}</Project>
       <Name>DataAccessLayer.EntityFrameworkRepository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Common.Utils.csproj">
-      <Project>{d21d7750-52f2-44a0-a6d5-15347fbb01cb}</Project>
-      <Name>Common.Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

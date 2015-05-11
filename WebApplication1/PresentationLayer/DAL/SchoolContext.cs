@@ -1,6 +1,6 @@
-﻿using ContosoUniversity.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using ContosoUniversity.Models;
 
 namespace ContosoUniversity.DAL
 {

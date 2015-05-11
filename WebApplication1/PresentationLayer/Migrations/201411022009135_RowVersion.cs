@@ -1,8 +1,8 @@
+using System;
+using System.Data.Entity.Migrations;
+
 namespace ContosoUniversity.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class RowVersion : DbMigration
     {
         public override void Up()

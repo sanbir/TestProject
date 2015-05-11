@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
 using Common.Models.Fixtures;
-using ContosoUniversity;
 using ContosoUniversity.Controllers;
 using Data.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
+﻿using System.Linq;
 using Common.Models.Fixtures;
-using Data.Contracts;
 using Data.Contracts.DataRepositories;
 using Data.Models;
 using DataAccessLayer.DataRepositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
 
 namespace DataAccessLayer.Tests
 {

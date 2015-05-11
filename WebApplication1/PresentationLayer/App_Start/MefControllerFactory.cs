@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace PresentationLayer.Bootstrapper
 {
@@ -15,7 +13,7 @@ namespace PresentationLayer.Bootstrapper
         {
             _container = container;
         }
-        protected override IController GetControllerInstance(System.Web.Routing.RequestContext requestContext, Type controllerType)
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
             Lazy<object, object> export = _container.GetExports(controllerType, null, null).FirstOrDefault();
 

@@ -8,7 +8,6 @@ using Common.Constants.Common;
 using Common.Constants.Employee;
 using Data.Models;
 using PagedList;
-using Utils;
 
 namespace ContosoUniversity.Controllers
 {
@@ -60,7 +59,7 @@ namespace ContosoUniversity.Controllers
 
             if (string.IsNullOrEmpty(sortPropertyName))
             {
-                sortPropertyName = DefaultSortPropertyName;
+                sortPropertyName = EmployeeProperties.LastName;
             }
 
             if (searchString == null)
@@ -166,11 +165,6 @@ namespace ContosoUniversity.Controllers
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
-
-        private static string DefaultSortPropertyName
-        {
-            get { return new Employee().GetPropertyNameFor(e => e.LastName); }
         }
 
         private static string SwapSortDirection(string sortDirection)
