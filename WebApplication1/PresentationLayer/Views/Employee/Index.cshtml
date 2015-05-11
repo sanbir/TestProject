@@ -7,7 +7,7 @@
     ViewBag.Title = ViewStringConstants.EmployeesTitle;
 }
 <h2>@ViewStringConstants.EmployeesTitle</h2>
-<p>
+<p class="">
     @Html.ActionLink(ViewStringConstants.Create, "Create")
 </p>
 @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
@@ -102,11 +102,14 @@
 
 <br />
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@((object) Html.PagedListPager(Model, page => Url.Action("Index",
-      new
-      {
-          page,
-          sortOrder = ViewBag.CurrentSort,
-          currentFilter = ViewBag.CurrentFilter
-      })))
+@ViewStringConstants.Page
+@(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+@ViewStringConstants.Of
+@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))

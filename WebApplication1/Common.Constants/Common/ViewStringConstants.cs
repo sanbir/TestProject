@@ -13,5 +13,7 @@
         public const string EmployeesTitle = "Работники";
         public const string Back = "Назад";
         public const string Search = "Поиск";
+        public const string Page = "Страница";
+        public const string Of = "из";
     }
 }
