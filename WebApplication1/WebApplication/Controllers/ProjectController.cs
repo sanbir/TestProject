@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
@@ -9,6 +11,7 @@ using PagedList;
 using Shared.Constants.Common;
 using Shared.Constants.Project;
 using Shared.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -69,7 +72,9 @@ namespace WebApplication.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var projects = _projectManager.GetAll(sortDirection, sortPropertyName, searchString);
+            IEnumerable<ProjectViewModel> projects =
+                _projectManager.GetAll(sortDirection, sortPropertyName, searchString)
+                    .Select(project => new ProjectViewModel(project));
 
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;

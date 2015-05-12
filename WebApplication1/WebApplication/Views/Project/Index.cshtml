@@ -1,7 +1,7 @@
 ﻿@using Shared.Constants.Common
 @using Shared.Constants.Project
 @using PagedList.Mvc
-@model PagedList.IPagedList<Shared.Models.Project>
+@model PagedList.IPagedList<WebApplication.ViewModels.ProjectViewModel>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = ViewStringConstants.ProjectsTitle;
@@ -91,30 +91,30 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
+                @Html.DisplayFor(modelItem => item.Project.ProjectName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerCompanyName)
+                @Html.DisplayFor(modelItem => item.Project.CustomerCompanyName)
             </td>
             <td>
-                @Html.Display(string.Join(item.Manager.LastName, item.Manager.FirstName, item.Manager.MiddleName ?? string.Empty), " ")
+                @Html.DisplayFor(modelItem => item.ProjectManagerFullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
+                @Html.DisplayFor(modelItem => item.Project.StartDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
+                @Html.DisplayFor(modelItem => item.Project.EndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Priority)
+                @Html.DisplayFor(modelItem => item.Project.Priority)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Comment)
+                @Html.DisplayFor(modelItem => item.Project.Comment)
             </td>
             <td>
-                @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = item.Id }) |
-                @Html.ActionLink(ViewStringConstants.Details, "Details", new { id = item.Id }) |
-                @Html.ActionLink(ViewStringConstants.Delete, "Delete", new { id = item.Id })
+                @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = item.Project.Id }) |
+                @Html.ActionLink(ViewStringConstants.Details, "Details", new { id = item.Project.Id }) |
+                @Html.ActionLink(ViewStringConstants.Delete, "Delete", new { id = item.Project.Id })
             </td>
         </tr>
     }

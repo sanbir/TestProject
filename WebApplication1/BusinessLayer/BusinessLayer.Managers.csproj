@@ -56,6 +56,10 @@
       <Project>{56B19F5F-38AB-46F4-B5C2-E6AC3B309F07}</Project>
       <Name>DAL.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared.Constants\Shared.Constants.csproj">
+      <Project>{D773CEEC-1798-4782-9420-547A7F422AE4}</Project>
+      <Name>Shared.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
       <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
       <Name>Shared.Models</Name>
