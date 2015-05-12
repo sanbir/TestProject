@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using BusinessLayer.Managers;
-using Common.Models.Fixtures;
-using Data.Contracts;
-using Data.Contracts.DataRepositories;
-using Data.Models;
-using DataAccessLayer.DataRepositories;
+using DAL.Contracts;
+using DAL.Contracts.DataRepositories;
+using DAL.EntityFrameworkRepository.DataRepositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Shared.Models;
+using Tests.Fixtures;
 
 namespace BusinessLayer.Tests
 {

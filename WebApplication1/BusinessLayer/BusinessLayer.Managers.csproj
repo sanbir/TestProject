@@ -52,13 +52,13 @@
       <Project>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</Project>
       <Name>BusinessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Contracts\DataAccessLayer.Contracts.csproj">
-      <Project>{065d42f7-c500-4cdd-9498-eeaa8549e4c5}</Project>
-      <Name>DataAccessLayer.Contracts</Name>
+    <ProjectReference Include="..\DAL.Contracts\DAL.Contracts.csproj">
+      <Project>{56B19F5F-38AB-46F4-B5C2-E6AC3B309F07}</Project>
+      <Name>DAL.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
-      <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Common.Models</Name>
+    <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
+      <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
+      <Name>Shared.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

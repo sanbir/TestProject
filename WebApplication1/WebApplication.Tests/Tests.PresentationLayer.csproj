@@ -95,17 +95,17 @@
       <Project>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</Project>
       <Name>BusinessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Models.Fixtures\Tests.Fixtures.csproj">
-      <Project>{24DE3E5C-5F60-4AA4-A16F-EBE0D9F5A726}</Project>
-      <Name>Tests.Fixtures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
-      <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
-      <Name>Common.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PresentationLayer\WebApplication.csproj">
       <Project>{7ce9d8f9-1a65-46b2-89c1-975ba157cdc5}</Project>
       <Name>WebApplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
+      <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
+      <Name>Shared.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tests.Fixtures\Tests.Fixtures.csproj">
+      <Project>{108EFA12-AC58-471C-BB6B-76A2E11A417C}</Project>
+      <Name>Tests.Fixtures</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

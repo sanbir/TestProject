@@ -46,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Models\Common.Models.csproj">
-      <Project>{E95D1CFB-6CB8-4A87-817A-4B93C3E9D5F5}</Project>
-      <Name>Common.Models</Name>
+    <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
+      <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
+      <Name>Shared.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

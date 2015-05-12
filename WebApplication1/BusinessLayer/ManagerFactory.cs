@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using BusinessLayer.Contracts;
-using Data.Models;
+using Shared.Models;
 
 namespace BusinessLayer
 {

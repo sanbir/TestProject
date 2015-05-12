@@ -1,9 +1,9 @@
 ﻿using BusinessLayer.Managers;
-using Data.Contracts;
-using Data.Contracts.DataRepositories;
-using Data.Models;
+using DAL.Contracts;
+using DAL.Contracts.DataRepositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Shared.Models;
 
 namespace BusinessLayer.Tests
 {

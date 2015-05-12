@@ -5,10 +5,10 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
-using Common.Constants.Common;
-using Common.Constants.Project;
-using Data.Models;
 using PagedList;
+using Shared.Constants.Common;
+using Shared.Constants.Project;
+using Shared.Models;
 
 namespace WebApplication.Controllers
 {

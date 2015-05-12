@@ -7,8 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Common.Constants.Common;
-using Data.Models;
+using BusinessLayer.Contracts.Managers;
+using BusinessLayer.Managers;
+using DAL.Contracts.DataRepositories;
+using DAL.EntityFrameworkRepository.DataRepositories;
+using Shared.Constants.Common;
+using Shared.Models;
 
 namespace WebApplication
 {
@@ -26,8 +30,10 @@ namespace WebApplication
             string dataRepositoriesFolder = ConfigurationManager.AppSettings[MefAccess.DataRepositoriesFolder];
             string businessLayerManagersFolder = ConfigurationManager.AppSettings[MefAccess.BusinessLayerManagersFolder];
 
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(dataRepositoriesFolder + MefAccess.DataAccessLayerDll)));
-            catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(businessLayerManagersFolder + MefAccess.BusinessLayerDll)));
+            //catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(dataRepositoriesFolder + MefAccess.DataAccessLayerDll)));
+            //catalog.Catalogs.Add(new AssemblyCatalog(Assembly.LoadFile(businessLayerManagersFolder + MefAccess.BusinessLayerDll)));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeManager).Assembly));
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));
 
             CompositionContainer container = new CompositionContainer(catalog);

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Data.Models;
+using Shared.Models;
 
 namespace BusinessLayer
 {

@@ -5,9 +5,10 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
-using Data.Contracts;
-using Data.Contracts.DataRepositories;
-using Data.Models;
+using DAL.Contracts;
+using DAL.Contracts.DataRepositories;
+using Shared.Models;
+
 
 namespace BusinessLayer.Managers
 {

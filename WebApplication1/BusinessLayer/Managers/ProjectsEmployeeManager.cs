@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using Data.Contracts;
-using Data.Contracts.DataRepositories;
-using Data.Models;
+using DAL.Contracts;
+using DAL.Contracts.DataRepositories;
+using Shared.Models;
+
 
 namespace BusinessLayer.Managers
 {

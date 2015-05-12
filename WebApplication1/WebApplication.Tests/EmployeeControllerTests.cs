@@ -3,9 +3,9 @@ using System.Linq;
 using System.Web.Mvc;
 using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
-using Common.Models.Fixtures;
+using Shared.Models;
+using Tests.Fixtures;
 using WebApplication.Controllers;
-using Data.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

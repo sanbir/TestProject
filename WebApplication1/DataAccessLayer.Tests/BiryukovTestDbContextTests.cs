@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DAL.EntityFrameworkRepository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DataAccessLayer.Tests

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using Common.Models.Fixtures;
-using Data.Contracts.DataRepositories;
-using Data.Models;
-using DataAccessLayer.DataRepositories;
+using DAL.Contracts.DataRepositories;
+using DAL.EntityFrameworkRepository.DataRepositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shared.Models;
+using Tests.Fixtures;
 
 namespace DataAccessLayer.Tests
 {

@@ -174,13 +174,25 @@
       <Project>{6a99d85d-8de1-450f-bfe3-502d7f3dcd28}</Project>
       <Name>BusinessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WebApplication1\Common.Constants\Common.Constants.csproj">
-      <Project>{0b09e27e-b8b5-41da-ae08-68907f877418}</Project>
-      <Name>Common.Constants</Name>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.Managers.csproj">
+      <Project>{8aff7348-82b5-48cf-8f2b-8b9c645d33eb}</Project>
+      <Name>BusinessLayer.Managers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\WebApplication1\Common.Models\Common.Models.csproj">
-      <Project>{e95d1cfb-6cb8-4a87-817a-4b93c3e9d5f5}</Project>
-      <Name>Common.Models</Name>
+    <ProjectReference Include="..\DAL.Contracts\DAL.Contracts.csproj">
+      <Project>{56b19f5f-38ab-46f4-b5c2-e6ac3b309f07}</Project>
+      <Name>DAL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL.EntityFrameworkRepository\DAL.EntityFrameworkRepository.csproj">
+      <Project>{306664c8-194f-491c-8e02-030a4a2be718}</Project>
+      <Name>DAL.EntityFrameworkRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Constants\Shared.Constants.csproj">
+      <Project>{D773CEEC-1798-4782-9420-547A7F422AE4}</Project>
+      <Name>Shared.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
+      <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
+      <Name>Shared.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
