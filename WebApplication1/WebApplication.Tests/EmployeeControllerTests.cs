@@ -5,9 +5,9 @@ using BusinessLayer.Contracts;
 using BusinessLayer.Contracts.Managers;
 using Shared.Models;
 using Tests.Fixtures;
-using WebApplication.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using WebApplication.Controllers;
 
 namespace WebApplication.Tests
 {

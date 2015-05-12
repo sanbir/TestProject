@@ -95,10 +95,6 @@
       <Project>{6A99D85D-8DE1-450F-BFE3-502D7F3DCD28}</Project>
       <Name>BusinessLayer.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PresentationLayer\WebApplication.csproj">
-      <Project>{7ce9d8f9-1a65-46b2-89c1-975ba157cdc5}</Project>
-      <Name>WebApplication</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
       <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
       <Name>Shared.Models</Name>
@@ -106,6 +102,10 @@
     <ProjectReference Include="..\Tests.Fixtures\Tests.Fixtures.csproj">
       <Project>{108EFA12-AC58-471C-BB6B-76A2E11A417C}</Project>
       <Name>Tests.Fixtures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplication\WebApplication.csproj">
+      <Project>{ED109868-E22A-4529-B812-86A0D7C156FE}</Project>
+      <Name>WebApplication</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
