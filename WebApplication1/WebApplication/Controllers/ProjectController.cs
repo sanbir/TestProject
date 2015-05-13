@@ -7,8 +7,10 @@ using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
 using PagedList;
 using Shared.Constants.Common;
+using Shared.Constants.Employee;
 using Shared.Constants.Project;
 using Shared.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -21,18 +23,67 @@ namespace WebApplication.Controllers
         }
 
         [ImportingConstructor]
-        public ProjectController(IProjectManager projectManager)
+        public ProjectController(IProjectManager projectManager, IEmployeeManager employeeManager)
         {
             _projectManager = projectManager;
+            _employeeManager = employeeManager;
         }
 
         [Import]
         IProjectManager _projectManager;
+        [Import]
+        IEmployeeManager _employeeManager;
 
-        public ActionResult Create()
+        public ActionResult Create(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
-            return View();
+            CreateProjectViewModel model = new CreateProjectViewModel();
+
+                        sortDirection = SwapSortDirection(sortDirection);
+            ViewBag.CurrentSortDirection = sortDirection;
+
+            if (string.IsNullOrEmpty(sortPropertyName))
+            {
+                sortPropertyName = EmployeeProperties.LastName;
+            }
+
+            if (searchString == null)
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
+
+            const int pageSize = ViewStringConstants.PageSize;
+            int pageNumber = page ?? ViewStringConstants.StartPage;
+
+            model.Employees = employees.ToPagedList(pageNumber, pageSize);
+
+            return View(model);
         }
+
+        //public ActionResult LoadEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        //{
+        //    sortDirection = SwapSortDirection(sortDirection);
+        //    ViewBag.CurrentSortDirection = sortDirection;
+
+        //    if (string.IsNullOrEmpty(sortPropertyName))
+        //    {
+        //        sortPropertyName = EmployeeProperties.LastName;
+        //    }
+
+        //    if (searchString == null)
+        //    {
+        //        searchString = currentFilter;
+        //    }
+        //    ViewBag.CurrentFilter = searchString;
+
+        //    var employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
+
+        //    const int pageSize = ViewStringConstants.PageSize;
+        //    int pageNumber = page ?? ViewStringConstants.StartPage;
+        //    return View(employees.ToPagedList(pageNumber, pageSize));
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
