@@ -124,13 +124,19 @@
                 </th>
                 <th>
                     @Html.ActionLink(EmployeeProperties.ContractorCompanyNameDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = EmployeeProperties.ContractorCompanyName,
-                currentFilter = ViewBag.CurrentFilter
-            })
+                        "Index",
+                        new
+                        {
+                            sortDirection = ViewBag.CurrentSortDirection,
+                            sortPropertyName = EmployeeProperties.ContractorCompanyName,
+                            currentFilter = ViewBag.CurrentFilter
+                        })
+                </th>
+                <th>
+                    @Html.Label(EmployeeProperties.AssignToProject)
+                </th>
+                <th>
+                    @Html.Label(EmployeeProperties.AssignAsManager)
                 </th>
                 <th></th>
             </tr>
@@ -139,24 +145,25 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
+                        @Html.DisplayFor(modelItem => item.Employee.LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => item.Employee.FirstName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MiddleName)
+                        @Html.DisplayFor(modelItem => item.Employee.MiddleName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Email)
+                        @Html.DisplayFor(modelItem => item.Employee.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ContractorCompanyName)
+                        @Html.DisplayFor(modelItem => item.Employee.ContractorCompanyName)
                     </td>
                     <td>
-                        @Html.ActionLink(ViewStringConstants.Edit, "Edit", new { id = item.Id }) |
-                        @Html.ActionLink(ViewStringConstants.Details, "Details", new { id = item.Id }) |
-                        @Html.ActionLink(ViewStringConstants.Delete, "Delete", new { id = item.Id })
+                        @Html.CheckBoxFor(modelItem => item.Assigned)
+                    </td>
+                    <td>
+                        @Html.RadioButtonFor(modelItem => item.IsManager, false)
                     </td>
                 </tr>
             }
@@ -213,9 +220,9 @@
                         }
                     </table>
                 </div>
-            </div>
+            </div>*@
 
-        <br />*@
+        <br />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

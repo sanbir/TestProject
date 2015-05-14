@@ -16,5 +16,7 @@
 
         public const string BindEmployeeProperties = "LastName, FirstName, MiddleName, Email, ContractorCompanyName";
 
+        public const string AssignToProject = "Назначить на проект";
+        public const string AssignAsManager = "Назначить руководителем";
     }
 }

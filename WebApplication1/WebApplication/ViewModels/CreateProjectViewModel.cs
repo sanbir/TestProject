@@ -11,6 +11,6 @@ namespace WebApplication.ViewModels
     {
         public Project Project { get; set; }
 
-        public IPagedList<Employee> Employees { get; set; }
+        public IPagedList<AssignedEmployeeData> Employees { get; set; }
     }
 }

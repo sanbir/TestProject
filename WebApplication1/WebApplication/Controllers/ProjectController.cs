@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
@@ -52,12 +54,15 @@ namespace WebApplication.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
+            IEnumerable<Employee> employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
 
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;
 
-            model.Employees = employees.ToPagedList(pageNumber, pageSize);
+            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
+                employees.Select(employee => new AssignedEmployeeData(employee));
+
+            model.Employees = assignedEmployeeData.ToPagedList(pageNumber, pageSize);
 
             return View(model);
         }
