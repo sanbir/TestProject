@@ -38,7 +38,7 @@ namespace WebApplication.Controllers
         {
             CreateProjectViewModel model = new CreateProjectViewModel();
 
-                        sortDirection = SwapSortDirection(sortDirection);
+            sortDirection = SwapSortDirection(sortDirection);
             ViewBag.CurrentSortDirection = sortDirection;
 
             if (string.IsNullOrEmpty(sortPropertyName))

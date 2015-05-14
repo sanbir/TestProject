@@ -13,7 +13,7 @@
 
         public const string ProjectNameDisplay = "Название проекта";
         public const string CustomerCompanyNameDisplay = "Название компании-заказчика";
-        public const string ManagerDisplay = "Руководитель проекта";
+        public const string ManagerIdDisplay = "Руководитель проекта";
         public const string StartDateDisplay = "Дата начала проекта";
         public const string EndDateDisplay = "Дата окончания проекта";
         public const string PriorityDisplay = "Приоритет проекта";

@@ -4,6 +4,7 @@
     {
         public const string EnterProjectName = "Введите название проекта";
         public const string EnterCustomerCompanyName = "Введите название компании-заказчика";
+        public const string EnterManagerId = "Назначьте руководителя проекта";
         public const string EnterStartDate = "Введите дату начала проекта";
         public const string DateFormatString = "{0:dd.MM.yyyy}";
         public const string EnterEndDate = "Введите дату окончания проекта";
