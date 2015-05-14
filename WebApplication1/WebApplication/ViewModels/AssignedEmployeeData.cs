@@ -22,6 +22,6 @@ namespace WebApplication.ViewModels
 
         public bool Assigned { get; set; }
 
-        public bool IsManager { get; set; }
+        public bool? IsManager { get; set; }
     }
 }

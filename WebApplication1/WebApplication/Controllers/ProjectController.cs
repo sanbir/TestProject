@@ -55,12 +55,11 @@ namespace WebApplication.Controllers
             ViewBag.CurrentFilter = searchString;
 
             IEnumerable<Employee> employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
+            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
+                employees.Select(employee => new AssignedEmployeeData(employee));
 
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;
-
-            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
-                employees.Select(employee => new AssignedEmployeeData(employee));
 
             model.Employees = assignedEmployeeData.ToPagedList(pageNumber, pageSize);
 
