@@ -70,7 +70,7 @@
         </div>
 
 
-        <h4>@ViewStringConstants.ProjectsEmployeesTitle</h4>
+        <h4>@ViewStringConstants.AssignEmployeesToProjectTitle</h4>
         <hr />
         @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
         {
@@ -185,42 +185,43 @@
         
         <hr />
         
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.ManagerId, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty } })
+                @Html.EditorFor(model => model.ManagerFullName, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty } })
                 @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.HiddenFor(model=>model.Project.ManagerId)
+        @Html.HiddenFor(model => model.Project.ManagerId)
         
         <div class="form-group">
+            @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-offset-2 col-md-10">
                 <table>
                     <tr>
-                        @{
-                            int cnt = 0;
-                            List<AssignedEmployeeData> employees = ViewBag.Employees;
+                    @{
+                        int cnt = 0;
+                        IEnumerable<AssignedEmployeeData> employees = Model.AssignedEmployees;
 
-                            foreach (var employee in employees)
+                        foreach (var employee in employees)
+                        {
+                            if (cnt++%3 == 0)
                             {
-                                if (cnt++%3 == 0)
-                                {
-                                    @:</tr><tr>
-                                }
-                                @:<td>
-                                    <input type="checkbox"
-                                           name="selectedEmployees"
-                                           value="@employee.EmployeeId"
-                                        @(Html.Raw(employee.Assigned ? "checked=\"checked\"" : "")) />
-                                    @employee.EmployeeId @:  @employee.FullName
-                                @:</td>
+                                @:</tr><tr>
                             }
-                            @:</tr>
+                            @:<td>
+                            <input type="checkbox"
+                                   name="selectedEmployees"
+                                   value="@employee.Employee.Id"
+                                @(Html.Raw(employee.Assigned ? "checked=\"checked\"" : "")) />
+                            @employee.Employee.Id @:  @employee.FullName
+                            @:</td>
                         }
-                    </table>
-                </div>
-            </div>*@
+                        @:</tr>
+                    }
+                </table>
+            </div>
+        </div>
 
         <br />
 

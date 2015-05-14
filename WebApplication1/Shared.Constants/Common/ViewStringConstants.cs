@@ -13,6 +13,7 @@
         public const string EmployeesTitle = "Работники";
         public const string ProjectTitle = "Проект";
         public const string ProjectsTitle = "Проекты";
+        public const string AssignEmployeesToProjectTitle = "Назначить работников на проект";
         public const string ProjectsEmployeesTitle = "Работники на проекте";
         public const string Back = "Назад";
         public const string Search = "Поиск";

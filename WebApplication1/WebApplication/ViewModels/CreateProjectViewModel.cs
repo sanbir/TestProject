@@ -12,5 +12,19 @@ namespace WebApplication.ViewModels
         public Project Project { get; set; }
 
         public IPagedList<AssignedEmployeeData> Employees { get; set; }
+
+        public string ManagerFullName {
+            get
+            {
+                return
+                    Employees.Where(employee => employee.IsManager ?? false)
+                        .Select(employee => employee.FullName)
+                        .FirstOrDefault();
+            }
+        }
+
+        public IEnumerable<AssignedEmployeeData> AssignedEmployees {
+            get { return Employees; }//TODO:
+        }
     }
 }
