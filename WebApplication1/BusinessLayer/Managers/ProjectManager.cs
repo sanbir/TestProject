@@ -124,5 +124,12 @@ namespace BusinessLayer.Managers
             return projectEntity;
         }
 
+
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+            IEnumerable<Employee> employees = employeeRepository.Get();
+            return employees;
+        }
     }
 }

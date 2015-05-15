@@ -25,45 +25,17 @@ namespace WebApplication.Controllers
         }
 
         [ImportingConstructor]
-        public ProjectController(IProjectManager projectManager, IEmployeeManager employeeManager)
+        public ProjectController(IProjectManager projectManager)
         {
             _projectManager = projectManager;
-            _employeeManager = employeeManager;
         }
 
-        [Import]
+        [Import] 
         IProjectManager _projectManager;
-        [Import]
-        IEmployeeManager _employeeManager;
 
-        public ActionResult Create(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        public ActionResult Create()
         {
-            CreateProjectViewModel model = new CreateProjectViewModel();
-
-            sortDirection = SwapSortDirection(sortDirection);
-            ViewBag.CurrentSortDirection = sortDirection;
-
-            if (string.IsNullOrEmpty(sortPropertyName))
-            {
-                sortPropertyName = EmployeeProperties.LastName;
-            }
-
-            if (searchString == null)
-            {
-                searchString = currentFilter;
-            }
-            ViewBag.CurrentFilter = searchString;
-
-            IEnumerable<Employee> employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
-            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
-                employees.Select(employee => new AssignedEmployeeData(employee));
-
-            const int pageSize = ViewStringConstants.PageSize;
-            int pageNumber = page ?? ViewStringConstants.StartPage;
-
-            model.Employees = assignedEmployeeData.ToPagedList(pageNumber, pageSize);
-
-            return View(model);
+            return View();
         }
 
         //public ActionResult LoadEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
@@ -97,8 +69,16 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _projectManager.CreateOrUpdate(project);
-                    return RedirectToAction("Index");
+                    CreateProjectViewModel model = new CreateProjectViewModel();
+
+                    IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
+                    IEnumerable<AssignedEmployeeData> assignedEmployeeData =
+                        employees.Select(employee => new AssignedEmployeeData(employee));
+
+                    model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
+
+                    return View(model);
+                    return RedirectToAction("AssignEmployees", new { id = id, saveChangesError = true });
                 }
             }
             catch (Exception) // TODO: add custom
@@ -107,6 +87,30 @@ namespace WebApplication.Controllers
             }
             return View(project);
         }
+
+        public ActionResult AssignEmployees( string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]Project project)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            _projectManager.CreateOrUpdate(project);
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    catch (Exception) // TODO: add custom
+        //    {
+        //        ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
+        //    }
+        //    return View(project);
+        //}
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {

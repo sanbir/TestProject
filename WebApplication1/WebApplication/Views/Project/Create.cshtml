@@ -1,10 +1,6 @@
-﻿@using PagedList.Mvc
-@using Shared.Constants.Common
-@using Shared.Constants.Employee
-@using Shared.Constants.Project
+﻿@using Shared.Constants.Common
 @using Shared.Models
-@using WebApplication.ViewModels
-@model WebApplication.ViewModels.CreateProjectViewModel
+@model Project
 
 @{
     ViewBag.Title = ViewStringConstants.Create;
@@ -22,204 +18,50 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.ProjectName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.CustomerCompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CustomerCompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.CustomerCompanyName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.CustomerCompanyName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CustomerCompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerCompanyName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.StartDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.EndDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Priority, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Priority, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Comment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Comment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <h4>@ViewStringConstants.AssignEmployeesToProjectTitle</h4>
-        <hr />
-        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
-        {
-            <p class="col-md-9 form-horizontal form-inline form-group">
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
-                <input type="submit" value=@ViewStringConstants.Search class="btn btn-default" />
-            </p>
-        }
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.ActionLink(EmployeeProperties.LastNameDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = EmployeeProperties.LastName,
-                currentFilter = ViewBag.CurrentFilter
-            })
-                </th>
-                <th>
-                    @Html.ActionLink(EmployeeProperties.FirstNameDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = EmployeeProperties.FirstName,
-                currentFilter = ViewBag.CurrentFilter
-            })
-                </th>
-                <th>
-                    @Html.ActionLink(EmployeeProperties.MiddleNameDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = EmployeeProperties.MiddleName,
-                currentFilter = ViewBag.CurrentFilter
-            })
-                </th>
-                <th>
-                    @Html.ActionLink(EmployeeProperties.EmailDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = EmployeeProperties.Email,
-                currentFilter = ViewBag.CurrentFilter
-            })
-                </th>
-                <th>
-                    @Html.ActionLink(EmployeeProperties.ContractorCompanyNameDisplay,
-                        "Index",
-                        new
-                        {
-                            sortDirection = ViewBag.CurrentSortDirection,
-                            sortPropertyName = EmployeeProperties.ContractorCompanyName,
-                            currentFilter = ViewBag.CurrentFilter
-                        })
-                </th>
-                <th>
-                    @Html.Label(EmployeeProperties.AssignToProject)
-                </th>
-                <th>
-                    @Html.Label(EmployeeProperties.AssignAsManager)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model.Employees)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.MiddleName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.ContractorCompanyName)
-                    </td>
-                    <td>
-                        @Html.CheckBoxFor(modelItem => item.Assigned)
-                    </td>
-                    <td>
-                        @Html.RadioButtonFor(modelItem => item.IsManager, false)
-                    </td>
-                </tr>
-            }
-        </table>
-
-        <br />
-
-        @ViewStringConstants.Page
-        @(Model.Employees.PageCount < Model.Employees.PageNumber ? 0 : Model.Employees.PageNumber)
-        @ViewStringConstants.Of
-        @Model.Employees.PageCount
-        @Html.PagedListPager(Model.Employees, page => Url.Action("Index",
-            new
-            {
-                page,
-                sortOrder = ViewBag.CurrentSort,
-                currentFilter = ViewBag.CurrentFilter
-            }))
-        
-        <hr />
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ManagerFullName, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty } })
-                @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @Html.HiddenFor(model => model.Project.ManagerId)
-        
-        <div class="form-group">
-            @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-offset-2 col-md-10">
-                <table>
-                    <tr>
-                    @{
-                        int cnt = 0;
-                        IEnumerable<AssignedEmployeeData> employees = Model.AssignedEmployees;
-
-                        foreach (var employee in employees)
-                        {
-                            if (cnt++%3 == 0)
-                            {
-                                @:</tr><tr>
-                            }
-                            @:<td>
-                            <input type="checkbox"
-                                   name="selectedEmployees"
-                                   value="@employee.Employee.Id"
-                                @(Html.Raw(employee.Assigned ? "checked=\"checked\"" : "")) />
-                            @employee.Employee.Id @:  @employee.FullName
-                            @:</td>
-                        }
-                        @:</tr>
-                    }
-                </table>
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -227,7 +69,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value=@ViewStringConstants.Create class="btn btn-default" />
+                <input type="submit" value=@ViewStringConstants.Next class="btn btn-default" />
             </div>
         </div>
     </div>
