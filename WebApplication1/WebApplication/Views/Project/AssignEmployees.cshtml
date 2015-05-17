@@ -108,7 +108,7 @@
                         @Html.DisplayFor(modelItem => item.Employee.ContractorCompanyName)
                     </td>
                     <td>
-                        @Html.CheckBoxFor(modelItem => item.Assigned)
+                        @Html.CheckBoxFor(modelItem => item.IsAssigned)
                     </td>
                     <td>
                         @Html.RadioButtonFor(modelItem => item.IsManager, false)
@@ -149,9 +149,8 @@
                     <tr>
                         @{
                             int cnt = 0;
-                            IEnumerable<AssignedEmployeeData> employees = Model.AssignedEmployees;
-
-                            foreach (var employee in employees)
+                            
+                            foreach (var employee in Model.AssignedEmployees)
                             {
                                 if (cnt++%3 == 0)
                                 {
@@ -161,7 +160,7 @@
                                 <input type="checkbox"
                                        name="selectedEmployees"
                                        value="@employee.Employee.Id"
-                                    @(Html.Raw(employee.Assigned ? "checked=\"checked\"" : "")) />
+                                    @(Html.Raw(employee.IsAssigned ? "checked=\"checked\"" : "")) />
                                 @employee.Employee.Id
                                 @:  @employee.FullName
                                 @:</td>

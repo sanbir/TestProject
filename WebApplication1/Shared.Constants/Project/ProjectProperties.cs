@@ -19,6 +19,6 @@
         public const string PriorityDisplay = "Приоритет проекта";
         public const string CommentDisplay = "Текстовый комментарий";
 
-        public const string BindProjectProperties = "ProjectName, CustomerCompanyName, ManagerId, StartDate, EndDate, Priority, Comment";
+        public const string BindProjectProperties = "ProjectName, CustomerCompanyName, StartDate, EndDate, Priority, Comment";
     }
 }

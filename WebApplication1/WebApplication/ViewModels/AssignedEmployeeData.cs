@@ -20,7 +20,7 @@ namespace WebApplication.ViewModels
             get { return string.Join(" ", Employee.LastName, Employee.FirstName, Employee.MiddleName); } 
         }
 
-        public bool Assigned { get; set; }
+        public bool IsAssigned { get; set; }
 
         public bool? IsManager { get; set; }
     }

@@ -23,8 +23,9 @@ namespace WebApplication.ViewModels
             }
         }
 
-        public IEnumerable<AssignedEmployeeData> AssignedEmployees {
-            get { return Employees; }//TODO:
+        public IEnumerable<AssignedEmployeeData> AssignedEmployees
+        {
+            get { return Employees.Where(employee => employee.IsAssigned); }
         }
     }
 }

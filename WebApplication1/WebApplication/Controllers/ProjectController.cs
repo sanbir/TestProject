@@ -69,16 +69,16 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    CreateProjectViewModel model = new CreateProjectViewModel();
-
                     IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
                     IEnumerable<AssignedEmployeeData> assignedEmployeeData =
                         employees.Select(employee => new AssignedEmployeeData(employee));
 
+                    CreateProjectViewModel model = new CreateProjectViewModel();
+                    model.Project = project;
                     model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
 
-                    return View(model);
-                    return RedirectToAction("AssignEmployees", new { id = id, saveChangesError = true });
+                    //return View(model);
+                    return View("AssignEmployees", model);
                 }
             }
             catch (Exception) // TODO: add custom
