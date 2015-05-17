@@ -136,7 +136,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ManagerFullName, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty } })
+                @Html.EditorFor(model => model.ManagerFullName, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty, placeholder = Html.DisplayNameFor(model => model.Project.ManagerId) } })
                 @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
             </div>
         </div>

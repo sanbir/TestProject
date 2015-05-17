@@ -22,7 +22,7 @@ namespace Shared.Models
         public string CustomerCompanyName { get; set; }
 
         [Required(ErrorMessage = ProjectValidationMessages.EnterManagerId)]
-        [Display(Name = ProjectProperties.ManagerIdDisplay, Prompt = ProjectProperties.ManagerIdDisplay)]
+        [Display(Name = ProjectProperties.ManagerIdDisplay, Prompt = ProjectProperties.ManagerIdPrompt)]
         public int ManagerId { get; set; }
 
         [DataType(DataType.Date)]
@@ -45,7 +45,7 @@ namespace Shared.Models
         [Display(Name = ProjectProperties.Comment, Prompt = ProjectProperties.Comment)]
         public string Comment { get; set; }
 
-        public Employee Manager { get; set; }
+        public virtual Employee Manager { get; set; }
 
         [Browsable(false)]
         public virtual ICollection<ProjectsEmployee> ProjectsEmployees { get; set; }
