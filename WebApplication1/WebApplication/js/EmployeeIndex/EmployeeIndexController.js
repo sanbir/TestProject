@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var employeeIndexController = function ($scope, $filter) {
+    var employeeIndexController = function ($scope, $filter, employeeIndexFactory) {
 
         // init
         $scope.sort = {
@@ -9,6 +9,10 @@
         };
 
         $scope.gap = 5;
+
+        employeeIndexFactory.getEmployees().then(function (employees) {
+            $scope.employees = employees;
+        });
 
         $scope.filteredItems = [];
         $scope.groupedItems = [];
@@ -157,7 +161,7 @@
         $scope.search();
     };
 
-    employeeIndexController.$inject = ['$scope', '$filter'];
+    employeeIndexController.$inject = ['$scope', '$filter', 'EmployeeIndexFactory'];
 
     angular.module('EmployeeIndexApp').controller('EmployeeIndexController', employeeIndexController);
 

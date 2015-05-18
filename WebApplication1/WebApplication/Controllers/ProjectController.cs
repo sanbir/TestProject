@@ -30,7 +30,7 @@ namespace WebApplication.Controllers
             _projectManager = projectManager;
         }
 
-        [Import] 
+        [Import]
         IProjectManager _projectManager;
 
         public ActionResult Create()
@@ -88,7 +88,20 @@ namespace WebApplication.Controllers
             return View(project);
         }
 
-        public ActionResult AssignEmployees( string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        public JsonResult GetEmployees()
+        {
+            IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
+            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
+                employees.Select(employee => new AssignedEmployeeData(employee));
+
+            CreateProjectViewModel model = new CreateProjectViewModel();
+            model.Project = null;
+            model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult AssignEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
             return View();
         }

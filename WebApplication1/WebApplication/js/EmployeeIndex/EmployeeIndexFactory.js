@@ -1,12 +1,17 @@
 ﻿(function () {
-    var employeeIndexFactory = function () {
-
-        var factory = {};
-
-        factory.Id = 42;
-
-        return factory;
+    var employeeIndexFactory = function ($http) {
+        return {
+            getEmployees: function () {
+                return $http.get('/Project/GetEmployees')
+                    .then(function (result) {
+                        return result.data;
+                    });
+            }
+        }
     };
+
+    employeeIndexFactory.$inject = ['$http'];
 
     angular.module('EmployeeIndexApp').factory('EmployeeIndexFactory', employeeIndexFactory);
 }());
+
