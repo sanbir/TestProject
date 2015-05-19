@@ -67,13 +67,13 @@
                 <pre>currentPage: {{sort|json}}</pre>
                 <tbody>
                     <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
-                        <td>{{item.employeesPage.firstName}}</td>
-                        <td>{{item.employeesPage.lastName}}</td>
-                        <td>{{item.employeesPage.middleName}}</td>
-                        <td>{{item.employeesPage.email}}</td>
-                        <td>{{item.employeesPage.contractorCompanyName}}</td>
-                        <td data-ng-set-manager>{{item.employeesPage.isManager}}</td>
-                        <td data-ng-assign-employee>{{item.employeesPage.isAssigned}}</td>
+                        <td>{{item.firstName}}</td>
+                        <td>{{item.lastName}}</td>
+                        <td>{{item.middleName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.contractorCompanyName}}</td>
+                        <td><input type="radio" data-set-manager data-ng-model="item.isManager"></td>
+                        <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
                     </tr>
                 </tbody>
             </table>

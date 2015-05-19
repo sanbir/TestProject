@@ -6,17 +6,21 @@
                 ngModelController.$parsers.push(function (isAssigned) {
 
                     //TODO:
+                    var selectedEmployee = scope.item;
+                    var assignedEmployeesIds = scope.$parent.project.assignedEmployeesIds;
+                    var assignedEmployees = scope.$parent.assignedEmployees;
+
                     if (isAssigned) {
-                        if ($scope.project.assignedEmployeesIds.indexOf($scope.employeesPage[selectedIndex].id) === -1) {
-                            $scope.project.assignedEmployeesIds.push($scope.employeesPage[selectedIndex].id);
-                            $scope.assignedEmployees.push($scope.employeesPage[selectedIndex]);
+                        if (assignedEmployeesIds.indexOf(selectedEmployee.id) === -1) {
+                            assignedEmployeesIds.push(selectedEmployee.id);
+                            assignedEmployees.push(selectedEmployee);
                         }
                     } else {
-                        if ($scope.project.assignedEmployeesIds.indexOf($scope.employeesPage[selectedIndex].id) !== -1) {
-                            for (var i = 0; i < $scope.project.assignedEmployeesIds.length; i++) {
-                                if ($scope.project.assignedEmployeesIds[i] === $scope.employeesPage[selectedIndex].id) {
-                                    $scope.project.assignedEmployeesIds.splice(i, 1);
-                                    $scope.assignedEmployees.splice(i, 1);
+                        if (assignedEmployeesIds.indexOf(selectedEmployee.id) !== -1) {
+                            for (var i = 0; i < assignedEmployeesIds.length; i++) {
+                                if (assignedEmployeesIds[i] === selectedEmployee.id) {
+                                    assignedEmployeesIds.splice(i, 1);
+                                    assignedEmployees.splice(i, 1);
                                     break;
                                 }
                             }
