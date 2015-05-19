@@ -2,30 +2,6 @@
 
     var employeeIndexController = function ($scope, $filter, employeeIndexFactory) {
 
-        function project() {
-            this.projectName = "";
-            this.customerCompanyName = "";
-            this.startDate = new Date();
-            this.endDate = new Date();
-            this.priority = 0;
-            this.comment = "";
-
-            this.managerId = 0;
-            this.assignedEmployeesIds = [];
-        }
-
-        function employee() {
-            this.id = 0;
-            this.firstName = "";
-            this.lastName = "";
-            this.middleName = "";
-            this.email = "";
-            this.contractorCompanyName = "";
-
-            this.isManager = false;
-            this.isAssigned = false;
-        }
-
         $scope.project = new project();
         $scope.employeesPage = [
             new employee(),
@@ -222,8 +198,8 @@
         $scope.search();
     };
 
-    employeeIndexController.$inject = ['$scope', '$filter', 'EmployeeIndexFactory'];
+    employeeIndexController.$inject = ['$scope', '$filter', 'employeeIndexFactory'];
 
-    angular.module('EmployeeIndexApp').controller('EmployeeIndexController', employeeIndexController);
+    angular.module('employeeIndexApp').controller('employeeIndexController', employeeIndexController);
 
 }());
