@@ -2,6 +2,60 @@
 
     var employeeIndexController = function ($scope, $filter, employeeIndexFactory) {
 
+        function project() {
+            this.projectName = "";
+            this.customerCompanyName = "";
+            this.startDate = new Date();
+            this.endDate = new Date();
+            this.priority = 0;
+            this.comment = "";
+
+            this.managerId = 0;
+            this.assignedEmployeesIds = [];
+        }
+
+        function employee() {
+            this.id = 0;
+            this.firstName = "";
+            this.lastName = "";
+            this.middleName = "";
+            this.email = "";
+            this.contractorCompanyName = "";
+
+            this.isManager = false;
+            this.isAssigned = false;
+        }
+
+        $scope.project = new project();
+        $scope.employeesPage = [
+            new employee(),
+            new employee(),
+            new employee()
+        ];
+
+        $scope.setManager = function() {
+            for (var i = 0; i < $scope.employeesPage.length; i++) {
+                if ($scope.employeesPage[i].isManager) {
+                    $scope.project.managerId = $scope.employeesPage[i].id;
+                    break;
+                }
+            }
+        };
+
+        $scope.assignEmployee = function () {
+            for (var i = 0; i < $scope.employeesPage.length; i++) {
+                if ($scope.employeesPage[i].isAssigned) {
+                    $scope.project.assignedEmployeesIds.push($scope.employeesPage[i].id);
+                    $scope.assignedEmployees.push($scope.employeesPage[i]);
+                }
+            }
+        };
+
+        $scope.assignedEmployees = [];
+
+
+
+
         // init
         $scope.sort = {
             sortingOrder: 'id',
@@ -10,9 +64,9 @@
 
         $scope.gap = 5;
 
-        employeeIndexFactory.getEmployees().then(function (employees) {
-            $scope.employees = employees;
-        });
+        //employeeIndexFactory.getEmployees().then(function (employees) {
+        //    $scope.employees = employees;
+        //});
 
         $scope.filteredItems = [];
         $scope.groupedItems = [];
