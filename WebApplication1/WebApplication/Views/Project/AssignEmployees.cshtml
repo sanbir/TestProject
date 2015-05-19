@@ -32,12 +32,13 @@
             <table class="table table-striped table-condensed table-hover">
                 <thead>
                     <tr>
-                        <th class="id" custom-sort order="'id'" sort="sort">Id&nbsp;</th>
-                        <th class="name" custom-sort order="'name'" sort="sort">Name&nbsp;</th>
-                        <th class="description" custom-sort order="'description'" sort="sort">Description&nbsp;</th>
-                        <th class="field3" custom-sort order="'field3'" sort="sort">Field 3&nbsp;</th>
-                        <th class="field4" custom-sort order="'field4'" sort="sort">Field 4&nbsp;</th>
-                        <th class="field5" custom-sort order="'field5'" sort="sort">Field 5&nbsp;</th>
+                        <th class="firstName" custom-sort order="'firstName'" sort="sort">firstName&nbsp;</th>
+                        <th class="lastName" custom-sort order="'lastName'" sort="sort">lastName&nbsp;</th>
+                        <th class="middleName" custom-sort order="'middleName'" sort="sort">middleName&nbsp;</th>
+                        <th class="email" custom-sort order="'email'" sort="sort">email&nbsp;</th>
+                        <th class="contractorCompanyName" custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName&nbsp;</th>
+                        <th class="isManager" custom-sort order="'isManager'" sort="sort">isManager&nbsp;</th>
+                        <th class="isAssigned" custom-sort order="'isAssigned'" sort="sort">isAssigned&nbsp;</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -66,12 +67,13 @@
                 <pre>currentPage: {{sort|json}}</pre>
                 <tbody>
                     <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
-                        <td>{{item.id}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.description}}</td>
-                        <td>{{item.field3}}</td>
-                        <td>{{item.field4}}</td>
-                        <td>{{item.field5}}</td>
+                        <td>{{item.employeesPage.firstName}}</td>
+                        <td>{{item.employeesPage.lastName}}</td>
+                        <td>{{item.employeesPage.middleName}}</td>
+                        <td>{{item.employeesPage.email}}</td>
+                        <td>{{item.employeesPage.contractorCompanyName}}</td>
+                        <td data-ng-set-manager>{{item.employeesPage.isManager}}</td>
+                        <td data-ng-assign-employee>{{item.employeesPage.isAssigned}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -241,8 +243,13 @@
     @*@Scripts.Render("~/Scripts/angular.min.js")*@
     @*@Scripts.Render("~/bundles/AngularEmployeeIndex")*@
     <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/js/EmployeeIndex/projectAssignEmployeesApp.js"></script>
-    <script src="~/js/EmployeeIndex/projectAssignEmployeesController.js"></script>
-    <script src="~/js/EmployeeIndex/EmployeeIndexDirectives.js"></script>
-    <script src="~/js/EmployeeIndex/EmployeeIndexFactory.js"></script>
+
+    <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesApp.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignEmployee.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Directives/CustomSort.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Directives/SetManager.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Factories/EmployeesPageFactory.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectAssignEmployeesFactories.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectFactory.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesController.js"></script>
 }
