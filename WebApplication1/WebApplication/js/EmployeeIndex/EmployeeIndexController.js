@@ -33,20 +33,27 @@
             new employee()
         ];
 
-        $scope.setManager = function() {
-            for (var i = 0; i < $scope.employeesPage.length; i++) {
-                if ($scope.employeesPage[i].isManager) {
-                    $scope.project.managerId = $scope.employeesPage[i].id;
-                    break;
-                }
+        $scope.setManager = function(selectedIndex) {
+            if ($scope.employeesPage[selectedIndex].isManager) {
+                $scope.project.managerId = $scope.employeesPage[selectedIndex].id;
             }
         };
 
-        $scope.assignEmployee = function () {
-            for (var i = 0; i < $scope.employeesPage.length; i++) {
-                if ($scope.employeesPage[i].isAssigned) {
-                    $scope.project.assignedEmployeesIds.push($scope.employeesPage[i].id);
-                    $scope.assignedEmployees.push($scope.employeesPage[i]);
+        $scope.assignEmployee = function(selectedIndex) {
+            if ($scope.employeesPage[selectedIndex].isAssigned) {
+                if ($scope.project.assignedEmployeesIds.indexOf($scope.employeesPage[selectedIndex].id) === -1) {
+                    $scope.project.assignedEmployeesIds.push($scope.employeesPage[selectedIndex].id);
+                    $scope.assignedEmployees.push($scope.employeesPage[selectedIndex]);
+                }
+            } else {
+                if ($scope.project.assignedEmployeesIds.indexOf($scope.employeesPage[selectedIndex].id) !== -1) {
+                    for (var i = 0; i < $scope.project.assignedEmployeesIds.length; i++) {
+                        if ($scope.project.assignedEmployeesIds[i] === $scope.employeesPage[selectedIndex].id) {
+                            $scope.project.assignedEmployeesIds.splice(i, 1);
+                            $scope.assignedEmployees.splice(i, 1);
+                            break;
+                        }
+                    }
                 }
             }
         };
