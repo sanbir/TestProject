@@ -24,7 +24,7 @@ namespace WebApplication
                       "~/Scripts/respond.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/AngularEmployeeIndex")
-            //    .Include("~/js/EmployeeIndex/" + "EmployeeIndexApp.js")
+            //    .Include("~/js/EmployeeIndex/" + "projectAssignEmployeesApp.js")
             //    .IncludeDirectory("~/js/EmployeeIndex/", "*.js", searchSubdirectories: true));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

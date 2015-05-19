@@ -23,6 +23,6 @@
         this.isAssigned = false;
     }
 
-    angular.module('employeeIndexApp').factory('employeesPageFactory', employeesPageFactory);
+    angular.module('projectAssignEmployeesApp').factory('employeesPageFactory', employeesPageFactory);
 }());
 

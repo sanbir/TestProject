@@ -126,13 +126,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="js\ProjectAssignEmployeesApp\EmployeeIndexApp.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\EmployeeIndexController.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\EmployeeIndexDirectives.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\Factories\EmployeeFactory.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\Directives\AssignEmployee.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\Directives\SetManager.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesApp.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesController.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\Directives\CustomSort.js" />
     <Content Include="js\ProjectAssignEmployeesApp\Factories\EmployeesPageFactory.js" />
     <Content Include="js\ProjectAssignEmployeesApp\Factories\ProjectFactory.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesFactories.js" />
+    <Content Include="js\ProjectAssignEmployeesApp\Factories\ProjectAssignEmployeesFactories.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1011,9 +1012,7 @@
       <Name>Shared.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\ProjectAssignEmployeesApp\Directives\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

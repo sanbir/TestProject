@@ -12,6 +12,6 @@
 
     employeeIndexFactory.$inject = ['$http'];
 
-    angular.module('employeeIndexApp').factory('employeeIndexFactory', employeeIndexFactory);
+    angular.module('projectAssignEmployeesApp').factory('employeeIndexFactory', employeeIndexFactory);
 }());
 

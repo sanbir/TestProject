@@ -38,6 +38,6 @@
         }
     };
 
-    angular.module('employeeIndexApp').directive('customSort', customSort);
+    angular.module('projectAssignEmployeesApp').directive('customSort', customSort);
 
 }());

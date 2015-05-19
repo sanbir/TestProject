@@ -18,6 +18,6 @@
         return project;
     };
 
-    angular.module('employeeIndexApp').factory('projectFactory', projectFactory);
+    angular.module('projectAssignEmployeesApp').factory('projectFactory', projectFactory);
 }());
 
