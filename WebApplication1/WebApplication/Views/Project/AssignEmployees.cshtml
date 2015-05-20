@@ -75,9 +75,6 @@
 
     </div>*@
     <h1>{{project.managerId}}</h1>
-    <div data-ng-repeat="item in assignedEmployees">
-        <h2>{{item.id}}</h2>
-    </div>
 
     <table class="table">
         <tr>
@@ -97,7 +94,7 @@
             <td>{{item.middleName}}</td>
             <td>{{item.email}}</td>
             <td>{{item.contractorCompanyName}}</td>
-            <td><input name="isManagerRadio" type="radio" data-ng-value="item.id" data-set-manager data-ng-model="$parent.project.managerId"></td>
+            <td><input name="isManagerRadio" type="radio" data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
             <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
         </tr>
         
@@ -152,45 +149,24 @@
 
     <div class="form-group">
         @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        @*<div class="col-md-offset-2 col-md-10">
-            <table>
-                <tr>
-
-                var cnt = 0;
-
-                        foreach (var employee in Model.AssignedEmployees)
-                        {
-                            if (cnt++ % 3 == 0)
-                            {
-                                @:</tr><tr>
-                            }
-                            @:<td>
-
-                            <input type="checkbox"
-                                   name="selectedEmployees"
-                                   value="@employee.Employee.Id"
-                                   @(Html.Raw(employee.IsAssigned ? "checked=\"checked\"" : ""))/>
-                        
-                                @employee.Employee.Id
-                                @:  @employee.FullName
-
-                            @:</td>
-                        }
-                        @:</tr>
-            </table>
-        </div>*@
         
         <div class="col-md-offset-2 col-md-10">
-            <table>
+            <table class="table">
+                <tr>
+                    <th>firstName</th>
+                    <th>lastName</th>
+                    <th>middleName</th>
+                    <th>isManager</th>
+                    <th>isAssigned</th>
+                </tr>
+
                 <tr data-ng-repeat="item in assignedEmployees | filter:{isAssigned:true}">
                     <td>{{item.firstName}}</td>
                     <td>{{item.lastName}}</td>
                     <td>{{item.middleName}}</td>
-                    <td>
-                        <input type="checkbox"
-                               name="selectedEmployee"
-                               data-ng-model="item.isAssigned" />
-                    </td>
+                    <td>{{item.middleName}}</td>
+                    <td><input name="assignedIsManagerRadio" type="radio" data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
+                    <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
                 </tr>
             </table>
         </div>
