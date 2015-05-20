@@ -122,36 +122,30 @@
         <pre>currentPage: {{sort|json}}</pre>
     </table>
 
-    <hr/>
-
-    <div class="">
-        @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div>
+        @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new {@class = "control-label col-md-2"})
         <div class="col-md-10">
             <span class="form-control" readonly>{{ managerFullName }}</span>
-            @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new {@class = "text-danger"})
         </div>
     </div>
 
-    @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+    <hr/>
 
-    <div class="col-md-offset-2 col-md-10">
-        <table class="table">
-            <tr>
-                <th>firstName</th>
-                <th>lastName</th>
-                <th>middleName</th>
-                <th>isManager</th>
-                <th>Unassign</th>
-            </tr>
-
-            <tr data-ng-repeat="item in assignedEmployees | filter:{isAssigned:true}">
-                <td>{{item.firstName}}</td>
-                <td>{{item.lastName}}</td>
-                <td>{{item.middleName}}</td>
-                <td><input name="assignedIsManagerRadio" type="radio" data-assign-if-manager data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
-                <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
-            </tr>
-        </table>
+    <div data-ng-show="filteredEmployees.length > 0">
+        @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-offset-2 col-md-10">
+            <table class="table">
+                <tr>
+                    <td></td>
+                    <td>Снять с проекта</td>
+                </tr>
+                <tr data-ng-repeat="item in filteredEmployees = (assignedEmployees | filter:{isAssigned:true})">
+                    <td>{{item.lastName}} {{item.firstName}} {{item.middleName}}</td>
+                    <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
+                </tr>
+            </table>
+        </div>
     </div>
     
     <br />
