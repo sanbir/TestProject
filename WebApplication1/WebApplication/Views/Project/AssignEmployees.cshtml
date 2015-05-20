@@ -95,7 +95,7 @@
             <td>{{item.email}}</td>
             <td>{{item.contractorCompanyName}}</td>
             <td><input name="isManagerRadio" type="radio" data-assign-if-manager data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
-            <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
+            <td><input type="checkbox" data-assign-employee data-ng-disabled="item.id == $parent.project.managerId" data-ng-model="item.isAssigned"></td>
         </tr>
         
         <tr>

@@ -5,7 +5,7 @@
             link: function (scope, element, attrs, ngModelController) {
                 ngModelController.$parsers.push(function (managerId) {
 
-                    scope.item.isAssigned = true;
+                    scope.item.isAssigned = false;
 
                     return managerId;
                 });
