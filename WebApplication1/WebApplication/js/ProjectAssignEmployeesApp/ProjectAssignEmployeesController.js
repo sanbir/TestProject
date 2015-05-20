@@ -7,8 +7,6 @@
         $scope.assignedEmployees = [];
 
 
-
-
         // init
         $scope.sort = {
             sortingOrder: 'id',
