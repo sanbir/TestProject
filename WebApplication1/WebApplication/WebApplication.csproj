@@ -985,7 +985,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignedEmployeeData.cs" />
     <Compile Include="ViewModels\CreateProjectViewModel.cs" />
-    <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\ProjectPartialViewModel.cs" />
+    <Compile Include="ViewModels\ProjectToPersistViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer.Contracts\BusinessLayer.Contracts.csproj">

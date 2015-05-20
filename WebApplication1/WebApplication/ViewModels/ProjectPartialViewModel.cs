@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication.ViewModels
 {
-    public class ProjectViewModel
+    public class ProjectPartialViewModel
     {
         public string ProjectName { get; set; }
         public string CustomerCompanyName { get; set; }

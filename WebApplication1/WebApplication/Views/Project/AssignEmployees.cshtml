@@ -23,59 +23,6 @@
         </p>
     }
 
-    @*<div>
-            <table class="table table-striped table-condensed table-hover">
-                <thead>
-                    <tr>
-                        <th class="firstName" custom-sort order="'firstName'" sort="sort">firstName&nbsp;</th>
-                        <th class="lastName" custom-sort order="'lastName'" sort="sort">lastName&nbsp;</th>
-                        <th class="middleName" custom-sort order="'middleName'" sort="sort">middleName&nbsp;</th>
-                        <th class="email" custom-sort order="'email'" sort="sort">email&nbsp;</th>
-                        <th class="contractorCompanyName" custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName&nbsp;</th>
-                        <th class="isManager" custom-sort order="'isManager'" sort="sort">isManager&nbsp;</th>
-                        <th class="isAssigned" custom-sort order="'isAssigned'" sort="sort">isAssigned&nbsp;</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                <td colspan="6">
-                    <div class="pagination-container">
-                        <ul class="pagination">
-                            <li ng-class="{disabled: currentPage == 0}">
-                                <a href ng-click="prevPage()">« @ViewStringConstants.Back</a>
-                            </li>
-
-                            <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-                                ng-class="{active: n == currentPage}"
-                                ng-click="setPage()">
-                                <a href ng-bind="n + 1">1</a>
-                            </li>
-
-                            <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                                <a href ng-click="nextPage()">@ViewStringConstants.Next »</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-                </tfoot>
-                <pre>pagedItems.length: {{pagedItems.length|json}}</pre>
-                <pre>currentPage: {{currentPage|json}}</pre>
-                <pre>currentPage: {{sort|json}}</pre>
-                <tbody>
-                    <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
-                        <td>{{item.firstName}}</td>
-                        <td>{{item.lastName}}</td>
-                        <td>{{item.middleName}}</td>
-                        <td>{{item.email}}</td>
-                        <td>{{item.contractorCompanyName}}</td>
-                        <td><input type="radio" data-set-manager data-ng-model="item.isManager"></td>
-                        <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>*@
-    <h1>{{project.managerId}}</h1>
-
     <table class="table">
         <tr>
             <th custom-sort order="'firstName'" sort="sort">firstName &nbsp;</th>
@@ -152,6 +99,8 @@
         <input type="button" value=@ViewStringConstants.Create class="btn btn-success" data-ng-click="sendData()" />
     </div>
 </div>
+
+<hr />
 
 <div>
     @Html.ActionLink(ViewStringConstants.Back, "Index")

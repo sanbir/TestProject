@@ -84,7 +84,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]ProjectViewModel projectViewModel)
+        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]ProjectPartialViewModel projectViewModel)
         {
             try
             {
@@ -100,6 +100,27 @@ namespace WebApplication.Controllers
                 ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
             }
             return View(projectViewModel);
+        }
+
+        [HttpPost]
+        public JsonResult Persist(ProjectToPersistViewModel projectViewModel)
+        {
+            try
+            {
+                if (projectViewModel != null)
+                {
+                    return Json("Success");
+                }
+                else
+                {
+                    return Json("Error");
+                }
+            }
+            catch (Exception) // TODO: add custom
+            {
+                // TODO:
+            }
+            return new JsonResult();
         }
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)

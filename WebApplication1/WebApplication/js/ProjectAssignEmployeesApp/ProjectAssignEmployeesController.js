@@ -8,8 +8,14 @@
 
         $scope.managerFullName = "";
 
-        $scope.sendData = function() {
-            
+        $scope.sendData = function () {
+            $http.post('/Project/Persist', JSON.stringify($scope.project)).
+              success(function (data, status, headers, config) {
+                  var aa = data;
+              }).
+              error(function (data, status, headers, config) {
+                  var bb = data;
+              });
         };
 
         // init
@@ -19,10 +25,6 @@
         };
 
         $scope.gap = 3;
-
-        //employeeIndexFactory.getEmployees().then(function (employees) {
-        //    $scope.employees = employees;
-        //});
 
         $scope.filteredItems = [];
         $scope.groupedItems = [];
