@@ -4,7 +4,7 @@
 @using Shared.Constants.Project
 @using Shared.Models
 @using WebApplication.ViewModels
-@model WebApplication.ViewModels.CreateProjectViewModel
+@model string
 
 @{
     ViewBag.Title = ViewStringConstants.Create;
@@ -24,56 +24,56 @@
     }
 
     @*<div>
-        <table class="table table-striped table-condensed table-hover">
-            <thead>
-                <tr>
-                    <th class="firstName" custom-sort order="'firstName'" sort="sort">firstName&nbsp;</th>
-                    <th class="lastName" custom-sort order="'lastName'" sort="sort">lastName&nbsp;</th>
-                    <th class="middleName" custom-sort order="'middleName'" sort="sort">middleName&nbsp;</th>
-                    <th class="email" custom-sort order="'email'" sort="sort">email&nbsp;</th>
-                    <th class="contractorCompanyName" custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName&nbsp;</th>
-                    <th class="isManager" custom-sort order="'isManager'" sort="sort">isManager&nbsp;</th>
-                    <th class="isAssigned" custom-sort order="'isAssigned'" sort="sort">isAssigned&nbsp;</th>
-                </tr>
-            </thead>
-            <tfoot>
-            <td colspan="6">
-                <div class="pagination-container">
-                    <ul class="pagination">
-                        <li ng-class="{disabled: currentPage == 0}">
-                            <a href ng-click="prevPage()">« @ViewStringConstants.Back</a>
-                        </li>
+            <table class="table table-striped table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="firstName" custom-sort order="'firstName'" sort="sort">firstName&nbsp;</th>
+                        <th class="lastName" custom-sort order="'lastName'" sort="sort">lastName&nbsp;</th>
+                        <th class="middleName" custom-sort order="'middleName'" sort="sort">middleName&nbsp;</th>
+                        <th class="email" custom-sort order="'email'" sort="sort">email&nbsp;</th>
+                        <th class="contractorCompanyName" custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName&nbsp;</th>
+                        <th class="isManager" custom-sort order="'isManager'" sort="sort">isManager&nbsp;</th>
+                        <th class="isAssigned" custom-sort order="'isAssigned'" sort="sort">isAssigned&nbsp;</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                <td colspan="6">
+                    <div class="pagination-container">
+                        <ul class="pagination">
+                            <li ng-class="{disabled: currentPage == 0}">
+                                <a href ng-click="prevPage()">« @ViewStringConstants.Back</a>
+                            </li>
 
-                        <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-                            ng-class="{active: n == currentPage}"
-                            ng-click="setPage()">
-                            <a href ng-bind="n + 1">1</a>
-                        </li>
+                            <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                                ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                <a href ng-bind="n + 1">1</a>
+                            </li>
 
-                        <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                            <a href ng-click="nextPage()">@ViewStringConstants.Next »</a>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-            </tfoot>
-            <pre>pagedItems.length: {{pagedItems.length|json}}</pre>
-            <pre>currentPage: {{currentPage|json}}</pre>
-            <pre>currentPage: {{sort|json}}</pre>
-            <tbody>
-                <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
-                    <td>{{item.firstName}}</td>
-                    <td>{{item.lastName}}</td>
-                    <td>{{item.middleName}}</td>
-                    <td>{{item.email}}</td>
-                    <td>{{item.contractorCompanyName}}</td>
-                    <td><input type="radio" data-set-manager data-ng-model="item.isManager"></td>
-                    <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
-                </tr>
-            </tbody>
-        </table>
+                            <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                                <a href ng-click="nextPage()">@ViewStringConstants.Next »</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                </tfoot>
+                <pre>pagedItems.length: {{pagedItems.length|json}}</pre>
+                <pre>currentPage: {{currentPage|json}}</pre>
+                <pre>currentPage: {{sort|json}}</pre>
+                <tbody>
+                    <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
+                        <td>{{item.firstName}}</td>
+                        <td>{{item.lastName}}</td>
+                        <td>{{item.middleName}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.contractorCompanyName}}</td>
+                        <td><input type="radio" data-set-manager data-ng-model="item.isManager"></td>
+                        <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-    </div>*@
+        </div>*@
     <h1>{{project.managerId}}</h1>
 
     <table class="table">
@@ -97,7 +97,7 @@
             <td><input name="isManagerRadio" type="radio" data-assign-if-manager data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
             <td><input type="checkbox" data-assign-employee data-ng-disabled="item.id == $parent.project.managerId" data-ng-model="item.isAssigned"></td>
         </tr>
-        
+
         <tr>
             <td>
                 <ul class="pagination">
@@ -122,15 +122,13 @@
         <pre>currentPage: {{sort|json}}</pre>
     </table>
 
-    <div>
-        @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new {@class = "control-label col-md-2"})
-        <div class="col-md-10">
-            <span class="form-control" readonly>{{ managerFullName }}</span>
-            @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new {@class = "text-danger"})
-        </div>
+
+    @Html.Label(ProjectProperties.ManagerIdDisplay, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        <span class="form-control" readonly>{{ managerFullName }}</span>
     </div>
 
-    <hr/>
+    <hr />
 
     <div data-ng-show="filteredEmployees.length > 0">
         @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -147,24 +145,11 @@
             </table>
         </div>
     </div>
-    
+
     <br />
-    
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ManagerFullName, new { htmlAttributes = new { @class = "form-control", @readonly = string.Empty, placeholder = Html.DisplayNameFor(model => model.Project.ManagerId) } })
-                @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @Html.HiddenFor(model => model.Project.ManagerId)*@
-    <div class="form-group">
-        
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="button" value=@ViewStringConstants.Create class="btn btn-default" />
-        </div>
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value=@ViewStringConstants.Create class="btn btn-success" data-ng-click="sendData()" />
     </div>
 </div>
 
@@ -185,5 +170,21 @@
     <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectAssignEmployeesFactories.js"></script>
     <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectFactory.js"></script>
     <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesController.js"></script>
-<script src="~/js/ProjectAssignEmployeesApp/Directives/AssignIfManager.js"></script>
+    <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignIfManager.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+        var projectFactory = function () {
+
+            var project = @Html.Raw(Model);
+
+            project.id = 0;
+            project.managerId = 0;
+            project.assignedEmployeesIds = [];
+
+            return project;
+        };
+        angular.module('projectAssignEmployeesApp').factory('projectFactory', projectFactory);
+
+    </script>
 }

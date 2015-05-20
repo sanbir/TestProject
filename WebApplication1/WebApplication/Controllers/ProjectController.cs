@@ -7,6 +7,8 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Web.Mvc;
 using BusinessLayer.Contracts.Managers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PagedList;
 using Shared.Constants.Common;
 using Shared.Constants.Employee;
@@ -61,33 +63,6 @@ namespace WebApplication.Controllers
         //    return View(employees.ToPagedList(pageNumber, pageSize));
         //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]Project project)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
-                    IEnumerable<AssignedEmployeeData> assignedEmployeeData =
-                        employees.Select(employee => new AssignedEmployeeData(employee));
-
-                    CreateProjectViewModel model = new CreateProjectViewModel();
-                    model.Project = project;
-                    model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
-
-                    //return View(model);
-                    return View("AssignEmployees", model);
-                }
-            }
-            catch (Exception) // TODO: add custom
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
-            }
-            return View(project);
-        }
-
         public JsonResult GetEmployees()
         {
             IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
@@ -101,29 +76,31 @@ namespace WebApplication.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AssignEmployees()
-        {
-            return View();
-        }
-
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]Project project)
+        //public ActionResult AssignEmployees()
         //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            _projectManager.CreateOrUpdate(project);
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    catch (Exception) // TODO: add custom
-        //    {
-        //        ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
-        //    }
-        //    return View(project);
+        //    return View();
         //}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]ProjectViewModel projectViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                    var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
+                    return View("AssignEmployees", string.Empty, jsonProjectViewModel);
+                }
+            }
+            catch (Exception) // TODO: add custom
+            {
+                ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
+            }
+            return View(projectViewModel);
+        }
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {

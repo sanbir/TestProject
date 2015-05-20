@@ -8,6 +8,9 @@
 
         $scope.managerFullName = "";
 
+        $scope.sendData = function() {
+            
+        };
 
         // init
         $scope.sort = {
