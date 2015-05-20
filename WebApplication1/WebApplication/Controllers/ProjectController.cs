@@ -101,7 +101,7 @@ namespace WebApplication.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult AssignEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        public ActionResult AssignEmployees()
         {
             return View();
         }

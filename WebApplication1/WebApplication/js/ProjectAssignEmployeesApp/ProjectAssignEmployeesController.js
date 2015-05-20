@@ -15,7 +15,7 @@
             reverse: false
         };
 
-        $scope.gap = 5;
+        $scope.gap = 3;
 
         //employeeIndexFactory.getEmployees().then(function (employees) {
         //    $scope.employees = employees;
@@ -23,9 +23,9 @@
 
         $scope.filteredItems = [];
         $scope.groupedItems = [];
-        $scope.itemsPerPage = 5;
+        $scope.itemsPerPage = 3;
         $scope.pagedItems = [];
-        $scope.currentPage = 0;
+        $scope.currentPage = 1;
         $scope.items = $scope.employeesPage;
 
         var searchMatch = function (haystack, needle) {

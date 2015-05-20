@@ -127,7 +127,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="js\ProjectAssignEmployeesApp\Directives\AssignEmployee.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\Directives\SetManager.js" />
     <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesApp.js" />
     <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesController.js" />
     <Content Include="js\ProjectAssignEmployeesApp\Directives\CustomSort.js" />

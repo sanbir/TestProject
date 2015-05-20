@@ -27,7 +27,7 @@ namespace WebApplication
             //    .Include("~/js/EmployeeIndex/" + "projectAssignEmployeesApp.js")
             //    .IncludeDirectory("~/js/EmployeeIndex/", "*.js", searchSubdirectories: true));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/CommonCSS").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
 
