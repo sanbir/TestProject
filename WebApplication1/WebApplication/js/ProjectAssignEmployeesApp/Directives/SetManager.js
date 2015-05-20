@@ -9,9 +9,9 @@
                     var selectedEmployee = scope.item;
                     var managerId = scope.$parent.project.managerId;
 
-                    if (isManager) {
-                        managerId = selectedEmployee.id;
-                    }
+                    //if (isManager) {
+                    //    managerId = selectedEmployee.id;
+                    //}
 
                     return isManager;
                 });

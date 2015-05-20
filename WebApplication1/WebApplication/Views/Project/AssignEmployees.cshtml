@@ -74,7 +74,7 @@
         </table>
 
     </div>*@
-
+    <h1>{{project.managerId}}</h1>
 
     <table class="table">
         <tr>
@@ -94,7 +94,7 @@
             <td>{{item.middleName}}</td>
             <td>{{item.email}}</td>
             <td>{{item.contractorCompanyName}}</td>
-            <td><input type="radio" data-set-manager data-ng-model="item.isManager"></td>
+            <td><input name="isManagerRadio" type="radio" data-ng-value="item.id" data-set-manager data-ng-model="$parent.project.managerId"></td>
             <td><input type="checkbox" data-assign-employee data-ng-model="item.isAssigned"></td>
         </tr>
     </table>
