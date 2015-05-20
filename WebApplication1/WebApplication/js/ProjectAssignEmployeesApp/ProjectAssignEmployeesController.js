@@ -6,6 +6,8 @@
         $scope.employeesPage = employeesPageFactory;
         $scope.assignedEmployees = [];
 
+        $scope.managerFullName = "";
+
 
         // init
         $scope.sort = {

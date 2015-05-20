@@ -122,8 +122,16 @@
         <pre>currentPage: {{sort|json}}</pre>
     </table>
 
-    <hr />
-  
+    <hr/>
+
+    <div class="">
+        @Html.LabelFor(model => model.Project.ManagerId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <span class="form-control" readonly>{{ managerFullName }}</span>
+            @Html.ValidationMessageFor(model => model.Project.ManagerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
     @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
 
     <div class="col-md-offset-2 col-md-10">

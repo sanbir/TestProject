@@ -5,7 +5,11 @@
             link: function (scope, element, attrs, ngModelController) {
                 ngModelController.$parsers.push(function (managerId) {
 
-                    scope.item.isAssigned = false;
+                    var manager = scope.item;
+                    manager.isAssigned = false;
+                    scope.$parent.managerFullName = manager.lastName
+                        + " " + manager.firstName
+                        + " " + manager.middleName;
 
                     return managerId;
                 });
