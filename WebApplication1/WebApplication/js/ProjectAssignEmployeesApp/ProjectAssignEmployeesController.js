@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var projectAssignEmployeesController = function ($scope, $filter, $http, $timeout, projectFactory, employeesPageFactory) {
+    var projectAssignEmployeesController = function ($scope, $filter, $http, $q, projectFactory, employeesPageFactory) {
 
         $scope.project = projectFactory;
         $scope.employeesPage = employeesPageFactory;
@@ -9,14 +9,49 @@
         $scope.managerFullName = "";
 
         $scope.sendData = function () {
-            $http.post('/Project/Persist', JSON.stringify($scope.project), { $timeout: 100 }).
-                success(function(data, status, headers, config) {
-                    var aa = data;
-                }).
-                error(function(data, status, headers, config) {
-                    var bb = data;
-                });
+            $scope.response = '';
+
+            var httpRequest = httpRequestHandler();
+
+            httpRequest.then(function (data) {
+                $scope.response = data;
+
+            }, function (error) {
+                $scope.response = error;
+            });
         };
+
+        function httpRequestHandler() {
+            var timeout = $q.defer(),
+                result = $q.defer(),
+                timedOut = false,
+                httpRequest;
+
+            setTimeout(function () {
+                timedOut = true;
+                timeout.resolve();
+            }, 10000);
+
+            httpRequest = $http.post('/Project/Persist', JSON.stringify($scope.project), timeout.promise);
+
+            httpRequest.success(function (data, status, headers, config) {
+                result.resolve(data);
+            });
+
+            httpRequest.error(function (data, status, headers, config) {
+                if (timedOut) {
+                    result.reject({
+                        error: 'timeout',
+                        message: 'Too long.'
+                    });
+                } else {
+                    result.reject(data);
+                }
+            });
+
+            return result.promise;
+        }
+
 
         // init
         $scope.sort = {
@@ -107,7 +142,7 @@
         $scope.search();
     };
 
-    projectAssignEmployeesController.$inject = ['$scope', '$filter', '$http', '$timeout', 'projectFactory', 'employeesPageFactory'];
+    projectAssignEmployeesController.$inject = ['$scope', '$filter', '$http', '$q', 'projectFactory', 'employeesPageFactory'];
 
     angular.module('projectAssignEmployeesApp').controller('projectAssignEmployeesController', projectAssignEmployeesController);
 
