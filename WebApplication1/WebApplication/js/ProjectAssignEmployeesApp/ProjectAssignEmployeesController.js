@@ -8,6 +8,28 @@
 
         $scope.managerFullName = "";
 
+        $scope.assignEmployee = function (selectedEmployee, isAssigned) {
+
+            if (isAssigned) {
+                if ($scope.project.assignedEmployeesIds.indexOf(selectedEmployee.id) === -1) {
+                    $scope.project.assignedEmployeesIds.push(selectedEmployee.id);
+                    $scope.assignedEmployees.push(selectedEmployee);
+                }
+            } else {
+                if ($scope.project.assignedEmployeesIds.indexOf(selectedEmployee.id) !== -1) {
+                    for (var i = 0; i < $scope.project.assignedEmployeesIds.length; i++) {
+                        if ($scope.project.assignedEmployeesIds[i] === selectedEmployee.id) {
+                            $scope.project.assignedEmployeesIds.splice(i, 1);
+                            $scope.assignedEmployees.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        // post
         $scope.sendData = function () {
             $scope.response = '';
 

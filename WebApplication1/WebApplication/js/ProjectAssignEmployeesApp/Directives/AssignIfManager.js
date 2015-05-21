@@ -6,10 +6,12 @@
                 ngModelController.$parsers.push(function (managerId) {
 
                     var manager = scope.item;
-                    manager.isAssigned = false;
                     scope.$parent.managerFullName = manager.lastName
                         + " " + manager.firstName
                         + " " + manager.middleName;
+
+                    manager.isAssigned = false;
+                    scope.$parent.assignEmployee(manager, manager.isAssigned);
 
                     return managerId;
                 });
