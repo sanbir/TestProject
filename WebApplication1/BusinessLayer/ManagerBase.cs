@@ -5,7 +5,7 @@ namespace BusinessLayer
 {
     public class ManagerBase
     {
-        public ManagerBase()
+        protected ManagerBase()
         {
             if (EntityBase.Container != null)
                 EntityBase.Container.SatisfyImportsOnce(this);

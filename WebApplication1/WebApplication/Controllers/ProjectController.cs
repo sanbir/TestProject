@@ -40,46 +40,46 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        //public ActionResult LoadEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
-        //{
-        //    sortDirection = SwapSortDirection(sortDirection);
-        //    ViewBag.CurrentSortDirection = sortDirection;
-
-        //    if (string.IsNullOrEmpty(sortPropertyName))
-        //    {
-        //        sortPropertyName = EmployeeProperties.LastName;
-        //    }
-
-        //    if (searchString == null)
-        //    {
-        //        searchString = currentFilter;
-        //    }
-        //    ViewBag.CurrentFilter = searchString;
-
-        //    var employees = _employeeManager.GetAll(sortDirection, sortPropertyName, searchString);
-
-        //    const int pageSize = ViewStringConstants.PageSize;
-        //    int pageNumber = page ?? ViewStringConstants.StartPage;
-        //    return View(employees.ToPagedList(pageNumber, pageSize));
-        //}
-
-        public JsonResult GetEmployees()
+        public JsonResult GetEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
-            IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
-            IEnumerable<AssignedEmployeeData> assignedEmployeeData =
-                employees.Select(employee => new AssignedEmployeeData(employee));
+            PagedEmployeesViewModel viewModel = new PagedEmployeesViewModel();
 
-            CreateProjectViewModel model = new CreateProjectViewModel();
-            model.Project = null;
-            model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
+            sortDirection = SwapSortDirection(sortDirection);
+            viewModel.CurrentSortDirection = sortDirection;
 
-            return Json(model, JsonRequestBehavior.AllowGet);
+            if (string.IsNullOrEmpty(sortPropertyName))
+            {
+                sortPropertyName = EmployeeProperties.LastName;
+            }
+
+            if (searchString == null)
+            {
+                searchString = currentFilter;
+            }
+            viewModel.CurrentFilter = searchString;
+
+            IEnumerable<Employee> employees = _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString);
+
+            //const int pageSize = ViewStringConstants.PageSize;
+            //int pageNumber = page ?? ViewStringConstants.StartPage;
+
+
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var jsonProjectViewModel = JsonConvert.SerializeObject(viewModel, Formatting.None, settings);
+            return Json(jsonProjectViewModel);
         }
 
-        //[HttpPost]
-        //public ActionResult AssignEmployees()
+        //public JsonResult GetEmployees()
         //{
-        //    return View();
+        //    IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
+        //    IEnumerable<AssignedEmployeeData> assignedEmployeeData =
+        //        employees.Select(employee => new AssignedEmployeeData(employee));
+
+        //    CreateProjectViewModel model = new CreateProjectViewModel();
+        //    model.Project = null;
+        //    model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
+
+        //    return Json(model, JsonRequestBehavior.AllowGet);
         //}
 
         [HttpPost]

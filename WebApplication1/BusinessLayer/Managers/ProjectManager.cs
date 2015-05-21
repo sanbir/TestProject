@@ -14,7 +14,7 @@ namespace BusinessLayer.Managers
 {
     [Export(typeof(IProjectManager))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class ProjectManager : ManagerBase, IProjectManager
+    public class ProjectManager : EmployeeManagerBase, IProjectManager
     {
         public ProjectManager()
         {
@@ -115,6 +115,11 @@ namespace BusinessLayer.Managers
             }
 
             return GetAll(direction, descriptor, filter);
+        }
+
+        IEnumerable<Employee> IProjectManager.GetAllEmployees(string sortDirection, string sortPropertyName, string filter)
+        {
+            return GetAllEmployees(sortDirection, sortPropertyName, filter);
         }
 
         public Project Get(int projectId)

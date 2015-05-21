@@ -14,13 +14,13 @@ namespace BusinessLayer.Managers
 {
     [Export(typeof(IEmployeeManager))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class EmployeeManager : ManagerBase, IEmployeeManager
+    public class EmployeeManager : EmployeeManagerBase, IEmployeeManager
     {
         public EmployeeManager()
         {
         }
 
-        public EmployeeManager(IDataRepositoryFactory dataRepositoryFactory)
+        public EmployeeManager(IDataRepositoryFactory dataRepositoryFactory) : base(dataRepositoryFactory)
         {
             _dataRepositoryFactory = dataRepositoryFactory;
         }
@@ -53,68 +53,17 @@ namespace BusinessLayer.Managers
 
         public IEnumerable<Employee> GetAll(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
-            var employees = GetAll();
-
-            if (!String.IsNullOrEmpty(filter))
-            {
-                employees =
-                    employees.Where(employee =>
-                        employee.LastName.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant())
-                        ||
-                        employee.FirstName.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant())
-                        ||
-                        (employee.MiddleName != null && employee.MiddleName.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant()))
-                        || employee.Email.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant())
-                        ||
-                        employee.ContractorCompanyName.ToLowerInvariant()
-                            .Contains(filter.ToLowerInvariant()));
-            }
-
-            switch (sortDirection)
-            {
-                case ListSortDirection.Ascending:
-                    employees = sortPropertyDescriptor == null
-                        ? employees.OrderBy(employee => employee.LastName)
-                        : employees.OrderBy(sortPropertyDescriptor.GetValue);
-                    break;
-                case ListSortDirection.Descending:
-                    employees = sortPropertyDescriptor == null
-                        ? employees.OrderByDescending(employee => employee.LastName)
-                        : employees.OrderByDescending(sortPropertyDescriptor.GetValue);
-                    break;
-            }
-
-            return employees;
+            return GetAllEmployees(sortDirection, sortPropertyDescriptor, filter);
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-            IEnumerable<Employee> employees = employeeRepository.Get();
-            return employees;
+            return GetAllEmployees();
         }
 
         public IEnumerable<Employee> GetAll(string sortDirection, string sortPropertyName, string filter)
         {
-            ListSortDirection direction = ListSortDirection.Ascending;
-
-            if (!string.IsNullOrEmpty(sortDirection))
-            {
-                Enum.TryParse(sortDirection, out direction);
-            }
-
-            PropertyDescriptor descriptor = null;
-
-            if (!string.IsNullOrEmpty(sortPropertyName))
-            {
-                descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
-            }
-
-            return GetAll(direction, descriptor, filter);
+            return GetAllEmployees(sortDirection, sortPropertyName, filter);
         }
 
         public Employee Get(int projectId)

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeManagerBase.cs" />
     <Compile Include="ManagerBase.cs" />
     <Compile Include="ManagerFactory.cs" />
     <Compile Include="Managers\ProjectManager.cs" />
