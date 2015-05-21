@@ -1,6 +1,6 @@
 ﻿(function () {
 
-    var projectAssignEmployeesController = function ($scope, $filter, projectFactory, employeesPageFactory) {
+    var projectAssignEmployeesController = function ($scope, $filter, $http, $timeout, projectFactory, employeesPageFactory) {
 
         $scope.project = projectFactory;
         $scope.employeesPage = employeesPageFactory;
@@ -9,13 +9,13 @@
         $scope.managerFullName = "";
 
         $scope.sendData = function () {
-            $http.post('/Project/Persist', JSON.stringify($scope.project)).
-              success(function (data, status, headers, config) {
-                  var aa = data;
-              }).
-              error(function (data, status, headers, config) {
-                  var bb = data;
-              });
+            $http.post('/Project/Persist', JSON.stringify($scope.project), { $timeout: 100 }).
+                success(function(data, status, headers, config) {
+                    var aa = data;
+                }).
+                error(function(data, status, headers, config) {
+                    var bb = data;
+                });
         };
 
         // init
@@ -107,7 +107,7 @@
         $scope.search();
     };
 
-    projectAssignEmployeesController.$inject = ['$scope', '$filter', 'projectFactory', 'employeesPageFactory'];
+    projectAssignEmployeesController.$inject = ['$scope', '$filter', '$http', '$timeout', 'projectFactory', 'employeesPageFactory'];
 
     angular.module('projectAssignEmployeesApp').controller('projectAssignEmployeesController', projectAssignEmployeesController);
 

@@ -99,7 +99,7 @@ namespace WebApplication.Controllers
             {
                 ModelState.AddModelError(string.Empty, ErrorMessages.CouldNotSave);
             }
-            return View(projectViewModel);
+            return View();
         }
 
         [HttpPost]
