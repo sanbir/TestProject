@@ -105,7 +105,6 @@ namespace WebApplication.Controllers
         [HttpPost]
         public JsonResult Persist(ProjectToPersistViewModel projectViewModel)
         {
-            throw new Exception();
             try
             {
                 if (projectViewModel != null)

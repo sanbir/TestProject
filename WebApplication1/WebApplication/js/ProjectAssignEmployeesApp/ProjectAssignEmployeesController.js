@@ -11,7 +11,7 @@
         $scope.sendData = function () {
             $scope.response = '';
 
-            var httpRequest = httpRequestHandler();
+            var httpRequest = httpRequestHandler('post', '/Project/Persist', JSON.stringify($scope.project));
 
             httpRequest.then(function (data) {
                 $scope.response = data;
@@ -21,7 +21,7 @@
             });
         };
 
-        function httpRequestHandler() {
+        function httpRequestHandler(method, url, dataToSend) {
             var timeout = $q.defer(),
                 result = $q.defer(),
                 timedOut = false,
@@ -32,7 +32,13 @@
                 timeout.resolve();
             }, 10000);
 
-            httpRequest = $http.post('/Project/Persist', JSON.stringify($scope.project), timeout.promise);
+            httpRequest = $http({
+                method: method,
+                url: url,
+                data: dataToSend,
+                cache: false,
+                timeout: timeout.promise
+            });
 
             httpRequest.success(function (data, status, headers, config) {
                 result.resolve(data);
@@ -41,8 +47,7 @@
             httpRequest.error(function (data, status, headers, config) {
                 if (timedOut) {
                     result.reject({
-                        error: 'timeout',
-                        message: 'Too long.'
+                        error: 'timeout'
                     });
                 } else {
                     result.reject(data);
