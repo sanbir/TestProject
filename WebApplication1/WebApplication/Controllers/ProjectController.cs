@@ -40,7 +40,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public JsonResult GetEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        public string GetEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
         {
             PagedEmployeesViewModel viewModel = new PagedEmployeesViewModel();
 
@@ -82,21 +82,8 @@ namespace WebApplication.Controllers
 
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var jsonProjectViewModel = JsonConvert.SerializeObject(viewModel, Formatting.None, settings);
-            return Json(jsonProjectViewModel);
+            return jsonProjectViewModel;
         }
-
-        //public JsonResult GetEmployees()
-        //{
-        //    IEnumerable<Employee> employees = _projectManager.GetAllEmployees();
-        //    IEnumerable<AssignedEmployeeData> assignedEmployeeData =
-        //        employees.Select(employee => new AssignedEmployeeData(employee));
-
-        //    CreateProjectViewModel model = new CreateProjectViewModel();
-        //    model.Project = null;
-        //    model.Employees = assignedEmployeeData.ToPagedList(ViewStringConstants.StartPage, ViewStringConstants.PageSize);
-
-        //    return Json(model, JsonRequestBehavior.AllowGet);
-        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
