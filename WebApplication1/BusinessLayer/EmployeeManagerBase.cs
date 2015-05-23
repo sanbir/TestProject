@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Contracts;
 using DAL.Contracts.DataRepositories;
+using Shared.Constants.Employee;
 using Shared.Models;
 using Shared.Pagination;
 
@@ -76,18 +77,16 @@ namespace BusinessLayer
         protected IEnumerable<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter)
         {
             ListSortDirection direction = ListSortDirection.Ascending;
-
             if (!string.IsNullOrEmpty(sortDirection))
             {
                 Enum.TryParse(sortDirection, out direction);
             }
 
-            PropertyDescriptor descriptor = null;
-
-            if (!string.IsNullOrEmpty(sortPropertyName))
+            if (string.IsNullOrEmpty(sortPropertyName))
             {
-                descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
+                sortPropertyName = EmployeeProperties.LastName;
             }
+            PropertyDescriptor descriptor = TypeDescriptor.GetProperties(new Employee()).Find(sortPropertyName, false);
 
             return GetAllEmployees(direction, descriptor, filter);
         }

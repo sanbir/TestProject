@@ -40,32 +40,16 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        public string GetEmployees(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)
+        public string GetEmployees(string sortDirection, string sortPropertyName, string searchString, int? page)
         {
-            PagedEmployeesViewModel viewModel = new PagedEmployeesViewModel();
-
-            sortDirection = SwapSortDirection(sortDirection);
-            viewModel.CurrentSortDirection = sortDirection;
-
-            if (string.IsNullOrEmpty(sortPropertyName))
-            {
-                sortPropertyName = EmployeeProperties.LastName;
-            }
-
-            if (searchString == null)
-            {
-                searchString = currentFilter;
-            }
-            viewModel.CurrentFilter = searchString;
-
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;
             int pageCount;
 
-            List<Employee> modelEmployees = _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString,
+            var modelEmployees = _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString,
                 pageNumber, pageSize, out pageCount);
 
-            List<PagedEmployeesViewModel.PlainEmployee> viewModelEmployees =
+            var viewModelEmployees =
                 modelEmployees.Select(employee => new PagedEmployeesViewModel.PlainEmployee
                 {
                     FirstName = employee.FirstName,
@@ -75,14 +59,17 @@ namespace WebApplication.Controllers
                     ContractorCompanyName = employee.ContractorCompanyName
                 }).ToList();
 
-            viewModel.Employees = viewModelEmployees;
-            viewModel.PageSize = pageSize;
-            viewModel.PageNumber = pageNumber;
-            viewModel.PageCount = pageCount;
+            var viewModel = new PagedEmployeesViewModel
+            {
+                Employees = viewModelEmployees,
+                PageSize = pageSize,
+                PageNumber = pageNumber,
+                PageCount = pageCount
+            };
 
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            var jsonProjectViewModel = JsonConvert.SerializeObject(viewModel, Formatting.None, settings);
-            return jsonProjectViewModel;
+            var jsonViewModel = JsonConvert.SerializeObject(viewModel, Formatting.None, settings);
+            return jsonViewModel;
         }
 
         [HttpPost]
