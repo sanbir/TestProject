@@ -15,27 +15,24 @@
 <div class="form-horizontal" data-ng-app="projectAssignEmployeesApp" data-ng-controller="projectAssignEmployeesController">
     <h4>@ViewStringConstants.AssignEmployeesToProjectTitle</h4>
     <hr />
-    @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
-    {
-        <p class="col-md-9 form-horizontal form-inline form-group">
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
-            <input type="submit" value=@ViewStringConstants.Search class="btn btn-default" />
-        </p>
-    }
+
+    <p class="col-md-9 form-horizontal form-inline form-group">
+        <input type="text" class="form-control" data-ng-model="query" />
+        <input type="button" value=@ViewStringConstants.Search class="btn btn-default" data-ng-click="search()" />
+    </p>
 
     <table class="table">
         <tr>
             <th custom-sort order="'firstName'" sort="sort">firstName &nbsp;</th>
             <th custom-sort order="'lastName'" sort="sort">lastName &nbsp;</th>
             <th custom-sort order="'middleName'" sort="sort">middleName &nbsp;</th>
-            <th custom-sort order="'email'" sort="sort">email</th>
+            <th custom-sort order="'email'" sort="sort">email &nbsp;</th>
             <th custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName &nbsp;</th>
             <th>isManager</th>
             <th>isAssigned</th>
-            <th></th>
         </tr>
 
-        <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sort.sortingOrder:sort.reverse">
+        <tr ng-repeat="item in employeesPage">
             <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
             <td>{{item.middleName}}</td>
