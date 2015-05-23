@@ -57,19 +57,25 @@ namespace WebApplication.Controllers
                 searchString = currentFilter;
             }
             viewModel.CurrentFilter = searchString;
-            
+
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;
             int pageCount;
 
-            var employees =
-                _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString, pageNumber, pageSize,
-                    out pageCount)
-                    .Select(
-                        employee =>
-                            new PagedEmployeesViewModel.PlainEmployee(employee.FirstName, employee.LastName,
-                                employee.MiddleName, employee.Email, employee.ContractorCompanyName));
-            viewModel.Employees = employees;
+            List<Employee> modelEmployees = _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString,
+                pageNumber, pageSize, out pageCount);
+
+            List<PagedEmployeesViewModel.PlainEmployee> viewModelEmployees =
+                modelEmployees.Select(employee => new PagedEmployeesViewModel.PlainEmployee
+                {
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    MiddleName = employee.MiddleName,
+                    Email = employee.Email,
+                    ContractorCompanyName = employee.ContractorCompanyName
+                }).ToList();
+
+            viewModel.Employees = viewModelEmployees;
             viewModel.PageSize = pageSize;
             viewModel.PageNumber = pageNumber;
             viewModel.PageCount = pageCount;

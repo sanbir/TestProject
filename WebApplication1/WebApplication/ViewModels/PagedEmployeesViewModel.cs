@@ -7,7 +7,7 @@ namespace WebApplication.ViewModels
 {
     public class PagedEmployeesViewModel
     {
-        public IEnumerable<PlainEmployee> Employees { get; set; }
+        public List<PlainEmployee> Employees { get; set; }
 
         public string CurrentSortDirection { get; set; }
 
@@ -18,15 +18,15 @@ namespace WebApplication.ViewModels
 
         public class PlainEmployee
         {
-            public PlainEmployee(string firstName, string lastName, string middleName, string email,
-                string contractorCompanyName)
-            {
-                FirstName = firstName;
-                LastName = lastName;
-                MiddleName = middleName;
-                Email = email;
-                ContractorCompanyName = contractorCompanyName;
-            }
+            //public PlainEmployee(string firstName, string lastName, string middleName, string email,
+            //    string contractorCompanyName)
+            //{
+            //    FirstName = firstName;
+            //    LastName = lastName;
+            //    MiddleName = middleName;
+            //    Email = email;
+            //    ContractorCompanyName = contractorCompanyName;
+            //}
 
             public string FirstName { get; set; }
             public string LastName { get; set; }
