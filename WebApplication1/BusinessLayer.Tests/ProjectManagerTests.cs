@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using BusinessLayer.Contracts.Managers;
 using BusinessLayer.Managers;
 using DAL.Contracts;
 using DAL.Contracts.DataRepositories;
@@ -175,6 +176,77 @@ namespace BusinessLayer.Tests
             ProjectManager manager = new ProjectManager();
             Project updateProjectResults = manager.CreateOrUpdate(project);
             Assert.AreEqual(project.CustomerCompanyName, updateProjectResults.CustomerCompanyName);
+        }
+
+        [TestMethod]
+        public void GetAllEmployeesPaged()
+        {
+            // arrange
+            string sortDirection = "Descending";
+            string sortPropertyName = "FirstName";
+            string filter = "alex";
+
+            List<Employee> employees = FixturesGenerator.GenerateEmployees(16).ToList();
+            employees[0].FirstName = "Anton";
+            employees[1].FirstName = "1Alexandra";
+            employees[2].FirstName = "Anna";
+            employees[3].FirstName = "Olga";
+            employees[4].FirstName = "2Alexander";
+            employees[5].FirstName = "Igor";
+            employees[6].FirstName = "3Alexandro";
+            employees[7].FirstName = "4Alexus";
+            employees[8].FirstName = "5Alexandria";
+            employees[9].FirstName = "Julia";
+            employees[10].FirstName = "Galina";
+            employees[11].FirstName = "6Alexey";
+            employees[12].FirstName = "Daria";
+            employees[13].FirstName = "7Alexea";
+            employees[14].FirstName = "8Alexis";
+            employees[15].FirstName = "Denis";
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IEmployeeRepository>().Get()).Returns(employees);
+            IProjectManager manager = new ProjectManager(mockDataRepositoryFactory.Object);
+            int pageCount;
+
+            int pageSize = 3;
+            int pageNumber = 2;
+
+            // act
+            List<Employee> receivedEmployees = manager.GetAllEmployees(sortDirection, sortPropertyName, filter,
+                pageNumber, pageSize, out pageCount);
+
+            // assert
+            Assert.AreEqual(3, pageCount);
+            Assert.IsTrue(receivedEmployees.Count == 3);
+            Assert.IsTrue(receivedEmployees[0].FirstName == "5Alexandria");
+
+            // arrange
+            pageSize = 4;
+            pageNumber = 2;
+
+            // act
+            receivedEmployees = manager.GetAllEmployees(sortDirection, sortPropertyName, filter,
+                pageNumber, pageSize, out pageCount);
+
+            // assert
+            Assert.AreEqual(2, pageCount);
+            Assert.IsTrue(receivedEmployees.Count == 4);
+            Assert.IsTrue(receivedEmployees[0].FirstName == "4Alexus");
+
+            // arrange
+            pageSize = 3;
+            pageNumber = 3;
+            sortDirection = null;
+
+            // act
+            receivedEmployees = manager.GetAllEmployees(sortDirection, sortPropertyName, filter,
+                pageNumber, pageSize, out pageCount);
+
+            // assert
+            Assert.AreEqual(3, pageCount);
+            Assert.IsTrue(receivedEmployees.Count == 2);
+            Assert.IsTrue(receivedEmployees[0].FirstName == "7Alexea");
         }
 
     }
