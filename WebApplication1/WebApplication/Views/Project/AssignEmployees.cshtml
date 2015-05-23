@@ -23,18 +23,18 @@
 
     <table class="table">
         <tr>
-            <th custom-sort order="'firstName'" sort="sort">firstName &nbsp;</th>
-            <th custom-sort order="'lastName'" sort="sort">lastName &nbsp;</th>
-            <th custom-sort order="'middleName'" sort="sort">middleName &nbsp;</th>
-            <th custom-sort order="'email'" sort="sort">email &nbsp;</th>
-            <th custom-sort order="'contractorCompanyName'" sort="sort">contractorCompanyName &nbsp;</th>
+            <th custom-sort order="'lastName'" sort="sort">@EmployeeProperties.LastNameDisplay &nbsp;</th>
+            <th custom-sort order="'firstName'" sort="sort">@EmployeeProperties.FirstNameDisplay &nbsp;</th>
+            <th custom-sort order="'middleName'" sort="sort">@EmployeeProperties.MiddleNameDisplay &nbsp;</th>
+            <th custom-sort order="'email'" sort="sort">@EmployeeProperties.EmailDisplay &nbsp;</th>
+            <th custom-sort order="'contractorCompanyName'" sort="sort">@EmployeeProperties.ContractorCompanyNameDisplay &nbsp;</th>
             <th>isManager</th>
             <th>isAssigned</th>
         </tr>
 
         <tr ng-repeat="item in employeesPage">
-            <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
+            <td>{{item.firstName}}</td>
             <td>{{item.middleName}}</td>
             <td>{{item.email}}</td>
             <td>{{item.contractorCompanyName}}</td>
@@ -45,7 +45,7 @@
         <tr>
             <td>
                 <ul class="pagination">
-                    <li ng-class="{disabled: currentPage == 0}">
+                    <li ng-class="{disabled: currentPage == 1}">
                         <a href ng-click="prevPage()">« @ViewStringConstants.Back</a>
                     </li>
 
@@ -61,9 +61,6 @@
                 </ul>
             </td>
         </tr>
-        <pre>pagedItems.length: {{pagedItems.length|json}}</pre>
-        <pre>currentPage: {{currentPage|json}}</pre>
-        <pre>currentPage: {{sort|json}}</pre>
     </table>
 
 
@@ -103,22 +100,23 @@
     @Html.ActionLink(ViewStringConstants.Back, "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @*@Scripts.Render("~/Scripts/angular.min.js")*@
-    @*@Scripts.Render("~/bundles/AngularEmployeeIndex")*@
-    <script src="~/Scripts/angular.min.js"></script>
+<div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @*@Scripts.Render("~/Scripts/angular.min.js")*@
+        @*@Scripts.Render("~/bundles/AngularEmployeeIndex")*@
+        <script src="~/Scripts/angular.min.js"></script>
 
-    <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesApp.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignEmployee.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Directives/CustomSort.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Factories/EmployeesPageFactory.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectAssignEmployeesFactories.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectFactory.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesController.js"></script>
-    <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignIfManager.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesApp.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignEmployee.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Directives/CustomSort.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Factories/EmployeesPageFactory.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectAssignEmployeesFactories.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Factories/ProjectFactory.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesController.js"></script>
+        <script src="~/js/ProjectAssignEmployeesApp/Directives/AssignIfManager.js"></script>
 
-    <script type="text/javascript" language="javascript">
+        <script type="text/javascript" language="javascript">
 
         var projectFactory = function () {
 
@@ -132,5 +130,6 @@
         };
         angular.module('projectAssignEmployeesApp').factory('projectFactory', projectFactory);
 
-    </script>
-}
+        </script>
+    }
+</div>

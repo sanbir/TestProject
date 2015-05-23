@@ -86,42 +86,43 @@
             DESC: "Descending"
         };
 
-        $scope.sortDirection = sortDirections.ASC;
-        $scope.sortPropertyName = "";
         $scope.searchString = "";
-        $scope.page = 1;
 
-        $scope.getEmployees = function () {
+        $scope.sort = {
+            reverse: false,
+            propertyName: null
+        };
+
+        $scope.paging = {
+            pageSize: null,
+            pageNumber: null,
+            pageCount: null
+        };
+
+        $scope.getEmployees = function() {
             $scope.response = '';
 
-            var httpRequest = httpRequestHandler('GET', '/Project/GetEmployees', JSON.stringify($scope.project));
+            var data = {
+                sortDirection: $scope.sort.reverse ? "Descending" : "Ascending",
+                sortPropertyName: $scope.sort.propertyName,
+                searchString: $scope.searchString,
+                page: $scope.paging.pageNumber
+            };
+
+            var httpRequest = httpRequestHandler('GET', '/Project/GetEmployees', JSON.stringify(data));
 
             httpRequest.then(function (data) {
-                $scope.employeesPage = data;
+                $scope.employeesPage = data.employees;
+                $scope.paging.pageSize = data.pageSize;
+                $scope.paging.pageNumber = data.pageNumber;
+                $scope.paging.pageCount = data.pageCount;
 
             }, function (error) {
                 $scope.response = error;
             });
         };
+
         $scope.getEmployees();
-
-
-
-        // init
-        $scope.sort = {
-            sortingOrder: 'id',
-            reverse: false
-        };
-
-        $scope.gap = 3;
-
-        $scope.filteredItems = [];
-        $scope.groupedItems = [];
-        $scope.itemsPerPage = 3;
-        $scope.pagedItems = [];
-        $scope.currentPage = 1;
-        $scope.items = $scope.employeesPage;
-        $scope.query = "";
 
         // init the filtered items
         $scope.search = function () {

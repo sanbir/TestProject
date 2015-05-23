@@ -18,23 +18,23 @@
                 scope.sort_by = function (newSortingOrder) {
                     var sort = scope.sort;
 
-                    if (sort.sortingOrder == newSortingOrder) {
+                    if (sort.propertyName == newSortingOrder) {
                         sort.reverse = !sort.reverse;
                     }
 
-                    sort.sortingOrder = newSortingOrder;
+                    sort.propertyName = newSortingOrder;
                 };
 
 
                 scope.selectedCls = function (column) {
-                    if (column == scope.sort.sortingOrder) {
+                    if (column == scope.sort.propertyName) {
                         return ('icon-chevron-' + ((scope.sort.reverse) ? 'down' : 'up'));
                     }
                     else {
                         return 'icon-sort';
                     }
                 };
-            }// end link
+            }
         }
     };
 
