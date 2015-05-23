@@ -21,6 +21,7 @@ namespace BusinessLayer.Managers
         }
 
         public ProjectManager(IDataRepositoryFactory dataRepositoryFactory)
+            : base(dataRepositoryFactory)
         {
             _dataRepositoryFactory = dataRepositoryFactory;
         }
@@ -117,9 +118,10 @@ namespace BusinessLayer.Managers
             return GetAll(direction, descriptor, filter);
         }
 
-        IEnumerable<Employee> IProjectManager.GetAllEmployees(string sortDirection, string sortPropertyName, string filter)
+        List<Employee> IProjectManager.GetAllEmployees(string sortDirection,
+            string sortPropertyName, string filter, int pageNumber, int pageSize, out int pageCount)
         {
-            return GetAllEmployees(sortDirection, sortPropertyName, filter);
+            return GetAllEmployees(sortDirection, sortPropertyName, filter, pageNumber, pageSize, out pageCount);
         }
 
         public Project Get(int projectId)
@@ -129,12 +131,5 @@ namespace BusinessLayer.Managers
             return projectEntity;
         }
 
-
-        public IEnumerable<Employee> GetAllEmployees()
-        {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-            IEnumerable<Employee> employees = employeeRepository.Get();
-            return employees;
-        }
     }
 }

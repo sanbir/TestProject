@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DAL.Contracts;
 using DAL.Contracts.DataRepositories;
 using Shared.Models;
+using Shared.Pagination;
 
 namespace BusinessLayer
 {
@@ -89,6 +90,15 @@ namespace BusinessLayer
             }
 
             return GetAllEmployees(direction, descriptor, filter);
+        }
+
+        protected List<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter, int pageNumber, int pageSize, out int pageCount)
+        {
+            Paging paging = new Paging(pageSize, pageNumber);
+            List<Employee> employees = GetAllEmployees(sortDirection, sortPropertyName, filter).Paginate(paging).ToList();
+            pageCount = paging.PageCount;
+
+            return employees;
         }
     }
 }

@@ -5,6 +5,7 @@ namespace BusinessLayer.Contracts.Managers
 {
     public interface IProjectManager : IManager<Project>
     {
-        IEnumerable<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter);
+        List<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter, int pageNumber,
+            int pageSize, out int pageCount);
     }
 }

@@ -57,12 +57,22 @@ namespace WebApplication.Controllers
                 searchString = currentFilter;
             }
             viewModel.CurrentFilter = searchString;
+            
+            const int pageSize = ViewStringConstants.PageSize;
+            int pageNumber = page ?? ViewStringConstants.StartPage;
+            int pageCount;
 
-            IEnumerable<Employee> employees = _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString);
-
-            //const int pageSize = ViewStringConstants.PageSize;
-            //int pageNumber = page ?? ViewStringConstants.StartPage;
-
+            var employees =
+                _projectManager.GetAllEmployees(sortDirection, sortPropertyName, searchString, pageNumber, pageSize,
+                    out pageCount)
+                    .Select(
+                        employee =>
+                            new PagedEmployeesViewModel.PlainEmployee(employee.FirstName, employee.LastName,
+                                employee.MiddleName, employee.Email, employee.ContractorCompanyName));
+            viewModel.Employees = employees;
+            viewModel.PageSize = pageSize;
+            viewModel.PageNumber = pageNumber;
+            viewModel.PageCount = pageCount;
 
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var jsonProjectViewModel = JsonConvert.SerializeObject(viewModel, Formatting.None, settings);
