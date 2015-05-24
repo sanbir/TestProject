@@ -38,11 +38,11 @@ namespace BusinessLayer.Managers
         {
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
 
-            Project updatedEntity = project.Id == 0
+            Project updatedProject = project.Id == 0
                 ? projectRepository.Add(project)
                 : projectRepository.Update(project);
 
-            return updatedEntity;
+            return updatedProject;
         }
 
         public void Delete(int projectId)
@@ -102,14 +102,12 @@ namespace BusinessLayer.Managers
         public IEnumerable<Project> GetAll(string sortDirection, string sortPropertyName, string filter)
         {
             ListSortDirection direction = ListSortDirection.Ascending;
-
             if (!string.IsNullOrEmpty(sortDirection))
             {
                 Enum.TryParse(sortDirection, out direction);
             }
 
             PropertyDescriptor descriptor = null;
-
             if (!string.IsNullOrEmpty(sortPropertyName))
             {
                 descriptor = TypeDescriptor.GetProperties(new Project()).Find(sortPropertyName, false);
@@ -118,20 +116,32 @@ namespace BusinessLayer.Managers
             return GetAll(direction, descriptor, filter);
         }
 
-        List<Employee> IProjectManager.GetAllEmployees(string sortDirection,
-            string sortPropertyName, string filter, int pageNumber, int pageSize, out int pageCount)
+        List<Employee> IProjectManager.GetAllEmployees(string sortDirection, string sortPropertyName,
+            string filter, int pageNumber, int pageSize, out int pageCount)
         {
             return GetAllEmployees(sortDirection, sortPropertyName, filter, pageNumber, pageSize, out pageCount);
         }
 
         public void CreateOrUpdateAndAssignEmployees(Project project, ICollection<int> assignedEmployeesIds)
         {
-            throw new NotImplementedException();
+            var updatedProject = CreateOrUpdate(project);
+            AssignEmployees(updatedProject.Id, assignedEmployeesIds);
         }
 
         public void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds)
         {
-            throw new NotImplementedException();
+            var projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
+
+            foreach (var employeeId in assignedEmployeesIds)
+            {
+                var projectsEmployee = new ProjectsEmployee
+                {
+                    ProjectId = projectId,
+                    EmployeeId = employeeId
+                };
+
+                projectsEmployeeRepository.Add(projectsEmployee);
+            }
         }
 
         public Project Get(int projectId)
