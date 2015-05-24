@@ -29,7 +29,6 @@
 
         }
 
-        // post
         $scope.sendData = function () {
             $scope.response = '';
 
@@ -46,15 +45,14 @@
         function httpRequestHandler(method, url, dataToSend) {
             var timeout = $q.defer(),
                 result = $q.defer(),
-                timedOut = false,
-                httpRequest;
+                timedOut = false;
 
             setTimeout(function () {
                 timedOut = true;
                 timeout.resolve();
-            }, 10000);
+            }, 100000000);
 
-            httpRequest = $http({
+            var httpRequest = $http({
                 method: method,
                 url: url,
                 data: dataToSend,
@@ -96,7 +94,8 @@
         $scope.paging = {
             pageSize: null,
             pageNumber: null,
-            pageCount: null
+            pageCount: null,
+            gap: 10
         };
 
         $scope.getEmployees = function() {
@@ -124,21 +123,33 @@
 
         $scope.getEmployees();
 
-        // init the filtered items
-        $scope.search = function () {
-
-        };
-
         $scope.prevPage = function () {
-            if ($scope.currentPage > 1) {
-                $scope.currentPage--;
+            if ($scope.paging.pageNumber > 1) {
+                $scope.paging.pageNumber--;
+                $scope.getEmployees();
             }
         };
 
         $scope.nextPage = function () {
-            if ($scope.currentPage < $scope.pagedItems.length - 2) {
-                $scope.currentPage++;
+            if ($scope.paging.pageNumber < $scope.paging.pageCount) {
+                $scope.paging.pageNumber++;
+                $scope.getEmployees();
             }
+        };
+
+        $scope.firstPage = function() {
+            $scope.paging.pageNumber = 1;
+            $scope.getEmployees();
+        };
+
+        $scope.lastPage = function() {
+            $scope.paging.pageNumber = $scope.paging.pageCount;
+            $scope.getEmployees();
+        };
+
+        $scope.setPage = function () {
+            $scope.paging.pageNumber = this.n;
+            $scope.getEmployees();
         };
 
     };

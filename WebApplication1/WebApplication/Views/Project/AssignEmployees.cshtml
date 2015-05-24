@@ -5,7 +5,7 @@
 @using Shared.Models
 @using WebApplication.ViewModels
 @model string
-
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = ViewStringConstants.Create;
 }
@@ -17,17 +17,17 @@
     <hr />
 
     <p class="col-md-9 form-horizontal form-inline form-group">
-        <input type="text" class="form-control" data-ng-model="query" />
-        <input type="button" value=@ViewStringConstants.Search class="btn btn-default" data-ng-click="search()" />
+        <input type="text" class="form-control" data-ng-model="searchString" />
+        <input type="button" value=@ViewStringConstants.Search class="btn btn-default" data-ng-click="getEmployees()" />
     </p>
 
     <table class="table">
         <tr>
-            <th custom-sort order="'lastName'" sort="sort">@EmployeeProperties.LastNameDisplay &nbsp;</th>
-            <th custom-sort order="'firstName'" sort="sort">@EmployeeProperties.FirstNameDisplay &nbsp;</th>
-            <th custom-sort order="'middleName'" sort="sort">@EmployeeProperties.MiddleNameDisplay &nbsp;</th>
-            <th custom-sort order="'email'" sort="sort">@EmployeeProperties.EmailDisplay &nbsp;</th>
-            <th custom-sort order="'contractorCompanyName'" sort="sort">@EmployeeProperties.ContractorCompanyNameDisplay &nbsp;</th>
+            <th>@EmployeeProperties.LastNameDisplay &nbsp;</th>
+            <th>@EmployeeProperties.FirstNameDisplay &nbsp;</th>
+            <th>@EmployeeProperties.MiddleNameDisplay &nbsp;</th>
+            <th>@EmployeeProperties.EmailDisplay &nbsp;</th>
+            <th>@EmployeeProperties.ContractorCompanyNameDisplay &nbsp;</th>
             <th>isManager</th>
             <th>isAssigned</th>
         </tr>
@@ -42,26 +42,35 @@
             <td><input type="checkbox" data-assign-employee data-ng-disabled="item.id == $parent.project.managerId" data-ng-model="item.isAssigned"></td>
         </tr>
 
-        <tr>
-            <td>
-                <ul class="pagination">
-                    <li ng-class="{disabled: currentPage == 1}">
-                        <a href ng-click="prevPage()">« @ViewStringConstants.Back</a>
-                    </li>
-
-                    <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
-                        ng-class="{active: n == currentPage}"
-                        ng-click="setPage()">
-                        <a href ng-bind="n + 1">1</a>
-                    </li>
-
-                    <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
-                        <a href ng-click="nextPage()">@ViewStringConstants.Next »</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
     </table>
+
+    <div class="pagination-container">
+        <ul class="pagination">
+            <li class="PagedList-skipToFirst" data-ng-show="paging.pageNumber - paging.gap > 1">
+                <a href="" ng-click="firstPage()">««</a>
+            </li>
+            <li class="PagedList-skipToPrevious" data-ng-show="paging.pageNumber - paging.gap > 1">
+                <a href="" ng-click="prevPage()">«</a>
+            </li>
+            <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber - paging.gap > 1">
+                <a>…</a>
+            </li>
+            <li ng-repeat="n in range(paging.pageCount, paging.pageNumber, paging.pageNumber + paging.gap) "
+                ng-class="{active: n == paging.pageNumber}"
+                ng-click="setPage()">
+                <a href="">{{ n }}</a>
+            </li>
+            <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+                <a>…</a>
+            </li>
+            <li class="PagedList-skipToNext" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+                <a href="" ng-click="nextPage()">»</a>
+            </li>
+            <li class="PagedList-skipToLast" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+                <a href="" ng-click="lastPage()">»»</a>
+            </li>
+        </ul>
+    </div>
 
 
     @Html.Label(ProjectProperties.ManagerIdDisplay, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -76,8 +85,8 @@
         <div class="col-md-offset-2 col-md-10">
             <table class="table">
                 <tr>
-                    <td></td>
-                    <td>Снять с проекта</td>
+                    <th></th>
+                    <th>Снять с проекта</th>
                 </tr>
                 <tr data-ng-repeat="item in filteredEmployees = (assignedEmployees | filter:{isAssigned:true})">
                     <td>{{item.lastName}} {{item.firstName}} {{item.middleName}}</td>
