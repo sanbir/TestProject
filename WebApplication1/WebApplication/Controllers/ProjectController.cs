@@ -95,55 +95,47 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public JsonResult Persist([Bind(Include = ProjectProperties.BindProjectPropertiesWithManagerId)]ProjectToPersistViewModel projectViewModel)
+        public string Persist([Bind(Include = ProjectProperties.BindProjectPropertiesWithManagerId)]ProjectToPersistViewModel projectViewModel)
         {
             try
             {
-                if (projectViewModel != null)
+                if (projectViewModel == null) return "Error";
+
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    var project = new Project
                     {
-                        Project project = new Project
-                        {
-                            ProjectName = projectViewModel.ProjectName,
-                            CustomerCompanyName = projectViewModel.CustomerCompanyName,
-                            ManagerId = projectViewModel.ManagerId,
-                            StartDate = projectViewModel.StartDate,
-                            EndDate = projectViewModel.EndDate,
-                            Priority = projectViewModel.Priority,
-                            Comment = projectViewModel.Comment
-                        };
+                        ProjectName = projectViewModel.ProjectName,
+                        CustomerCompanyName = projectViewModel.CustomerCompanyName,
+                        ManagerId = projectViewModel.ManagerId,
+                        StartDate = projectViewModel.StartDate,
+                        EndDate = projectViewModel.EndDate,
+                        Priority = projectViewModel.Priority,
+                        Comment = projectViewModel.Comment
+                    };
 
-                        if (projectViewModel.AssignedEmployeesIds.Any())
-                        {
-                            _projectManager.CreateOrUpdateAndAssignEmployees(project,
-                                projectViewModel.AssignedEmployeesIds);
-                        }
-                        else
-                        {
-                            _projectManager.CreateOrUpdate(project);
-                        }
-                    }
-                    else if(projectViewModel.AssignedEmployeesIds.Any() && projectViewModel.Id!=0)
+                    if (projectViewModel.AssignedEmployeesIds != null && projectViewModel.AssignedEmployeesIds.Any())
                     {
-                        _projectManager.AssignEmployees();
+                        _projectManager.CreateOrUpdateAndAssignEmployees(project,
+                            projectViewModel.AssignedEmployeesIds);
                     }
-
-
-
-
-                    return Json("Success");
+                    else
+                    {
+                        _projectManager.CreateOrUpdate(project);
+                    }
                 }
-                else
+                else if (projectViewModel.AssignedEmployeesIds != null && projectViewModel.AssignedEmployeesIds.Any() && projectViewModel.Id != 0)
                 {
-                    return Json("Error");
+                    _projectManager.AssignEmployees(projectViewModel.Id, projectViewModel.AssignedEmployeesIds);
                 }
+
+                return "Success";
             }
             catch (Exception) // TODO: add custom
             {
                 // TODO:
+                return "Error";
             }
-            return new JsonResult();
         }
 
         public ActionResult Index(string sortDirection, string sortPropertyName, string currentFilter, string searchString, int? page)

@@ -21,6 +21,6 @@
         public const string CommentDisplay = "Текстовый комментарий";
 
         public const string BindProjectProperties = "ProjectName, CustomerCompanyName, StartDate, EndDate, Priority, Comment";
-        public const string BindProjectPropertiesWithManagerId = "ProjectName, CustomerCompanyName, ManagerId, StartDate, EndDate, Priority, Comment";
+        public const string BindProjectPropertiesWithManagerId = "Id, ProjectName, CustomerCompanyName, ManagerId, StartDate, EndDate, Priority, Comment, AssignedEmployeesIds";
     }
 }
