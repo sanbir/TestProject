@@ -130,7 +130,7 @@ namespace BusinessLayer.Managers
 
         public void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds)
         {
-            var projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
+            IProjectsEmployeeRepository projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
 
             foreach (var employeeId in assignedEmployeesIds)
             {
@@ -142,6 +142,13 @@ namespace BusinessLayer.Managers
 
                 projectsEmployeeRepository.Add(projectsEmployee);
             }
+        }
+
+        public List<int> GetAssignedEmployeesIds(int projectId)
+        {
+            IProjectsEmployeeRepository projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
+
+            return projectsEmployeeRepository.GetAssignedEmployeesIds(projectId).ToList();
         }
 
         public Project Get(int projectId)

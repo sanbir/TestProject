@@ -11,5 +11,7 @@ namespace BusinessLayer.Contracts.Managers
         void CreateOrUpdateAndAssignEmployees(Project project, ICollection<int> assignedEmployeesIds);
 
         void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds);
+
+        List<int> GetAssignedEmployeesIds(int projectId);
     }
 }

@@ -82,6 +82,8 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    ViewBag.ActionToPerform = ViewStringConstants.Create;
+
                     var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
                     var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
                     return View("AssignEmployees", string.Empty, jsonProjectViewModel);
@@ -193,6 +195,10 @@ namespace WebApplication.Controllers
             {
                 try
                 {
+                    ViewBag.ActionToPerform = ViewStringConstants.Edit;
+
+                    var assignedEmployeesIds = _projectManager.GetAssignedEmployeesIds(project.Id);
+
                     var projectViewModel = new ProjectViewModel
                     {
                         Id = project.Id,
@@ -202,7 +208,8 @@ namespace WebApplication.Controllers
                         StartDate = project.StartDate,
                         EndDate = project.EndDate,
                         Priority = project.Priority,
-                        Comment = project.Comment
+                        Comment = project.Comment,
+                        AssignedEmployeesIds = assignedEmployeesIds
                     };
 
                     var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };

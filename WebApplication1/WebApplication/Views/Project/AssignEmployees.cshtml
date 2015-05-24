@@ -7,10 +7,10 @@
 @model string
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = ViewStringConstants.Create;
+    ViewBag.Title = ViewBag.ActionToPerform;
 }
 
-<h2>@ViewStringConstants.Create</h2>
+<h2>@ViewBag.ActionToPerform</h2>
 
 <div class="form-horizontal" data-ng-app="projectAssignEmployeesApp" data-ng-controller="projectAssignEmployeesController">
     <h4>@ViewStringConstants.AssignEmployeesToProjectTitle</h4>
@@ -99,7 +99,7 @@
     <br />
 
     <div class="col-md-offset-2 col-md-10">
-        <input type="button" value=@ViewStringConstants.Create class="btn btn-success" data-ng-click="sendData()" />
+        <input type="button" value=@ViewStringConstants.Save class="btn btn-success" data-ng-click="sendData()" />
     </div>
 </div>
 
