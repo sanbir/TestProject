@@ -40,6 +40,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        [HttpPost]
         public string GetEmployees(string sortDirection, string sortPropertyName, string searchString, int? page)
         {
             const int pageSize = ViewStringConstants.PageSize;

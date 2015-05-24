@@ -31,6 +31,11 @@
             employeesPageFactory.getEmployees(sortDirection, sortPropertyName, searchString, page)
                 .then(function (data) {
                     $scope.employeesPage = data.employees;
+                    var employees = data.employees;
+                    for (var i = 0; i < employees.length; i++) {
+                        employees[i]["isAssigned"] = false;
+                    }
+                    $scope.employeesPage = employees;
                     $scope.paging.pageSize = data.pageSize;
                     $scope.paging.pageNumber = data.pageNumber;
                     $scope.paging.pageCount = data.pageCount;
@@ -91,12 +96,12 @@
             }
         };
 
-        $scope.firstPage = function() {
+        $scope.firstPage = function () {
             $scope.paging.pageNumber = 1;
             $scope.getEmployees();
         };
 
-        $scope.lastPage = function() {
+        $scope.lastPage = function () {
             $scope.paging.pageNumber = $scope.paging.pageCount;
             $scope.getEmployees();
         };
