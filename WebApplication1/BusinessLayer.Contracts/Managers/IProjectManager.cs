@@ -7,5 +7,9 @@ namespace BusinessLayer.Contracts.Managers
     {
         List<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter, int pageNumber,
             int pageSize, out int pageCount);
+
+        void CreateOrUpdateAndAssignEmployees(Project project, ICollection<int> assignedEmployeesIds);
+
+        void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds);
     }
 }

@@ -95,12 +95,43 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public JsonResult Persist(ProjectToPersistViewModel projectViewModel)
+        public JsonResult Persist([Bind(Include = ProjectProperties.BindProjectPropertiesWithManagerId)]ProjectToPersistViewModel projectViewModel)
         {
             try
             {
                 if (projectViewModel != null)
                 {
+                    if (ModelState.IsValid)
+                    {
+                        Project project = new Project
+                        {
+                            ProjectName = projectViewModel.ProjectName,
+                            CustomerCompanyName = projectViewModel.CustomerCompanyName,
+                            ManagerId = projectViewModel.ManagerId,
+                            StartDate = projectViewModel.StartDate,
+                            EndDate = projectViewModel.EndDate,
+                            Priority = projectViewModel.Priority,
+                            Comment = projectViewModel.Comment
+                        };
+
+                        if (projectViewModel.AssignedEmployeesIds.Any())
+                        {
+                            _projectManager.CreateOrUpdateAndAssignEmployees(project,
+                                projectViewModel.AssignedEmployeesIds);
+                        }
+                        else
+                        {
+                            _projectManager.CreateOrUpdate(project);
+                        }
+                    }
+                    else if(projectViewModel.AssignedEmployeesIds.Any() && projectViewModel.Id!=0)
+                    {
+                        _projectManager.AssignEmployees();
+                    }
+
+
+
+
                     return Json("Success");
                 }
                 else

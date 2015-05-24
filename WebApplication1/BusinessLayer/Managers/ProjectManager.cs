@@ -124,6 +124,16 @@ namespace BusinessLayer.Managers
             return GetAllEmployees(sortDirection, sortPropertyName, filter, pageNumber, pageSize, out pageCount);
         }
 
+        public void CreateOrUpdateAndAssignEmployees(Project project, ICollection<int> assignedEmployeesIds)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds)
+        {
+            throw new NotImplementedException();
+        }
+
         public Project Get(int projectId)
         {
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();

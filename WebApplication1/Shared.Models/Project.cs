@@ -22,6 +22,7 @@ namespace Shared.Models
         public string CustomerCompanyName { get; set; }
 
         [Required(ErrorMessage = ProjectValidationMessages.EnterManagerId)]
+        [Range(1, int.MaxValue, ErrorMessage = ProjectValidationMessages.EnterManagerId)]
         [Display(Name = ProjectProperties.ManagerIdDisplay, Prompt = ProjectProperties.ManagerIdPrompt)]
         public int ManagerId { get; set; }
 
