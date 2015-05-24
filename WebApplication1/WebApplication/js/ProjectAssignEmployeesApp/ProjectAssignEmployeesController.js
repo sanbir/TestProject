@@ -1,8 +1,7 @@
 ﻿(function () {
 
-    var projectAssignEmployeesController = function ($scope, $filter, $http, $q, projectFactory) {
+    var projectAssignEmployeesController = function ($scope, $http, $q) {
 
-        $scope.project = projectFactory;
         $scope.assignedEmployees = [];
         $scope.managerFullName = "";
 
@@ -106,7 +105,7 @@
                 page: $scope.paging.pageNumber
             };
 
-            var httpRequest = httpRequestHandler('GET', '/Project/GetEmployees', JSON.stringify(data));
+            var httpRequest = httpRequestHandler('POST', '/Project/GetEmployees', JSON.stringify(data));
 
             httpRequest.then(function (data) {
                 var employees = data.employees;
@@ -157,7 +156,7 @@
 
     };
 
-    projectAssignEmployeesController.$inject = ['$scope', '$filter', '$http', '$q', 'projectFactory', 'employeesPageFactory'];
+    projectAssignEmployeesController.$inject = ['$scope', '$http', '$q'];
 
     angular.module('projectAssignEmployeesApp').controller('projectAssignEmployeesController', projectAssignEmployeesController);
 
