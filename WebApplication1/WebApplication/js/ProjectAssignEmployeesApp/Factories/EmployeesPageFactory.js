@@ -23,18 +23,6 @@
         return employeesPage;
     };
 
-    function employee() {
-        this.id = 0;
-        this.firstName = "";
-        this.lastName = "";
-        this.middleName = "";
-        this.email = "";
-        this.contractorCompanyName = "";
-
-        this.isManager = false;
-        this.isAssigned = false;
-    }
-
     angular.module('projectAssignEmployeesApp').factory('employeesPageFactory', employeesPageFactory);
 }());
 

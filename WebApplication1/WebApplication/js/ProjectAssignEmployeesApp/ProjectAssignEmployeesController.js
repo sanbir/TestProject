@@ -1,11 +1,9 @@
 ﻿(function () {
 
-    var projectAssignEmployeesController = function ($scope, $filter, $http, $q, projectFactory, employeesPageFactory) {
+    var projectAssignEmployeesController = function ($scope, $filter, $http, $q, projectFactory) {
 
         $scope.project = projectFactory;
-        $scope.employeesPage = employeesPageFactory;
         $scope.assignedEmployees = [];
-
         $scope.managerFullName = "";
 
         $scope.assignEmployee = function (selectedEmployee, isAssigned) {
@@ -111,7 +109,12 @@
             var httpRequest = httpRequestHandler('GET', '/Project/GetEmployees', JSON.stringify(data));
 
             httpRequest.then(function (data) {
-                $scope.employeesPage = data.employees;
+                var employees = data.employees;
+                for (var i = 0; i < employees.length; i++) {
+                    employees[i]["isAssigned"] = false;
+                }
+                $scope.employeesPage = employees;
+
                 $scope.paging.pageSize = data.pageSize;
                 $scope.paging.pageNumber = data.pageNumber;
                 $scope.paging.pageCount = data.pageCount;

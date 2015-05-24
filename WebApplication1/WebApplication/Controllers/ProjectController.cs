@@ -52,6 +52,7 @@ namespace WebApplication.Controllers
             var viewModelEmployees =
                 modelEmployees.Select(employee => new PagedEmployeesViewModel.PlainEmployee
                 {
+                    Id = employee.Id,
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
                     MiddleName = employee.MiddleName,
