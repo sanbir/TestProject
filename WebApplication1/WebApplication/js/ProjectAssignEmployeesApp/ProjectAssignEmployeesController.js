@@ -5,7 +5,7 @@
         $scope.managerFullName = "";
         $scope.searchString = "";
         $scope.project = projectFactory;
-        $scope.assignedEmployees = projectFactory.assignedEmployeesIds;
+        $scope.assignedEmployees = [];
 
         $scope.sort = {
             reverse: false,
@@ -34,6 +34,14 @@
                     var employees = data.employees;
                     for (var i = 0; i < employees.length; i++) {
                         employees[i]["isAssigned"] = false;
+
+                        for (var j = 0; j < $scope.project.assignedEmployeesIds.length; j++) {
+                            if (employees[i].id == $scope.project.assignedEmployeesIds[j]) {
+                                employees[i]["isAssigned"] = true;
+                                $scope.assignedEmployees.push(employees[i]);
+                                break;
+                            }
+                        }
                     }
                     $scope.employeesPage = employees;
                     $scope.paging.pageSize = data.pageSize;
