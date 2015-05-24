@@ -192,6 +192,21 @@ namespace WebApplication.Controllers
             {
                 try
                 {
+                    var projectViewModel = new ProjectPartialViewModel
+                    {
+                        Id=project.Id,
+                        ProjectName = project.ProjectName,
+                        CustomerCompanyName = project.CustomerCompanyName,
+                        ManagerId
+                        StartDate = project.StartDate,
+                        EndDate = project.EndDate,
+
+                    };
+
+                    var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+                    var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
+                    return View("AssignEmployees", string.Empty, jsonProjectViewModel);
+
                     _projectManager.CreateOrUpdate(project);
                     return RedirectToAction("Index");
                 }
