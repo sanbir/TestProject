@@ -7,8 +7,10 @@ using Shared.Constants.Project;
 
 namespace WebApplication.ViewModels
 {
-    public class ProjectPartialViewModel
+    public class ProjectViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = ProjectValidationMessages.EnterProjectName)]
         public string ProjectName { get; set; }
 
@@ -28,5 +30,12 @@ namespace WebApplication.ViewModels
         public int Priority { get; set; }
 
         public string Comment { get; set; }
+
+        [Required(ErrorMessage = ProjectValidationMessages.EnterManagerId)]
+        [Range(1, int.MaxValue, ErrorMessage = ProjectValidationMessages.EnterManagerId)]
+        [Display(Name = ProjectProperties.ManagerIdDisplay, Prompt = ProjectProperties.ManagerIdPrompt)]
+        public int ManagerId { get; set; }
+
+        public ICollection<int> AssignedEmployeesIds { get; set; }
     }
 }

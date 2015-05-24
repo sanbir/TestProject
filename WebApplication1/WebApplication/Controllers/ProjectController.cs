@@ -76,7 +76,7 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]ProjectPartialViewModel projectViewModel)
+        public ActionResult Create([Bind(Include = ProjectProperties.BindProjectProperties)]ProjectViewModel projectViewModel)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public string Persist([Bind(Include = ProjectProperties.BindProjectPropertiesWithManagerId)]ProjectToPersistViewModel projectViewModel)
+        public string Persist([Bind(Include = ProjectProperties.BindProjectPropertiesWithManagerId)]ProjectViewModel projectViewModel)
         {
             try
             {
@@ -105,6 +105,7 @@ namespace WebApplication.Controllers
                 {
                     var project = new Project
                     {
+                        Id = projectViewModel.Id,
                         ProjectName = projectViewModel.ProjectName,
                         CustomerCompanyName = projectViewModel.CustomerCompanyName,
                         ManagerId = projectViewModel.ManagerId,
@@ -192,23 +193,21 @@ namespace WebApplication.Controllers
             {
                 try
                 {
-                    var projectViewModel = new ProjectPartialViewModel
+                    var projectViewModel = new ProjectViewModel
                     {
-                        Id=project.Id,
+                        Id = project.Id,
                         ProjectName = project.ProjectName,
                         CustomerCompanyName = project.CustomerCompanyName,
-                        ManagerId
+                        ManagerId = project.ManagerId,
                         StartDate = project.StartDate,
                         EndDate = project.EndDate,
-
+                        Priority = project.Priority,
+                        Comment = project.Comment
                     };
 
                     var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
                     var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
                     return View("AssignEmployees", string.Empty, jsonProjectViewModel);
-
-                    _projectManager.CreateOrUpdate(project);
-                    return RedirectToAction("Index");
                 }
                 catch (Exception) // TODO: add custom
                 {
