@@ -131,8 +131,6 @@
     <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesApp.js" />
     <Content Include="js\ProjectAssignEmployeesApp\ProjectAssignEmployeesController.js" />
     <Content Include="js\ProjectAssignEmployeesApp\Directives\CustomSort.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\Factories\EmployeesPageFactory.js" />
-    <Content Include="js\ProjectAssignEmployeesApp\Factories\ProjectAssignEmployeesFactories.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
