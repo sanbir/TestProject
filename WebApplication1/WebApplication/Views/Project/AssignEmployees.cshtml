@@ -121,17 +121,23 @@
 
         <script type="text/javascript" language="javascript">
 
-        var projectFactory = function () {
+            var projectFactory = function() {
 
-            var project = @Html.Raw(Model);
+                var project = @Html.Raw(Model);
 
-            project.id = 0;
-            project.managerId = 0;
-            project.assignedEmployeesIds = [];
+                if (typeof project.id === "undefined") {
+                    project.id = 0;
+                }
+                if (typeof project.managerId === "undefined") {
+                    project.managerId = 0;
+                }
+                if (typeof project.assignedEmployeesIds === "undefined") {
+                    project.assignedEmployeesIds = [];
+                }
 
-            return project;
-        };
-        angular.module('projectAssignEmployeesApp').factory('projectFactory', projectFactory);
+                return project;
+            };
+            angular.module('projectAssignEmployeesApp').factory('projectFactory', projectFactory);
 
         </script>
     }

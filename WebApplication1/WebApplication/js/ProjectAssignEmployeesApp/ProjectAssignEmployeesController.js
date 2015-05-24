@@ -2,10 +2,10 @@
 
     var projectAssignEmployeesController = function ($scope, projectFactory, employeesPageFactory) {
 
-        $scope.project = projectFactory;
-        $scope.assignedEmployees = [];
         $scope.managerFullName = "";
         $scope.searchString = "";
+        $scope.project = projectFactory;
+        $scope.assignedEmployees = projectFactory.assignedEmployeesIds;
 
         $scope.sort = {
             reverse: false,
