@@ -1,12 +1,46 @@
 ﻿(function () {
 
-    var projectAssignEmployeesController = function ($scope, $filter, $http, $q, projectFactory, employeesPageFactory) {
+    var projectAssignEmployeesController = function ($scope, projectFactory, employeesPageFactory) {
 
         $scope.project = projectFactory;
-        $scope.employeesPage = employeesPageFactory;
         $scope.assignedEmployees = [];
-
         $scope.managerFullName = "";
+        $scope.searchString = "";
+
+        $scope.sort = {
+            reverse: false,
+            propertyName: null
+        };
+
+        $scope.paging = {
+            pageSize: null,
+            pageNumber: null,
+            pageCount: null,
+            gap: 10
+        };
+
+        $scope.employeesPage = [];
+
+        $scope.getEmployees = function () {
+
+            var sortDirection = $scope.sort.reverse ? "Descending" : "Ascending";
+            var sortPropertyName = $scope.sort.propertyName;
+            var searchString = $scope.searchString;
+            var page = $scope.paging.pageNumber;
+
+            employeesPageFactory.getEmployees(sortDirection, sortPropertyName, searchString, page)
+                .then(function (data) {
+                    $scope.employeesPage = data.employees;
+                    $scope.paging.pageSize = data.pageSize;
+                    $scope.paging.pageNumber = data.pageNumber;
+                    $scope.paging.pageCount = data.pageCount;
+                },
+                function (data) {
+                    $scope.error = "Failed to get employees";
+                });
+        };
+
+        $scope.getEmployees();
 
         $scope.assignEmployee = function (selectedEmployee, isAssigned) {
 
@@ -30,98 +64,18 @@
         }
 
         $scope.sendData = function () {
-            $scope.response = '';
 
-            var httpRequest = httpRequestHandler('POST', '/Project/Persist', JSON.stringify($scope.project));
-
-            httpRequest.then(function (data) {
-                $scope.response = data;
-
-            }, function (error) {
-                $scope.response = error;
-            });
+            employeesPageFactory.sendData($scope.project)
+                .then(function (data) {
+                    $scope.info = data;
+                },
+                function (data) {
+                    $scope.error = "Failed to send the project";
+                });
         };
 
-        function httpRequestHandler(method, url, dataToSend) {
-            var timeout = $q.defer(),
-                result = $q.defer(),
-                timedOut = false;
-
-            setTimeout(function () {
-                timedOut = true;
-                timeout.resolve();
-            }, 100000000);
-
-            var httpRequest = $http({
-                method: method,
-                url: url,
-                data: dataToSend,
-                cache: false,
-                timeout: timeout.promise
-            });
-
-            httpRequest.success(function (data, status, headers, config) {
-                result.resolve(data);
-            });
-
-            httpRequest.error(function (data, status, headers, config) {
-                if (timedOut) {
-                    result.reject({
-                        error: 'timeout'
-                    });
-                } else {
-                    result.reject(data);
-                }
-            });
-
-            return result.promise;
-        }
 
         /////////////////////////////////////////
-
-        var sortDirections = {
-            ASC: "Ascending",
-            DESC: "Descending"
-        };
-
-        $scope.searchString = "";
-
-        $scope.sort = {
-            reverse: false,
-            propertyName: null
-        };
-
-        $scope.paging = {
-            pageSize: null,
-            pageNumber: null,
-            pageCount: null,
-            gap: 10
-        };
-
-        $scope.getEmployees = function() {
-            $scope.response = '';
-
-            var data = {
-                sortDirection: $scope.sort.reverse ? "Descending" : "Ascending",
-                sortPropertyName: $scope.sort.propertyName,
-                searchString: $scope.searchString,
-                page: $scope.paging.pageNumber
-            };
-
-            var httpRequest = httpRequestHandler('GET', '/Project/GetEmployees', JSON.stringify(data));
-
-            httpRequest.then(function (data) {
-                $scope.employeesPage = data.employees;
-                $scope.paging.pageSize = data.pageSize;
-                $scope.paging.pageNumber = data.pageNumber;
-                $scope.paging.pageCount = data.pageCount;
-
-            }, function (error) {
-                $scope.response = error;
-            });
-        };
-
-        $scope.getEmployees();
 
         $scope.prevPage = function () {
             if ($scope.paging.pageNumber > 1) {
@@ -154,7 +108,7 @@
 
     };
 
-    projectAssignEmployeesController.$inject = ['$scope', '$filter', '$http', '$q', 'projectFactory', 'employeesPageFactory'];
+    projectAssignEmployeesController.$inject = ['$scope', 'projectFactory', 'employeesPageFactory'];
 
     angular.module('projectAssignEmployeesApp').controller('projectAssignEmployeesController', projectAssignEmployeesController);
 

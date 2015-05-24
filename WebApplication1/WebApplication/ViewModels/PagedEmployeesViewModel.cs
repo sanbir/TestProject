@@ -13,6 +13,7 @@ namespace WebApplication.ViewModels
         public List<PlainEmployee> Employees { get; set; }
         public class PlainEmployee
         {
+            public int Id { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string MiddleName { get; set; }
