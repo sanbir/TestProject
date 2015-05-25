@@ -132,12 +132,26 @@ namespace BusinessLayer.Managers
         {
             IProjectsEmployeeRepository projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
 
-            foreach (var employeeId in assignedEmployeesIds)
+            var formerAssignedEmployeesIds = GetAssignedEmployeesIds(projectId);
+
+            foreach (var formerAssignedEmployeesId in formerAssignedEmployeesIds)
+            {
+                if (assignedEmployeesIds.Contains(formerAssignedEmployeesId))
+                {
+                    assignedEmployeesIds.Remove(formerAssignedEmployeesId);
+                }
+                else
+                {
+                    projectsEmployeeRepository.Remove(projectId, formerAssignedEmployeesId);
+                }
+            }
+
+            foreach (var newlyAssignedEmployeesId in assignedEmployeesIds)
             {
                 var projectsEmployee = new ProjectsEmployee
                 {
                     ProjectId = projectId,
-                    EmployeeId = employeeId
+                    EmployeeId = newlyAssignedEmployeesId
                 };
 
                 projectsEmployeeRepository.Add(projectsEmployee);
