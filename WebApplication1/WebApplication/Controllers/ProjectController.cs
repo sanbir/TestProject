@@ -258,6 +258,7 @@ namespace WebApplication.Controllers
                 ProjectName = project.ProjectName,
                 CustomerCompanyName = project.CustomerCompanyName,
                 ManagerId = project.ManagerId,
+                ManagerFullName = string.Join(" ", project.Manager.LastName, project.Manager.FirstName, project.Manager.MiddleName),
                 StartDate = project.StartDate,
                 EndDate = project.EndDate,
                 Priority = project.Priority,
