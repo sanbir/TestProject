@@ -32,21 +32,30 @@
                 .then(function (data) {
                     $scope.employeesPage = data.employees;
                     var employees = data.employees;
+
                     for (var i = 0; i < employees.length; i++) {
                         employees[i]["isAssigned"] = false;
 
                         for (var j = 0; j < $scope.project.assignedEmployeesIds.length; j++) {
+
                             if (employees[i].id == $scope.project.assignedEmployeesIds[j]) {
                                 employees[i]["isAssigned"] = true;
                                 $scope.assignedEmployees.push(employees[i]);
-                                break;
+                            }
+
+                            if (employees[i].id == $scope.project.managerId) {
+                                $scope.setManagerFullName(employees[i]);
                             }
                         }
                     }
+
                     $scope.employeesPage = employees;
                     $scope.paging.pageSize = data.pageSize;
                     $scope.paging.pageNumber = data.pageNumber;
                     $scope.paging.pageCount = data.pageCount;
+                    if ($scope.paging.gap > $scope.paging.pageCount) {
+                        $scope.paging.gap = $scope.paging.pageCount;
+                    }
                 },
                 function (data) {
                     $scope.error = "Failed to get employees";
@@ -55,7 +64,13 @@
 
         $scope.getEmployees();
 
-        $scope.assignEmployee = function (selectedEmployee, isAssigned) {
+        $scope.setManagerFullName = function(employee) {
+            $scope.managerFullName = employee.lastName
+                + " " + employee.firstName
+                + " " + employee.middleName;
+        };
+
+        $scope.assignEmployee = function(selectedEmployee, isAssigned) {
 
             if (isAssigned) {
                 if ($scope.project.assignedEmployeesIds.indexOf(selectedEmployee.id) === -1) {
@@ -64,17 +79,24 @@
                 }
             } else {
                 if ($scope.project.assignedEmployeesIds.indexOf(selectedEmployee.id) !== -1) {
+
                     for (var i = 0; i < $scope.project.assignedEmployeesIds.length; i++) {
                         if ($scope.project.assignedEmployeesIds[i] === selectedEmployee.id) {
                             $scope.project.assignedEmployeesIds.splice(i, 1);
-                            $scope.assignedEmployees.splice(i, 1);
+                            break;
+                        }
+                    }
+
+                    for (var j = 0; j < $scope.assignedEmployees.length; j++) {
+                        if ($scope.assignedEmployees[j].id === selectedEmployee.id) {
+                            $scope.assignedEmployees.splice(j, 1);
                             break;
                         }
                     }
                 }
             }
 
-        }
+        };
 
         $scope.sendData = function () {
 
@@ -86,9 +108,6 @@
                     $scope.error = "Failed to send the project";
                 });
         };
-
-
-        /////////////////////////////////////////
 
         $scope.prevPage = function () {
             if ($scope.paging.pageNumber > 1) {
@@ -117,6 +136,21 @@
         $scope.setPage = function () {
             $scope.paging.pageNumber = this.n;
             $scope.getEmployees();
+        };
+
+        $scope.range = function () {
+            var pageNumbers = [];
+            var start = $scope.paging.pageNumber;
+
+            if (start > $scope.paging.pageCount - $scope.paging.gap) {
+                start = $scope.paging.pageCount - $scope.paging.gap + 1;
+            }
+
+            for (var i = start; i < start + $scope.paging.gap; i++) {
+                pageNumbers.push(i);
+            }
+
+            return pageNumbers;
         };
 
     };

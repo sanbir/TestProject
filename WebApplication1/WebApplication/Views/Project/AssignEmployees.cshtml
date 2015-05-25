@@ -55,7 +55,7 @@
             <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber - paging.gap > 1">
                 <a>…</a>
             </li>
-            <li ng-repeat="n in range(paging.pageCount, paging.pageNumber, paging.pageNumber + paging.gap) "
+            <li ng-repeat="n in range()"
                 ng-class="{active: n == paging.pageNumber}"
                 ng-click="setPage()">
                 <a href="">{{ n }}</a>
