@@ -4,5 +4,6 @@ namespace DAL.Contracts.DataRepositories
 {
     public interface IProjectRepository : IDataRepository<Project>
     {
+        Employee GetManager(int projectId);
     }
 }

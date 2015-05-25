@@ -67,5 +67,10 @@ namespace DAL.EntityFrameworkRepository.DataRepositories
 
             return project;
         }
+
+        public Employee GetManager(int projectId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

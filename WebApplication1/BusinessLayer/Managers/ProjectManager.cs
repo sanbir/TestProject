@@ -171,7 +171,9 @@ namespace BusinessLayer.Managers
 
         public Employee GetManager(int projectId)
         {
-            throw new NotImplementedException();
+            IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();
+            Employee employee = projectRepository.GetManager(projectId);
+            return employee;
         }
 
         public Project Get(int projectId)
