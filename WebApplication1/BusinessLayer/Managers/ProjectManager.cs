@@ -58,21 +58,18 @@ namespace BusinessLayer.Managers
 
             if (!String.IsNullOrEmpty(filter))
             {
-                //projects =
-                //    projects.Where(project =>
-                //        project.ProjectName.ToLowerInvariant()
-                //            .Contains(filter.ToLowerInvariant())
-                //        ||
-                //        project.CustomerCompanyName.ToLowerInvariant()
-                //            .Contains(filter.ToLowerInvariant())
-                //        ||
-                //        (project.MiddleName != null && project.MiddleName.ToLowerInvariant()
-                //            .Contains(filter.ToLowerInvariant()))
-                //        || project.Email.ToLowerInvariant()
-                //            .Contains(filter.ToLowerInvariant())
-                //        ||
-                //        project.ContractorCompanyName.ToLowerInvariant()
-                //            .Contains(filter.ToLowerInvariant()));
+                // TODO: filter dates
+                projects =
+                    projects.Where(project =>
+                        project.ProjectName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        ||
+                        project.CustomerCompanyName.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant())
+                        ||
+                        (project.Comment != null && project.Comment.ToLowerInvariant()
+                            .Contains(filter.ToLowerInvariant()))
+                        || project.Priority.ToString() == filter);
             }
 
             switch (sortDirection)
@@ -170,6 +167,11 @@ namespace BusinessLayer.Managers
             IProjectsEmployeeRepository projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
 
             return projectsEmployeeRepository.GetAssignedEmployees(projectId).ToList();
+        }
+
+        public Employee GetManager(int projectId)
+        {
+            throw new NotImplementedException();
         }
 
         public Project Get(int projectId)

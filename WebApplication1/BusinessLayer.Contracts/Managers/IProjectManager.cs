@@ -15,5 +15,7 @@ namespace BusinessLayer.Contracts.Managers
         List<int> GetAssignedEmployeesIds(int projectId);
 
         List<Employee> GetAssignedEmployees(int projectId);
+
+        Employee GetManager(int projectId);
     }
 }
