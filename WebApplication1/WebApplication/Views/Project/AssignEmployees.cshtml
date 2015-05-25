@@ -112,13 +112,13 @@
 
             var project = @Html.Raw(Model);
 
-            if (typeof project.id === "undefined") {
+            if (typeof project.id === "undefined" || project.id === null) {
                 project.id = 0;
             }
-            if (typeof project.managerId === "undefined") {
+            if (typeof project.managerId === "undefined" || project.managerId === null) {
                 project.managerId = 0;
             }
-            if (typeof project.assignedEmployeesIds === "undefined") {
+            if (typeof project.assignedEmployeesIds === "undefined" || project.assignedEmployeesIds === null) {
                 project.assignedEmployeesIds = [];
             }
 
