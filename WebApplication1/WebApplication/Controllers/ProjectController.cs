@@ -284,7 +284,10 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(project);
+            List<Employee> assignedEmployees = _projectManager.GetAssignedEmployees(project.Id);
+            ProjectViewModel projectViewModel = GetProjectViewModel(project, assignedEmployees);
+
+            return View(projectViewModel);
         }
 
         [HttpPost]

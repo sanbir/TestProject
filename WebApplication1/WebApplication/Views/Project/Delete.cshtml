@@ -1,5 +1,6 @@
 ﻿@using Shared.Constants.Common
-@model Shared.Models.Project
+@using Shared.Constants.Employee
+@model WebApplication.ViewModels.ProjectViewModel
 
 @{
     ViewBag.Title = ViewStringConstants.Delete;
@@ -26,6 +27,14 @@
 
             <dd>
                 @Html.DisplayFor(model => model.CustomerCompanyName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ManagerFullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ManagerFullName)
             </dd>
 
             <dt>
@@ -60,6 +69,32 @@
                 @Html.DisplayFor(model => model.Comment)
             </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.AssignedEmployees)
+            </dt>
+            <dd>
+                <table class="table">
+                    <tr>
+                        <th>@EmployeeProperties.LastNameDisplay</th>
+                        <th>@EmployeeProperties.FirstNameDisplay</th>
+                        <th>@EmployeeProperties.MiddleNameDisplay</th>
+                    </tr>
+                    @foreach (var item in Model.AssignedEmployees)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MiddleName)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
         </dl>
 
         @using (Html.BeginForm())
