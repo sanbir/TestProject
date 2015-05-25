@@ -13,5 +13,7 @@ namespace BusinessLayer.Contracts.Managers
         void AssignEmployees(int projectId, ICollection<int> assignedEmployeesIds);
 
         List<int> GetAssignedEmployeesIds(int projectId);
+
+        List<Employee> GetAssignedEmployees(int projectId);
     }
 }

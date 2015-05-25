@@ -199,18 +199,7 @@ namespace WebApplication.Controllers
 
                     var assignedEmployeesIds = _projectManager.GetAssignedEmployeesIds(project.Id);
 
-                    var projectViewModel = new ProjectViewModel
-                    {
-                        Id = project.Id,
-                        ProjectName = project.ProjectName,
-                        CustomerCompanyName = project.CustomerCompanyName,
-                        ManagerId = project.ManagerId,
-                        StartDate = project.StartDate,
-                        EndDate = project.EndDate,
-                        Priority = project.Priority,
-                        Comment = project.Comment,
-                        AssignedEmployeesIds = assignedEmployeesIds
-                    };
+                    ProjectViewModel projectViewModel = GetProjectViewModel(project, assignedEmployeesIds);
 
                     var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
                     var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
@@ -222,6 +211,23 @@ namespace WebApplication.Controllers
                 }
             }
             return View(project);
+        }
+
+        private static ProjectViewModel GetProjectViewModel(Project project, ICollection<int> assignedEmployeesIds)
+        {
+            var projectViewModel = new ProjectViewModel
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                CustomerCompanyName = project.CustomerCompanyName,
+                ManagerId = project.ManagerId,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate,
+                Priority = project.Priority,
+                Comment = project.Comment,
+                AssignedEmployeesIds = assignedEmployeesIds
+            };
+            return projectViewModel;
         }
 
         public ActionResult Details(int? id)
@@ -237,8 +243,29 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+            
+            List<Employee> assignedEmployees = _projectManager.GetAssignedEmployees(project.Id);
+            ProjectViewModel projectViewModel = GetProjectViewModel(project, assignedEmployees);
 
-            return View(project);
+            return View(projectViewModel);
+        }
+
+        private ProjectViewModel GetProjectViewModel(Project project, ICollection<Employee> assignedEmployees)
+        {
+            var projectViewModel = new ProjectViewModel
+            {
+                Id = project.Id,
+                ProjectName = project.ProjectName,
+                CustomerCompanyName = project.CustomerCompanyName,
+                ManagerId = project.ManagerId,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate,
+                Priority = project.Priority,
+                Comment = project.Comment,
+                AssignedEmployeesIds = assignedEmployees.Select(employee => employee.Id).ToList(),
+                AssignedEmployees = assignedEmployees
+            };
+            return projectViewModel;
         }
 
         public ActionResult Delete(int? id, bool? saveChangesError = false)

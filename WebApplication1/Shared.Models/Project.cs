@@ -43,7 +43,7 @@ namespace Shared.Models
         [Display(Name = ProjectProperties.PriorityDisplay, Prompt = ProjectProperties.PriorityDisplay)]
         public int Priority { get; set; }
 
-        [Display(Name = ProjectProperties.Comment, Prompt = ProjectProperties.Comment)]
+        [Display(Name = ProjectProperties.CommentDisplay, Prompt = ProjectProperties.CommentDisplay)]
         public string Comment { get; set; }
 
         public virtual Employee Manager { get; set; }

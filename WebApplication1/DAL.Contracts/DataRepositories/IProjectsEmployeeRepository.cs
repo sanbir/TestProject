@@ -8,5 +8,7 @@ namespace DAL.Contracts.DataRepositories
         IEnumerable<int> GetAssignedEmployeesIds(int projectId);
 
         void Remove(int projectId, int employeeId);
+
+        IEnumerable<Employee> GetAssignedEmployees(int projectId);
     }
 }

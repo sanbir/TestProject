@@ -28,8 +28,8 @@ namespace DAL.EntityFrameworkRepository.DataRepositories
             using (var entityContext = new BiryukovTestDbContext())
             {
                 var projectsEmployees = from pe in entityContext.ProjectsEmployees
-                    where pe.ProjectId == projectId && pe.EmployeeId == employeeId
-                    select pe;
+                                        where pe.ProjectId == projectId && pe.EmployeeId == employeeId
+                                        select pe;
 
                 foreach (var projectsEmployee in projectsEmployees)
                 {
@@ -37,6 +37,18 @@ namespace DAL.EntityFrameworkRepository.DataRepositories
                 }
 
                 entityContext.SaveChanges();
+            }
+        }
+
+        public IEnumerable<Employee> GetAssignedEmployees(int projectId)
+        {
+            using (var entityContext = new BiryukovTestDbContext())
+            {
+                return (from p in entityContext.Projects
+                        join pe in entityContext.ProjectsEmployees on p.Id equals pe.ProjectId
+                        join e in entityContext.Employees on pe.EmployeeId equals e.Id
+                        where p.Id == projectId
+                        select e).Distinct().ToList();
             }
         }
     }

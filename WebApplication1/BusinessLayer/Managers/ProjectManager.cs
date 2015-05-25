@@ -165,6 +165,13 @@ namespace BusinessLayer.Managers
             return projectsEmployeeRepository.GetAssignedEmployeesIds(projectId).ToList();
         }
 
+        public List<Employee> GetAssignedEmployees(int projectId)
+        {
+            IProjectsEmployeeRepository projectsEmployeeRepository = _dataRepositoryFactory.GetDataRepository<IProjectsEmployeeRepository>();
+
+            return projectsEmployeeRepository.GetAssignedEmployees(projectId).ToList();
+        }
+
         public Project Get(int projectId)
         {
             IProjectRepository projectRepository = _dataRepositoryFactory.GetDataRepository<IProjectRepository>();

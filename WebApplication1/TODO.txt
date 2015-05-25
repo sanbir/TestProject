@@ -24,8 +24,6 @@
 
 ____________________________________________________________________________________
 
-+ unassign non-selected employees
-- show paging
 - details (read)
 - delete
 
