@@ -102,7 +102,7 @@
 
             employeesPageFactory.sendData($scope.project)
                 .then(function (data) {
-                    $scope.info = data;
+                    window.location.replace("/");
                 },
                 function (data) {
                     $scope.error = "Failed to send the project";
