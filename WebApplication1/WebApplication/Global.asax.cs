@@ -26,9 +26,6 @@ namespace WebApplication
 
             AggregateCatalog catalog = new AggregateCatalog();
 
-            //string dataRepositoriesFolder = ConfigurationManager.AppSettings[MefAccess.DataRepositoriesFolder];
-            //string businessLayerManagersFolder = ConfigurationManager.AppSettings[MefAccess.BusinessLayerManagersFolder];
-
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeManager).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(EmployeeRepository).Assembly));
             catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly()));

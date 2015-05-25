@@ -23,9 +23,9 @@ namespace WebApplication
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/AngularEmployeeIndex")
-            //    .Include("~/js/EmployeeIndex/" + "projectAssignEmployeesApp.js")
-            //    .IncludeDirectory("~/js/EmployeeIndex/", "*.js", searchSubdirectories: true));
+            bundles.Add(new ScriptBundle("~/bundles/ProjectAssignEmployeesApp")
+                .Include("~/Scripts/angular.min.js", "~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesApp.js")
+                .IncludeDirectory("~/js/ProjectAssignEmployeesApp/", "*.js", searchSubdirectories: true));
 
             bundles.Add(new StyleBundle("~/Content/CommonCSS").Include(
                 "~/Content/bootstrap.css",
