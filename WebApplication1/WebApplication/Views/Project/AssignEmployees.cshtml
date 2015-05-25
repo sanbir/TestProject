@@ -28,8 +28,8 @@
             <th>@EmployeeProperties.MiddleNameDisplay &nbsp;</th>
             <th>@EmployeeProperties.EmailDisplay &nbsp;</th>
             <th>@EmployeeProperties.ContractorCompanyNameDisplay &nbsp;</th>
-            <th>isManager</th>
-            <th>isAssigned</th>
+            <th>@ViewStringConstants.AssignAsManager</th>
+            <th>@ViewStringConstants.AssignToProject</th>
         </tr>
 
         <tr ng-repeat="item in employeesPage">
@@ -85,8 +85,8 @@
         <div class="col-md-offset-2 col-md-10">
             <table class="table">
                 <tr>
-                    <th>ФИО работника</th>
-                    <th>Снять с проекта</th>
+                    <th>@ViewStringConstants.EmployeeFullName</th>
+                    <th>@ViewStringConstants.UnassignFromProject</th>
                 </tr>
                 <tr data-ng-repeat="item in filteredEmployees = (assignedEmployees | filter:{isAssigned:true})">
                     <td>{{item.lastName}} {{item.firstName}} {{item.middleName}}</td>

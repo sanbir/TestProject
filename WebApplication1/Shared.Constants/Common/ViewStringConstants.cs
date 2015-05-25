@@ -15,6 +15,10 @@
         public const string ProjectsTitle = "Проекты";
         public const string AssignEmployeesToProjectTitle = "Назначить работников на проект";
         public const string ProjectsEmployeesTitle = "Работники на проекте";
+        public const string AssignAsManager = "Назначить руководителем";
+        public const string AssignToProject = "Назначить на проект";
+        public const string UnassignFromProject = "Снять с проекта";
+        public const string EmployeeFullName = "ФИО работника";
         public const string Next = "Далее";
         public const string Back = "Назад";
         public const string Search = "Поиск";
