@@ -40,7 +40,17 @@
 
                             if (employees[i].id == $scope.project.assignedEmployeesIds[j]) {
                                 employees[i]["isAssigned"] = true;
-                                $scope.assignedEmployees.push(employees[i]);
+
+                                var needToAssign = true;
+                                for (var k = 0; k < $scope.assignedEmployees.length; k++) {
+                                    if ($scope.assignedEmployees[k].id === employees[i].id) {
+                                        needToAssign = false;
+                                        break;
+                                    }
+                                }
+                                if (needToAssign) {
+                                    $scope.assignedEmployees.push(employees[i]);
+                                }
                             }
 
                             if (employees[i].id == $scope.project.managerId) {
