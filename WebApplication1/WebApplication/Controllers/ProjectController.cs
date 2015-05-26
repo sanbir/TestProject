@@ -15,6 +15,7 @@ using Shared.Constants.Employee;
 using Shared.Constants.Project;
 using Shared.Models;
 using WebApplication.ViewModels;
+using WebGrease.Css.Extensions;
 
 namespace WebApplication.Controllers
 {
@@ -157,11 +158,12 @@ namespace WebApplication.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            var projects = _projectManager.GetAll(sortDirection, sortPropertyName, searchString);
+            IEnumerable<Project> projects = _projectManager.GetAll(sortDirection, sortPropertyName, searchString);
+            IEnumerable<ProjectViewModel> projectViewModels = projects.Select(GetProjectViewModel);
 
             const int pageSize = ViewStringConstants.PageSize;
             int pageNumber = page ?? ViewStringConstants.StartPage;
-            return View(projects.ToPagedList(pageNumber, pageSize));
+            return View(projectViewModels.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Edit(int? id)
@@ -215,6 +217,15 @@ namespace WebApplication.Controllers
 
         private static ProjectViewModel GetProjectViewModel(Project project, ICollection<int> assignedEmployeesIds)
         {
+            var projectViewModel = GetProjectViewModel(project);
+
+            projectViewModel.AssignedEmployeesIds = assignedEmployeesIds;
+
+            return projectViewModel;
+        }
+
+        private static ProjectViewModel GetProjectViewModel(Project project)
+        {
             var projectViewModel = new ProjectViewModel
             {
                 Id = project.Id,
@@ -224,9 +235,28 @@ namespace WebApplication.Controllers
                 StartDate = project.StartDate,
                 EndDate = project.EndDate,
                 Priority = project.Priority,
-                Comment = project.Comment,
-                AssignedEmployeesIds = assignedEmployeesIds
+                Comment = project.Comment
             };
+
+            if (project.Manager != null)
+            {
+                projectViewModel.ManagerFullName = string.Join(" ", project.Manager.LastName, project.Manager.FirstName,
+                    project.Manager.MiddleName ?? string.Empty);
+            }
+
+            return projectViewModel;
+        }
+
+        private static ProjectViewModel GetProjectViewModel(Project project, ICollection<Employee> assignedEmployees)
+        {
+            var projectViewModel = GetProjectViewModel(project);
+
+            if (assignedEmployees != null)
+            {
+                projectViewModel.AssignedEmployees = assignedEmployees;
+                projectViewModel.AssignedEmployeesIds = assignedEmployees.Select(employee => employee.Id).ToList();
+            }
+
             return projectViewModel;
         }
 
@@ -248,25 +278,6 @@ namespace WebApplication.Controllers
             ProjectViewModel projectViewModel = GetProjectViewModel(project, assignedEmployees);
 
             return View(projectViewModel);
-        }
-
-        private ProjectViewModel GetProjectViewModel(Project project, ICollection<Employee> assignedEmployees)
-        {
-            var projectViewModel = new ProjectViewModel
-            {
-                Id = project.Id,
-                ProjectName = project.ProjectName,
-                CustomerCompanyName = project.CustomerCompanyName,
-                ManagerId = project.ManagerId,
-                ManagerFullName = string.Join(" ", project.Manager.LastName, project.Manager.FirstName, project.Manager.MiddleName),
-                StartDate = project.StartDate,
-                EndDate = project.EndDate,
-                Priority = project.Priority,
-                Comment = project.Comment,
-                AssignedEmployeesIds = assignedEmployees.Select(employee => employee.Id).ToList(),
-                AssignedEmployees = assignedEmployees
-            };
-            return projectViewModel;
         }
 
         public ActionResult Delete(int? id, bool? saveChangesError = false)

@@ -1,7 +1,7 @@
 ﻿@using Shared.Constants.Common
 @using Shared.Constants.Project
 @using PagedList.Mvc
-@model PagedList.IPagedList<Shared.Models.Project>
+@model PagedList.IPagedList<WebApplication.ViewModels.ProjectViewModel>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = ViewStringConstants.ProjectsTitle;
@@ -97,7 +97,7 @@
                 @Html.DisplayFor(modelItem => item.CustomerCompanyName)
             </td>
             <td>
-                @Html.Display(string.Join(item.Manager.LastName, item.Manager.FirstName, item.Manager.MiddleName ?? string.Empty), " ")
+                @Html.DisplayFor(modelItem => item.ManagerFullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
