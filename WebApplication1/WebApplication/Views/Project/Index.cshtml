@@ -42,14 +42,7 @@
                 })
         </th>
         <th>
-            @Html.ActionLink(ProjectProperties.ManagerIdDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.Manager,
-                currentFilter = ViewBag.CurrentFilter
-            })
+            @Html.Label(ProjectProperties.ManagerIdDisplay)
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.StartDateDisplay,

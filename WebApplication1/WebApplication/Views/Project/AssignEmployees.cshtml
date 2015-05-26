@@ -41,8 +41,14 @@
             <td><input name="isManagerRadio" type="radio" data-assign-if-manager data-ng-value="item.id" data-ng-model="$parent.project.managerId"></td>
             <td><input type="checkbox" data-assign-employee data-ng-disabled="item.id == $parent.project.managerId" data-ng-model="item.isAssigned"></td>
         </tr>
-
     </table>
+    
+    <br />
+
+    @ViewStringConstants.Page
+    {{ paging.pageCount  < paging.pageNumber ? 0 : paging.pageNumber }}
+    @ViewStringConstants.Of
+    {{ paging.pageCount }}
 
     <div class="pagination-container">
         <ul class="pagination">
