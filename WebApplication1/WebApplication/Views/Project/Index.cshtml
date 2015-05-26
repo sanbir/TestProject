@@ -23,13 +23,14 @@
     <tr>
         <th>
             @Html.ActionLink(ProjectProperties.ProjectNameDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.ProjectName,
-                currentFilter = ViewBag.CurrentFilter
-            })
+                "Index",
+                new
+                {
+                    sortDirection = ViewBag.CurrentSortDirection,
+                    sortPropertyName = ProjectProperties.ProjectName,
+                    currentFilter = ViewBag.CurrentFilter
+                })
+            <i class="glyphicon glyphicon-filter"></i>
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.CustomerCompanyNameDisplay,
@@ -46,23 +47,23 @@
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.StartDateDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.StartDate,
-                currentFilter = ViewBag.CurrentFilter
-            })
+                "Index",
+                new
+                {
+                    sortDirection = ViewBag.CurrentSortDirection,
+                    sortPropertyName = ProjectProperties.StartDate,
+                    currentFilter = ViewBag.CurrentFilter
+                })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.EndDateDisplay,
-            "Index",
-            new
-            {
-                sortDirection = ViewBag.CurrentSortDirection,
-                sortPropertyName = ProjectProperties.EndDate,
-                currentFilter = ViewBag.CurrentFilter
-            })
+                "Index",
+                new
+                {
+                    sortDirection = ViewBag.CurrentSortDirection,
+                    sortPropertyName = ProjectProperties.EndDate,
+                    currentFilter = ViewBag.CurrentFilter
+                })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.PriorityDisplay,

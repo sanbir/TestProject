@@ -29,6 +29,7 @@ namespace WebApplication
 
             bundles.Add(new StyleBundle("~/Content/CommonCSS").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/css/font-awesome.css",
                 "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
