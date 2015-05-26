@@ -1,9 +1,6 @@
-﻿@using PagedList.Mvc
-@using Shared.Constants.Common
+﻿@using Shared.Constants.Common
 @using Shared.Constants.Employee
 @using Shared.Constants.Project
-@using Shared.Models
-@using WebApplication.ViewModels
 @model string
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
@@ -28,7 +25,7 @@
             <th>@EmployeeProperties.MiddleNameDisplay &nbsp;</th>
             <th>@EmployeeProperties.EmailDisplay &nbsp;</th>
             <th>@EmployeeProperties.ContractorCompanyNameDisplay &nbsp;</th>
-            <th>@ViewStringConstants.AssignAsManager</th>
+            <th>@ViewStringConstants.AssignAsManager &nbsp;</th>
             <th>@ViewStringConstants.AssignToProject</th>
         </tr>
 
@@ -45,41 +42,37 @@
     
     <br />
 
-    @ViewStringConstants.Page
-    {{ paging.pageCount  < paging.pageNumber ? 0 : paging.pageNumber }}
-    @ViewStringConstants.Of
-    {{ paging.pageCount }}
+    @ViewStringConstants.Page {{ paging.pageCount  < paging.pageNumber ? 0 : paging.pageNumber }} @ViewStringConstants.Of {{ paging.pageCount }}
 
     <div class="pagination-container">
         <ul class="pagination">
             <li class="PagedList-skipToFirst" data-ng-show="paging.pageNumber - paging.gap > 1">
-                <a href="" ng-click="firstPage()">««</a>
+                <a href="" data-ng-click="firstPage()">««</a>
             </li>
             <li class="PagedList-skipToPrevious" data-ng-show="paging.pageNumber - paging.gap > 1">
-                <a href="" ng-click="prevPage()">«</a>
+                <a href="" data-ng-click="prevPage()">«</a>
             </li>
             <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber - paging.gap > 1">
                 <a>…</a>
             </li>
-            <li ng-repeat="n in range()"
-                ng-class="{active: n == paging.pageNumber}"
-                ng-click="setPage()">
+            <li data-ng-repeat="n in range()"
+                data-ng-class="{active: n == paging.pageNumber}"
+                data-ng-click="setPage()">
                 <a href="">{{ n }}</a>
             </li>
             <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
                 <a>…</a>
             </li>
             <li class="PagedList-skipToNext" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
-                <a href="" ng-click="nextPage()">»</a>
+                <a href="" data-ng-click="nextPage()">»</a>
             </li>
             <li class="PagedList-skipToLast" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
-                <a href="" ng-click="lastPage()">»»</a>
+                <a href="" data-ng-click="lastPage()">»»</a>
             </li>
         </ul>
     </div>
 
-
-    @Html.Label(ProjectProperties.ManagerIdDisplay, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.Label(ProjectProperties.ManagerIdDisplay, new { @class = "control-label col-md-2" })
     <div class="col-md-10">
         <span class="form-control" readonly>{{ managerFullName }}</span>
     </div>
@@ -87,7 +80,7 @@
     <hr />
 
     <div data-ng-show="filteredEmployees.length > 0">
-        @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label(ViewStringConstants.ProjectsEmployeesTitle, new { @class = "control-label col-md-2" })
         <div class="col-md-offset-2 col-md-10">
             <table class="table">
                 <tr>
