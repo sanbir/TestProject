@@ -52,7 +52,7 @@ namespace WebApplication.Controllers
                 pageNumber, pageSize, out pageCount);
 
             var viewModelEmployees =
-                modelEmployees.Select(employee => new PagedEmployeesViewModel.PlainEmployee
+                modelEmployees.Select(employee => new EmployeeViewModel
                 {
                     Id = employee.Id,
                     FirstName = employee.FirstName,
@@ -278,11 +278,24 @@ namespace WebApplication.Controllers
 
             if (assignedEmployees != null)
             {
-                projectViewModel.AssignedEmployees = assignedEmployees;
+                projectViewModel.AssignedEmployees = assignedEmployees.Select(GetEmployeeViewModel).ToList();
                 projectViewModel.AssignedEmployeesIds = assignedEmployees.Select(employee => employee.Id).ToList();
             }
 
             return projectViewModel;
+        }
+
+        private static EmployeeViewModel GetEmployeeViewModel(Employee employee)
+        {
+            return new EmployeeViewModel
+            {
+                Id = employee.Id,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                MiddleName = employee.MiddleName,
+                ContractorCompanyName = employee.ContractorCompanyName,
+                Email = employee.Email
+            };
         }
 
         public ActionResult Details(int? id)

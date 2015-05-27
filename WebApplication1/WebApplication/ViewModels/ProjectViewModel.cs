@@ -49,6 +49,6 @@ namespace WebApplication.ViewModels
         public ICollection<int> AssignedEmployeesIds { get; set; }
 
         [Display(Name = ViewStringConstants.ProjectsEmployeesTitle)]
-        public ICollection<Employee> AssignedEmployees { get; set; }
+        public ICollection<EmployeeViewModel> AssignedEmployees { get; set; }
     }
 }
