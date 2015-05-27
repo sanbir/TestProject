@@ -2,7 +2,6 @@
 
     var projectAssignEmployeesController = function ($scope, projectFactory, employeesPageFactory) {
 
-        $scope.managerFullName = "";
         $scope.searchString = "";
         $scope.project = projectFactory;
         $scope.assignedEmployees = [];
@@ -80,7 +79,7 @@
         $scope.getEmployees();
 
         $scope.setManagerFullName = function(employee) {
-            $scope.managerFullName = employee.lastName
+            $scope.project.managerFullName = employee.lastName
                 + " " + employee.firstName
                 + " " + employee.middleName;
         };

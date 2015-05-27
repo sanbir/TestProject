@@ -73,7 +73,7 @@
 
     @Html.Label(ProjectProperties.ManagerIdDisplay, new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        <span class="form-control" readonly>{{ managerFullName }}</span>
+        <span class="form-control" readonly>{{ project.managerFullName }}</span>
     </div>
 
     <hr />
@@ -129,6 +129,9 @@
             }
             if (typeof project.assignedEmployeesIds === "undefined" || project.assignedEmployeesIds === null) {
                 project.assignedEmployeesIds = [];
+            }
+            if (typeof project.managerFullName === "undefined" || project.managerFullName === null) {
+                project.managerFullName = "";
             }
 
             return project;
