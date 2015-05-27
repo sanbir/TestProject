@@ -2,7 +2,7 @@
 @using Shared.Constants.Employee
 @using Shared.Constants.Project
 @model string
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 @{
     ViewBag.Title = ViewBag.ActionToPerform;
 }
@@ -14,8 +14,7 @@
     <hr />
 
     <p class="col-md-9 form-horizontal form-inline form-group">
-        <input type="text" class="form-control" data-ng-model="searchString" />
-        <input type="button" value=@ViewStringConstants.Search class="btn btn-default" data-ng-click="getEmployees()" />
+        <input type="text" class="form-control" data-ng-model="searchString" data-ng-change="getEmployees()" placeholder="@ViewStringConstants.Search" />
     </p>
 
     <table class="table">
@@ -44,15 +43,15 @@
 
     @ViewStringConstants.Page {{ paging.pageCount  < paging.pageNumber ? 0 : paging.pageNumber }} @ViewStringConstants.Of {{ paging.pageCount }}
 
-    <div class="pagination-container">
+    <div>
         <ul class="pagination">
-            <li class="PagedList-skipToFirst" data-ng-show="paging.pageNumber - paging.gap > 1">
+            <li data-ng-show="paging.pageNumber - paging.gap > 1">
                 <a href="" data-ng-click="firstPage()">««</a>
             </li>
-            <li class="PagedList-skipToPrevious" data-ng-show="paging.pageNumber - paging.gap > 1">
+            <li data-ng-show="paging.pageNumber - paging.gap > 1">
                 <a href="" data-ng-click="prevPage()">«</a>
             </li>
-            <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber - paging.gap > 1">
+            <li class="disabled" data-ng-show="paging.pageNumber - paging.gap > 1">
                 <a>…</a>
             </li>
             <li data-ng-repeat="n in range()"
@@ -60,13 +59,13 @@
                 data-ng-click="setPage()">
                 <a href="">{{ n }}</a>
             </li>
-            <li class="disabled PagedList-ellipses" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+            <li class="disabled" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
                 <a>…</a>
             </li>
-            <li class="PagedList-skipToNext" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+            <li data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
                 <a href="" data-ng-click="nextPage()">»</a>
             </li>
-            <li class="PagedList-skipToLast" data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
+            <li data-ng-show="paging.pageNumber + paging.gap < paging.pageCount">
                 <a href="" data-ng-click="lastPage()">»»</a>
             </li>
         </ul>
@@ -104,7 +103,18 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/ProjectAssignEmployeesApp")
+    @*@Scripts.Render("~/bundles/ProjectAssignEmployeesApp")*@
+    
+    <script src="~/Scripts/angular.js"></script>
+<script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesApp.js"></script>
+<script src="~/js/ProjectAssignEmployeesApp/Directives/AssignEmployee.js"></script>
+<script src="~/js/ProjectAssignEmployeesApp/Directives/AssignIfManager.js"></script>
+<script src="~/js/ProjectAssignEmployeesApp/Directives/CustomSort.js"></script>
+<script src="~/js/ProjectAssignEmployeesApp/Services/EmployeesPageFactory.js"></script>
+
+<script src="~/js/ProjectAssignEmployeesApp/ProjectAssignEmployeesController.js"></script>
+
+
     <script type="text/javascript" language="javascript">
 
         var projectFactory = function() {
