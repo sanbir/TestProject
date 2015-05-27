@@ -10,6 +10,6 @@ namespace WebApplication.ViewModels
         public int PageSize { get; set; }
         public int PageNumber { get; set; }
         public int PageCount { get; set; }
-        public List<EmployeeViewModel> Employees { get; set; }
+        public ICollection<EmployeeViewModel> Employees { get; set; }
     }
 }

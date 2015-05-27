@@ -31,6 +31,7 @@
                     currentFilter = ViewBag.CurrentFilter
                 })
             <i class="glyphicon glyphicon-filter"></i>
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.CustomerCompanyNameDisplay,
@@ -41,9 +42,11 @@
                     sortPropertyName = ProjectProperties.CustomerCompanyName,
                     currentFilter = ViewBag.CurrentFilter
                 })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.Label(ProjectProperties.ManagerIdDisplay)
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.StartDateDisplay,
@@ -54,6 +57,7 @@
                     sortPropertyName = ProjectProperties.StartDate,
                     currentFilter = ViewBag.CurrentFilter
                 })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.EndDateDisplay,
@@ -64,6 +68,7 @@
                     sortPropertyName = ProjectProperties.EndDate,
                     currentFilter = ViewBag.CurrentFilter
                 })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.ActionLink(ProjectProperties.PriorityDisplay,
@@ -74,9 +79,11 @@
                     sortPropertyName = ProjectProperties.Priority,
                     currentFilter = ViewBag.CurrentFilter
                 })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th>
             @Html.Label(ProjectProperties.CommentDisplay)
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
         </th>
         <th></th>
     </tr>
@@ -128,3 +135,7 @@
         sortOrder = ViewBag.CurrentSort,
         currentFilter = ViewBag.CurrentFilter
     }))
+
+<script src="~/Scripts/angular.js"></script>
+<script src="~/js/ProjectIndexApp/ProjectIndexApp.js"></script>
+<script src="~/js/ProjectIndexApp/ProjectIndexAppController.js"></script>
