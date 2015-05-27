@@ -19,6 +19,13 @@
             gap: 10
         };
 
+        $scope.resetPagingGap = function() {
+            $scope.paging.gap = 10;
+            if ($scope.paging.gap > $scope.paging.pageCount) {
+                $scope.paging.gap = $scope.paging.pageCount;
+            }
+        };
+
         $scope.employeesPage = [];
 
         $scope.getEmployees = function () {
@@ -58,14 +65,12 @@
                             }
                         }
                     }
-                    $scope.paging.gap = 10;
+                    
                     $scope.employeesPage = employees;
                     $scope.paging.pageSize = data.pageSize;
                     $scope.paging.pageNumber = data.pageNumber;
                     $scope.paging.pageCount = data.pageCount;
-                    if ($scope.paging.gap > $scope.paging.pageCount) {
-                        $scope.paging.gap = $scope.paging.pageCount;
-                    }
+                    $scope.resetPagingGap();
                 },
                 function (data) {
                     $scope.error = "Failed to get employees";
