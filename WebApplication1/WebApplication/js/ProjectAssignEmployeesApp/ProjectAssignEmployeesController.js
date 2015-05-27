@@ -58,7 +58,7 @@
                             }
                         }
                     }
-
+                    $scope.paging.gap = 10;
                     $scope.employeesPage = employees;
                     $scope.paging.pageSize = data.pageSize;
                     $scope.paging.pageNumber = data.pageNumber;
