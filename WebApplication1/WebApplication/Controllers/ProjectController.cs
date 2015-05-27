@@ -183,6 +183,31 @@ namespace WebApplication.Controllers
             return View(project);
         }
 
+        public ActionResult AssignEmployees(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project project = _projectManager.Get((int)id);
+
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<Employee> assignedEmployees = _projectManager.GetAssignedEmployees(project.Id);
+            ProjectViewModel projectViewModel = GetProjectViewModel(project, assignedEmployees);
+
+            ViewBag.ActionToPerform = ViewStringConstants.Edit;
+
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var jsonProjectViewModel = JsonConvert.SerializeObject(projectViewModel, Formatting.None, settings);
+
+            return View("AssignEmployees", string.Empty, jsonProjectViewModel);
+        }
+
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
