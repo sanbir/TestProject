@@ -21,6 +21,11 @@
 
         $scope.employeesPage = [];
 
+        $scope.search = function() {
+            $scope.paging.gap = 10;
+            $scope.getEmployees();
+        };
+
         $scope.getEmployees = function () {
 
             var sortDirection = $scope.sort.reverse ? "Descending" : "Ascending";

@@ -14,7 +14,7 @@
     <hr />
 
     <p class="col-md-9 form-horizontal form-inline form-group">
-        <input type="text" class="form-control" data-ng-model="searchString" data-ng-change="getEmployees()" placeholder="@ViewStringConstants.Search" />
+        <input type="text" class="form-control" data-ng-model="searchString" data-ng-change="getEmployees()" data-ng-blur="getEmployees()" placeholder="@ViewStringConstants.Search" />
     </p>
 
     <table class="table">
