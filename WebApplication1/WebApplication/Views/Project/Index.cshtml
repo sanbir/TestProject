@@ -6,34 +6,43 @@
 @{
     ViewBag.Title = ViewStringConstants.ProjectsTitle;
 }
-<h2>@ViewStringConstants.ProjectsTitle</h2>
-<hr />
-@using (Html.BeginForm("Index", "Project", FormMethod.Get))
-{
-    <p class="col-md-9 form-horizontal form-inline form-group">
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
-        <input type="submit" value=@ViewStringConstants.Search class="btn btn-default" />
-    </p>
-}
-<p class="col-md-1 col-md-offset-2">
-    @Html.ActionLink(ViewStringConstants.Create, "Create", null, new { @class = "btn btn-success" })
-</p>
 
-<table class="table">
+<div class="row">
+    <h2 class="col-md-9">@ViewStringConstants.ProjectsTitle</h2>
+    <p class="col-md-1 col-md-offset-2 h2">
+        @Html.ActionLink(ViewStringConstants.Create, "Create", null, new { @class = "btn btn-success" })
+    </p>
+</div>
+
+<table class="table" data-ng-app="projectIndexApp" data-ng-controller="projectIndexController">
     <tr>
         <th>
-            @Html.ActionLink(ProjectProperties.ProjectNameDisplay,
-                "Index",
-                new
-                {
-                    sortDirection = ViewBag.CurrentSortDirection,
-                    sortPropertyName = ProjectProperties.ProjectName,
-                    currentFilter = ViewBag.CurrentFilter
-                })
-            <i class="glyphicon glyphicon-filter"></i>
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="projectNameFilter.show()"></a>
+            
+            <div data-ng-hide="projectNameFilter.isShown">
+                <a href="@Url.Action("Index", new
+                     {
+                         sortDirection = ViewBag.CurrentSortDirection,
+                         sortPropertyName = ProjectProperties.ProjectName,
+                         currentFilter = ViewBag.CurrentFilter
+                     })">
+                    <span>@ProjectProperties.ProjectNameDisplay</span>
+                    <span data-ng-class="{'dropup': 'Ascending'=='@ViewBag.CurrentSortDirection', 'dropdown': 'Descending'=='@ViewBag.CurrentSortDirection'}">
+                        <span class="caret"></span>
+                    </span>
+                </a>
+            </div>
+            @using (Html.BeginForm("Index", "Project", FormMethod.Get, new { data_ng_show = "projectNameFilter.isShown" }))
+            {
+                <p class="form-inline form-group">
+                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                    <input type="submit" value=@ViewStringConstants.Search class="btn btn-default" />
+                </p>
+            }
         </th>
+
         <th>
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="customerCompanyNameFilter.show()"></a>
             @Html.ActionLink(ProjectProperties.CustomerCompanyNameDisplay,
                 "Index",
                 new
@@ -41,14 +50,26 @@
                     sortDirection = ViewBag.CurrentSortDirection,
                     sortPropertyName = ProjectProperties.CustomerCompanyName,
                     currentFilter = ViewBag.CurrentFilter
+                },
+                new
+                {
+                    data_ng_hide = "customerCompanyNameFilter.isShown"
                 })
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "customerCompanyNameFilter.isShown" })
         </th>
+
         <th>
-            @Html.Label(ProjectProperties.ManagerIdDisplay)
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="managerFilter.show()"></a>
+            @Html.Label(ProjectProperties.ManagerIdDisplay, new { data_ng_hide = "managerFilter.isShown" })
+            <div class="form-group">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Фамилия", data_ng_show = "managerFilter.isShown" })
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Имя", data_ng_show = "managerFilter.isShown" })
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Отчество", data_ng_show = "managerFilter.isShown" })
+            </div>
         </th>
+
         <th>
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="startDateFilter.show()"></a>
             @Html.ActionLink(ProjectProperties.StartDateDisplay,
                 "Index",
                 new
@@ -56,10 +77,17 @@
                     sortDirection = ViewBag.CurrentSortDirection,
                     sortPropertyName = ProjectProperties.StartDate,
                     currentFilter = ViewBag.CurrentFilter
+                },
+                new
+                {
+                    data_ng_hide = "startDateFilter.isShown"
                 })
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "startDateFilter.isShown" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "startDateFilter.isShown" })
         </th>
+
         <th>
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="endDateFilter.show()"></a>
             @Html.ActionLink(ProjectProperties.EndDateDisplay,
                 "Index",
                 new
@@ -67,10 +95,17 @@
                     sortDirection = ViewBag.CurrentSortDirection,
                     sortPropertyName = ProjectProperties.EndDate,
                     currentFilter = ViewBag.CurrentFilter
+                },
+                new
+                {
+                    data_ng_hide = "endDateFilter.isShown"
                 })
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "endDateFilter.isShown" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "endDateFilter.isShown" })
         </th>
+
         <th>
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="priorityFilter.show()"></a>
             @Html.ActionLink(ProjectProperties.PriorityDisplay,
                 "Index",
                 new
@@ -78,16 +113,22 @@
                     sortDirection = ViewBag.CurrentSortDirection,
                     sortPropertyName = ProjectProperties.Priority,
                     currentFilter = ViewBag.CurrentFilter
+                },
+                new
+                {
+                    data_ng_hide = "priorityFilter.isShown"
                 })
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "priorityFilter.isShown" })
         </th>
+
         <th>
-            @Html.Label(ProjectProperties.CommentDisplay)
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+            <a href="" class="glyphicon glyphicon-filter" data-ng-click="commentFilter.show()"></a>
+            @Html.Label(ProjectProperties.CommentDisplay, new { data_ng_hide = "commentFilter.isShown" })
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", data_ng_show = "commentFilter.isShown" })
         </th>
+
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -139,3 +180,7 @@
 <script src="~/Scripts/angular.js"></script>
 <script src="~/js/ProjectIndexApp/ProjectIndexApp.js"></script>
 <script src="~/js/ProjectIndexApp/ProjectIndexAppController.js"></script>
+
+<script type="text/javascript">
+    
+</script>
