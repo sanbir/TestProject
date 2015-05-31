@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using BusinessLayer.Contracts.Managers;
 using BusinessLayer.Managers;
 using DAL.Contracts;
 using DAL.Contracts.DataRepositories;
@@ -172,6 +173,21 @@ namespace BusinessLayer.Tests
             EmployeeManager manager = new EmployeeManager();
             Employee updateEmployeeResults = manager.CreateOrUpdate(employee);
             Assert.AreEqual(employee.Email, updateEmployeeResults.Email);
+        }
+
+        [TestMethod]
+        public void ShouldReturnEmployeeById()
+        {
+            Employee employee = new Employee() { Id = 1 };
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IEmployeeRepository>().Get(employee.Id)).Returns(employee);
+
+            EmployeeManager manager = new EmployeeManager(mockDataRepositoryFactory.Object);
+
+            Employee updateEmployeeResults = manager.Get(employee.Id);
+
+            Assert.IsTrue(updateEmployeeResults == employee);
         }
 
     }
