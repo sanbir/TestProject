@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="EmployeeManagerBaseTests.cs" />
     <Compile Include="ProjectManagerTests.cs" />
-    <Compile Include="ProjectsEmployeeManagerTests.cs" />
     <Compile Include="EmployeeManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
