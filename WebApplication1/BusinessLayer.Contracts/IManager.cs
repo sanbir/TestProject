@@ -17,10 +17,10 @@ namespace BusinessLayer.Contracts
         IEnumerable<TEntity> GetAll(string sortDirection,
             string sortPropertyName, string filter);
 
-        TEntity Get(int projectId);
+        TEntity Get(int entityId);
 
         void CreateOrUpdate(TEntity entity);
 
-        void Delete(int projectId);
+        void Delete(int entityId);
     }
 }
