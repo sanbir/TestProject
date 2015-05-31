@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection;
 using DAL.Contracts;
+using Shared.Exceptions;
+using Shared.Logging.Contracts;
 using Shared.Models;
 
 namespace DAL.EntityFrameworkRepository
@@ -12,6 +15,9 @@ namespace DAL.EntityFrameworkRepository
     public class DataRepositoryBase<TEntity> : IDataRepository<TEntity>
         where TEntity : EntityBase, new()
     {
+        [Import]
+        ILogger _logger;
+
         public TEntity Add(TEntity entity)
         {
             using (var entityContext = new BiryukovTestDbContext())
@@ -64,7 +70,7 @@ namespace DAL.EntityFrameworkRepository
 
         private static void MapProperties(TEntity entity, TEntity existingEntity)
         {
-            List<PropertyInfo> properties = typeof (TEntity).GetProperties().ToList();
+            List<PropertyInfo> properties = typeof(TEntity).GetProperties().ToList();
             foreach (PropertyInfo property in properties)
             {
                 if (!property.GetGetMethod().IsVirtual)
@@ -78,7 +84,7 @@ namespace DAL.EntityFrameworkRepository
         {
             using (var entityContext = new BiryukovTestDbContext())
                 return (from e in entityContext.Set<TEntity>()
-                    select e).ToArray().ToList();
+                        select e).ToArray().ToList();
         }
 
         public TEntity Get(int id)
@@ -89,12 +95,27 @@ namespace DAL.EntityFrameworkRepository
 
         private TEntity GetEntity(BiryukovTestDbContext entityContext, int id)
         {
-            var entity = (from e in entityContext.Set<TEntity>()
-                          where e.Id == id
-                          select e).FirstOrDefault();
+            return ExecuteExceptionHandledOperation(() =>
+            {
+                var entity = (from e in entityContext.Set<TEntity>()
+                              where e.Id == id
+                              select e).FirstOrDefault();
 
-            return entity;
+                return entity;
+            });
         }
 
+        protected T ExecuteExceptionHandledOperation<T>(Func<T> codetoExecute)
+        {
+            try
+            {
+                return codetoExecute.Invoke();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw new DataAccessException();
+            }
+        }
     }
 }
