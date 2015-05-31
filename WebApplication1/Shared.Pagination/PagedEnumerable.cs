@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shared.Pagination
 {
-    internal class PagedEnumerable<T> : IEnumerable<T>, IEnumerable
+    internal class PagedEnumerable<T> : IEnumerable<T>
     {
         #region Fields
         private IEnumerable<T> collection;
@@ -15,6 +15,11 @@ namespace Shared.Pagination
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <param name="paging"></param>
         public PagedEnumerable(IEnumerable<T> collection, Paging paging)
         {
             if (paging == null)

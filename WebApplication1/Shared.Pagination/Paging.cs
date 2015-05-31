@@ -9,12 +9,18 @@ namespace Shared.Pagination
     public class Paging
     {
         #region Constructors
+        /// <summary>
+        /// Creates a new Paging object with the provided pageSize and pageNumber
+        /// </summary>
+        /// <param name="pageSize">Page size, starting with 1</param>
+        /// <param name="pageNumber">Page number, starting with 1</param>
+        /// <exception cref="ArgumentException"></exception>
         public Paging(int pageSize, int pageNumber)
         {
             if (pageSize < 1)
-                throw new ArgumentException("The parameter must not be less than one.", "size");
+                throw new ArgumentException("The parameter must not be less than one.", "pageSize");
             if (pageNumber < 1)
-                throw new ArgumentException("The parameter must not be less than one.", "number");
+                throw new ArgumentException("The parameter must not be less than one.", "pageNumber");
 
             PageSize = pageSize;
             PageNumber = pageNumber;

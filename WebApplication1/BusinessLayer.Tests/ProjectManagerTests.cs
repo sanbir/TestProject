@@ -249,5 +249,26 @@ namespace BusinessLayer.Tests
             Assert.IsTrue(receivedEmployees[0].FirstName == "7Alexea");
         }
 
+        [TestMethod]
+        public void DeleteProjectById()
+        {
+            Project project = new Project() { Id = 1 };
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            var queue = new Queue<Project>();
+            queue.Enqueue(project);
+            queue.Enqueue(null);
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IProjectRepository>().Get(project.Id)).Returns(queue.Dequeue);
+            ProjectManager manager = new ProjectManager(mockDataRepositoryFactory.Object);
+
+            Project projectToDelete = manager.Get(project.Id);
+            Assert.IsNotNull(projectToDelete);
+
+            manager.Delete(project.Id);
+
+            Project deletedProject = manager.Get(project.Id);
+            Assert.IsNull(deletedProject);
+        }
+
     }
 }
