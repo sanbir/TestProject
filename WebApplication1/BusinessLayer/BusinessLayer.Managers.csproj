@@ -60,6 +60,10 @@
       <Project>{D773CEEC-1798-4782-9420-547A7F422AE4}</Project>
       <Name>Shared.Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared.Exceptions\Shared.Exceptions.csproj">
+      <Project>{4DA3A97B-0F73-4AD5-940B-B7D0456F85F4}</Project>
+      <Name>Shared.Exceptions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
       <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
       <Name>Shared.Models</Name>

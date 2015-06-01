@@ -48,6 +48,8 @@ namespace BusinessLayer.Managers
         {
             IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
+            //TODO : check if assigned
+
             employeeRepository.Remove(employeeId);
         }
 
