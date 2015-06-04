@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Shared.Exceptions
 {
-    public class DataAccessException : ApplicationException
+    public class BusinessLayerException : ApplicationException
     {
-        public DataAccessException(string message)
+        public BusinessLayerException(string message)
             : base(message)
         {
         }
 
-        public DataAccessException(string message, Exception ex)
+        public BusinessLayerException(string message, Exception ex)
             : base(message, ex)
         {
         }

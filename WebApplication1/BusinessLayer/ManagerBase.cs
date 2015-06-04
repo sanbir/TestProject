@@ -19,15 +19,10 @@ namespace BusinessLayer
             {
                 return codetoExecute.Invoke();
             }
-            catch (DataAccessException ex)
-            {
-                // TODO: Logger.Error(ex);
-                throw new DataAccessException();
-            }
             catch (Exception ex)
             {
                 // TODO: Logger.Error(ex);
-                throw new DataAccessException();
+                throw new BusinessLayerException(ex.Message, ex);
             }
         }
 
@@ -40,7 +35,7 @@ namespace BusinessLayer
             catch (Exception ex)
             {
                 // TODO: Logger.Error(ex);
-                throw new DataAccessException();
+                throw new BusinessLayerException(ex.Message, ex);
             }
         }
     }

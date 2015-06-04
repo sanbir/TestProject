@@ -20,7 +20,8 @@ namespace BusinessLayer.Managers
         {
         }
 
-        public EmployeeManager(IDataRepositoryFactory dataRepositoryFactory) : base(dataRepositoryFactory)
+        public EmployeeManager(IDataRepositoryFactory dataRepositoryFactory)
+            : base(dataRepositoryFactory)
         {
             _dataRepositoryFactory = dataRepositoryFactory;
         }
@@ -30,49 +31,61 @@ namespace BusinessLayer.Managers
 
         void IManager<Employee>.CreateOrUpdate(Employee employee)
         {
-            CreateOrUpdate(employee);
+            ExecuteExceptionHandledOperation(() =>
+            {
+                CreateOrUpdate(employee);
+            });
         }
 
         public Employee CreateOrUpdate(Employee employee)
         {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+            return ExecuteExceptionHandledOperation(() =>
+            {
+                IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
-            Employee updatedEntity = employee.Id == 0
-                ? employeeRepository.Add(employee)
-                : employeeRepository.Update(employee);
+                Employee updatedEntity = employee.Id == 0
+                    ? employeeRepository.Add(employee)
+                    : employeeRepository.Update(employee);
 
-            return updatedEntity;
+                return updatedEntity;
+            });
         }
 
         public void Delete(int employeeId)
         {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+            ExecuteExceptionHandledOperation(() =>
+            {
+                IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
 
-            //TODO : check if assigned
+                //TODO : check if assigned
 
-            employeeRepository.Remove(employeeId);
+                employeeRepository.Remove(employeeId);
+            });
         }
 
         public IEnumerable<Employee> GetAll(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
         {
-            return GetAllEmployees(sortDirection, sortPropertyDescriptor, filter);
+            return ExecuteExceptionHandledOperation(() => GetAllEmployees(sortDirection, sortPropertyDescriptor, filter));
         }
 
         public IEnumerable<Employee> GetAll()
         {
-            return GetAllEmployees();
+            return ExecuteExceptionHandledOperation(() => GetAllEmployees());
         }
 
         public IEnumerable<Employee> GetAll(string sortDirection, string sortPropertyName, string filter)
         {
-            return GetAllEmployees(sortDirection, sortPropertyName, filter);
+            return ExecuteExceptionHandledOperation(() => GetAllEmployees(sortDirection, sortPropertyName, filter));
         }
 
         public Employee Get(int employeeId)
         {
-            IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
-            Employee employeeEntity = employeeRepository.Get(employeeId);
-            return employeeEntity;
+            return ExecuteExceptionHandledOperation(() =>
+            {
+                IEmployeeRepository employeeRepository = _dataRepositoryFactory.GetDataRepository<IEmployeeRepository>();
+                Employee employeeEntity = employeeRepository.Get(employeeId);
+                return employeeEntity;
+            });
         }
 
     }

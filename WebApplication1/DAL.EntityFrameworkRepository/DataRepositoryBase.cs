@@ -100,14 +100,11 @@ namespace DAL.EntityFrameworkRepository
 
         private TEntity GetEntity(BiryukovTestDbContext entityContext, int id)
         {
-            return ExecuteExceptionHandledOperation(() =>
-            {
-                var entity = (from e in entityContext.Set<TEntity>()
-                              where e.Id == id
-                              select e).FirstOrDefault();
+            var entity = (from e in entityContext.Set<TEntity>()
+                where e.Id == id
+                select e).FirstOrDefault();
 
-                return entity;
-            });
+            return entity;
         }
 
         protected T ExecuteExceptionHandledOperation<T>(Func<T> codetoExecute)
@@ -119,7 +116,7 @@ namespace DAL.EntityFrameworkRepository
             catch (Exception ex)
             {
                 // TODO: Logger.Error(ex);
-                throw new DataAccessException();
+                throw new DataAccessException(ex.Message, ex);
             }
         }
 
@@ -132,7 +129,7 @@ namespace DAL.EntityFrameworkRepository
             catch (Exception ex)
             {
                 // TODO: Logger.Error(ex);
-                throw new DataAccessException();
+                throw new DataAccessException(ex.Message, ex);
             }
         }
 

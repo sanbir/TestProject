@@ -27,7 +27,8 @@ namespace BusinessLayer
         [Import]
         IDataRepositoryFactory _dataRepositoryFactory;
 
-        protected IEnumerable<Employee> GetAllEmployees(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor, string filter)
+        protected IEnumerable<Employee> GetAllEmployees(ListSortDirection sortDirection,
+            PropertyDescriptor sortPropertyDescriptor, string filter)
         {
             var employees = GetAllEmployees();
             employees = FilterEmployees(filter, employees);
@@ -36,7 +37,8 @@ namespace BusinessLayer
             return employees;
         }
 
-        private static IEnumerable<Employee> SortEmployees(ListSortDirection sortDirection, PropertyDescriptor sortPropertyDescriptor,
+        private static IEnumerable<Employee> SortEmployees(ListSortDirection sortDirection,
+            PropertyDescriptor sortPropertyDescriptor,
             IEnumerable<Employee> employees)
         {
             switch (sortDirection)
@@ -112,10 +114,12 @@ namespace BusinessLayer
             return direction;
         }
 
-        protected List<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter, int pageNumber, int pageSize, out int pageCount)
+        protected List<Employee> GetAllEmployees(string sortDirection, string sortPropertyName, string filter,
+            int pageNumber, int pageSize, out int pageCount)
         {
             Paging paging = new Paging(pageSize, pageNumber);
-            List<Employee> employees = GetAllEmployees(sortDirection, sortPropertyName, filter).Paginate(paging).ToList();
+            List<Employee> employees =
+                GetAllEmployees(sortDirection, sortPropertyName, filter).Paginate(paging).ToList();
             pageCount = paging.PageCount;
 
             return employees;
