@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C1451BA3-FC7C-4518-BBE6-D1651C453B2D}</ProjectGuid>
+    <ProjectGuid>{4DA3A97B-0F73-4AD5-940B-B7D0456F85F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Shared.Exceptions</RootNamespace>

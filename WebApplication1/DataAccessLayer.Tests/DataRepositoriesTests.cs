@@ -8,68 +8,8 @@ using Tests.Fixtures;
 namespace DataAccessLayer.Tests
 {
     [TestClass]
-    public class DataRepositoriesTests
+    public class DataRepositoriesTests // TODO: refactor to separate classes
     {
-        [TestMethod]
-        public void TestEmployeeRepository()
-        {
-            Employee employee = FixturesGenerator.GenerateEmployee();
-            IEmployeeRepository employeeRepository = new EmployeeRepository();
-
-            #region Create
-
-            Employee savedEmployee = employeeRepository.Add(employee);
-            Assert.AreEqual(employee, savedEmployee);
-
-            #endregion
-
-            #region Read
-
-            employeeRepository.Add(employee);
-            Employee readEmployee = employeeRepository.Get(savedEmployee.Id);
-            Assert.AreEqual(employee.Email, readEmployee.Email);
-
-            #endregion
-
-            #region Read Many
-
-            var readEmployees = employeeRepository.Get();
-            Assert.IsTrue(readEmployees.Count() > 1);
-
-            #endregion
-
-            #region Update
-
-            employee = FixturesGenerator.GenerateEmployee();
-            readEmployee.FirstName = employee.FirstName;
-            readEmployee.LastName = employee.LastName;
-            readEmployee.MiddleName = employee.MiddleName;
-            readEmployee.Email = employee.Email;
-            readEmployee.ContractorCompanyName = employee.ContractorCompanyName;
-            Employee updatedEmployee = employeeRepository.Update(readEmployee);
-            Assert.AreEqual(employee.Email, updatedEmployee.Email);
-
-            #endregion
-
-            #region Delete
-
-            employeeRepository.Remove(updatedEmployee);
-            readEmployee = employeeRepository.Get(updatedEmployee.Id);
-            Assert.IsNull(readEmployee);
-
-            #endregion
-
-            #region Delete By Id
-
-            savedEmployee = employeeRepository.Add(employee);
-            employeeRepository.Remove(savedEmployee.Id);
-            readEmployee = employeeRepository.Get(savedEmployee.Id);
-            Assert.IsNull(readEmployee);
-
-            #endregion
-
-        }
-
         [TestMethod]
         public void TestProjectRepository()
         {

@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="BiryukovTestDbContextTests.cs" />
     <Compile Include="DataRepositoriesTests.cs" />
+    <Compile Include="EmployeeRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\DAL.EntityFrameworkRepository\DAL.EntityFrameworkRepository.csproj">
       <Project>{306664C8-194F-491C-8E02-030A4A2BE718}</Project>
       <Name>DAL.EntityFrameworkRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Exceptions\Shared.Exceptions.csproj">
+      <Project>{4DA3A97B-0F73-4AD5-940B-B7D0456F85F4}</Project>
+      <Name>Shared.Exceptions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
       <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>

@@ -13,43 +13,52 @@ namespace DAL.EntityFrameworkRepository.DataRepositories
     {
         public IEnumerable<int> GetAssignedEmployeesIds(int projectId)
         {
-            using (var entityContext = new BiryukovTestDbContext())
+            return ExecuteExceptionHandledOperation(() =>
             {
-                return (from p in entityContext.Projects
+                using (var entityContext = new BiryukovTestDbContext())
+                {
+                    return (from p in entityContext.Projects
                         join pe in entityContext.ProjectsEmployees
                             on p.Id equals pe.ProjectId
                         where p.Id == projectId
                         select pe.EmployeeId).Distinct().ToList();
-            }
+                }
+            });
         }
 
         public void Remove(int projectId, int employeeId)
         {
-            using (var entityContext = new BiryukovTestDbContext())
+            ExecuteExceptionHandledOperation(() =>
             {
-                var projectsEmployees = from pe in entityContext.ProjectsEmployees
-                                        where pe.ProjectId == projectId && pe.EmployeeId == employeeId
-                                        select pe;
-
-                foreach (var projectsEmployee in projectsEmployees)
+                using (var entityContext = new BiryukovTestDbContext())
                 {
-                    entityContext.Entry(projectsEmployee).State = EntityState.Deleted;
-                }
+                    var projectsEmployees = from pe in entityContext.ProjectsEmployees
+                        where pe.ProjectId == projectId && pe.EmployeeId == employeeId
+                        select pe;
 
-                entityContext.SaveChanges();
-            }
+                    foreach (var projectsEmployee in projectsEmployees)
+                    {
+                        entityContext.Entry(projectsEmployee).State = EntityState.Deleted;
+                    }
+
+                    entityContext.SaveChanges();
+                }
+            });
         }
 
         public IEnumerable<Employee> GetAssignedEmployees(int projectId)
         {
-            using (var entityContext = new BiryukovTestDbContext())
+            return ExecuteExceptionHandledOperation(() =>
             {
-                return (from p in entityContext.Projects
+                using (var entityContext = new BiryukovTestDbContext())
+                {
+                    return (from p in entityContext.Projects
                         join pe in entityContext.ProjectsEmployees on p.Id equals pe.ProjectId
                         join e in entityContext.Employees on pe.EmployeeId equals e.Id
                         where p.Id == projectId
                         select e).Distinct().ToList();
-            }
+                }
+            });
         }
     }
 }

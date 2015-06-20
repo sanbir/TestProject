@@ -70,12 +70,8 @@
       <Name>Shared.Constants</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared.Exceptions\Shared.Exceptions.csproj">
-      <Project>{C1451BA3-FC7C-4518-BBE6-D1651C453B2D}</Project>
+      <Project>{4DA3A97B-0F73-4AD5-940B-B7D0456F85F4}</Project>
       <Name>Shared.Exceptions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared.Logging.Contracts\Shared.Logging.Contracts.csproj">
-      <Project>{022F7FC8-0988-4E9A-88BE-8247D3BD0C4C}</Project>
-      <Name>Shared.Logging.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared.Models\Shared.Models.csproj">
       <Project>{5BD11E4D-D98F-4DE5-B607-E7C6BAECC084}</Project>
